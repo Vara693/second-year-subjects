@@ -1,0 +1,1122 @@
+
+<style>
+  :root {
+    --accent: #185FA5;
+    --accent-light: #E6F1FB;
+    --accent-mid: #378ADD;
+    --green: #3B6D11;
+    --green-light: #EAF3DE;
+    --amber: #854F0B;
+    --amber-light: #FAEEDA;
+    --red: #A32D2D;
+    --red-light: #FCEBEB;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --teal: #0F6E56;
+    --teal-light: #E1F5EE;
+    --coral: #993C1D;
+    --coral-light: #FAECE7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans, system-ui); font-size: 14px; color: var(--color-text-primary); line-height: 1.6; }
+
+  .nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--color-background-primary);
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    padding: 8px 12px;
+    display: flex; gap: 6px; flex-wrap: wrap;
+    overflow-x: auto;
+  }
+  .nav-btn {
+    font-size: 11px; padding: 4px 10px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: 20px; cursor: pointer;
+    background: transparent; color: var(--color-text-secondary);
+    white-space: nowrap; transition: all 0.15s;
+    font-family: inherit;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--accent-light); color: var(--accent); border-color: var(--accent);
+  }
+
+  .section { display: none; padding: 16px 4px 40px; }
+  .section.active { display: block; }
+
+  h1 { font-size: 20px; font-weight: 500; margin-bottom: 4px; color: var(--color-text-primary); }
+  h2 { font-size: 16px; font-weight: 500; margin: 20px 0 8px; color: var(--color-text-primary); }
+  h3 { font-size: 14px; font-weight: 500; margin: 14px 0 6px; color: var(--color-text-primary); }
+  p { margin-bottom: 8px; color: var(--color-text-primary); line-height: 1.7; }
+  ul, ol { padding-left: 20px; margin-bottom: 8px; }
+  li { margin-bottom: 3px; color: var(--color-text-primary); }
+  strong { font-weight: 500; }
+  code { font-family: var(--font-mono, monospace); font-size: 12px; background: var(--color-background-secondary); padding: 1px 5px; border-radius: 4px; }
+
+  .tag {
+    display: inline-block; font-size: 10px; padding: 2px 8px;
+    border-radius: 20px; font-weight: 500; margin-left: 6px; vertical-align: middle;
+  }
+  .tag-def { background: var(--purple-light); color: var(--purple); }
+  .tag-key { background: var(--accent-light); color: var(--accent); }
+  .tag-exam { background: var(--amber-light); color: var(--amber); }
+  .tag-tip { background: var(--green-light); color: var(--green); }
+  .tag-warn { background: var(--red-light); color: var(--red); }
+
+  .card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg, 12px);
+    padding: 12px 16px; margin-bottom: 10px;
+  }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 10px 0; }
+  .card-accent { border-left: 3px solid var(--accent); }
+  .card-green { border-left: 3px solid var(--green); }
+  .card-amber { border-left: 3px solid var(--amber); }
+  .card-red { border-left: 3px solid var(--red); }
+  .card-purple { border-left: 3px solid var(--purple); }
+  .card-teal { border-left: 3px solid var(--teal); }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th { background: var(--color-background-secondary); padding: 8px 10px; text-align: left; font-weight: 500; border: 0.5px solid var(--color-border-tertiary); }
+  td { padding: 7px 10px; border: 0.5px solid var(--color-border-tertiary); vertical-align: top; }
+  tr:hover td { background: var(--color-background-secondary); }
+
+  .highlight { background: var(--amber-light); border-radius: 4px; padding: 10px 14px; margin: 8px 0; border-left: 3px solid var(--amber); }
+  .info-box { background: var(--accent-light); border-radius: 4px; padding: 10px 14px; margin: 8px 0; border-left: 3px solid var(--accent); }
+  .warn-box { background: var(--red-light); border-radius: 4px; padding: 10px 14px; margin: 8px 0; border-left: 3px solid var(--red); }
+  .success-box { background: var(--green-light); border-radius: 4px; padding: 10px 14px; margin: 8px 0; border-left: 3px solid var(--green); }
+
+  .process-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin: 10px 0; }
+  .flow-box {
+    background: var(--accent-light); color: var(--accent);
+    border: 0.5px solid var(--accent); border-radius: 6px;
+    padding: 6px 12px; font-size: 12px; font-weight: 500; white-space: nowrap;
+  }
+  .flow-arrow { color: var(--color-text-secondary); font-size: 16px; }
+
+  .spiral-ring { display: flex; flex-direction: column; gap: 4px; margin: 10px 0; }
+  .spiral-row {
+    display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+    border-radius: 6px; font-size: 13px;
+  }
+  .s1 { background: var(--accent-light); color: var(--accent); }
+  .s2 { background: var(--amber-light); color: var(--amber); }
+  .s3 { background: var(--green-light); color: var(--green); }
+  .s4 { background: var(--red-light); color: var(--red); }
+
+  .quiz-section { margin-top: 16px; }
+  .quiz-q { background: var(--color-background-secondary); border-radius: 8px; padding: 12px 14px; margin: 8px 0; }
+  .quiz-opt { display: flex; align-items: center; gap: 8px; margin: 6px 0; cursor: pointer; padding: 6px 10px; border-radius: 6px; transition: background 0.15s; }
+  .quiz-opt:hover { background: var(--color-background-secondary); }
+  .quiz-opt input { cursor: pointer; }
+  .quiz-result { font-size: 12px; margin-top: 6px; padding: 4px 10px; border-radius: 4px; display: none; }
+  .correct-result { background: var(--green-light); color: var(--green); }
+  .wrong-result { background: var(--red-light); color: var(--red); }
+
+  .mnemonic { background: var(--purple-light); border-radius: 8px; padding: 12px 14px; margin: 8px 0; }
+  .mnemonic-title { font-size: 12px; font-weight: 500; color: var(--purple); margin-bottom: 4px; }
+
+  .revision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; margin: 10px 0; }
+  .rev-card {
+    background: var(--color-background-secondary);
+    border-radius: 8px; padding: 10px 12px;
+    border: 0.5px solid var(--color-border-tertiary);
+  }
+  .rev-label { font-size: 10px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .rev-val { font-size: 13px; font-weight: 500; }
+
+  .model-card { border-radius: 8px; padding: 12px; margin-bottom: 8px; border: 0.5px solid var(--color-border-tertiary); }
+  .badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 20px; margin: 2px; font-weight: 500; }
+  .badge-ok { background: var(--green-light); color: var(--green); }
+  .badge-no { background: var(--red-light); color: var(--red); }
+
+  .scrum-role { display: flex; gap: 12px; align-items: flex-start; padding: 10px; border-radius: 8px; margin-bottom: 8px; border: 0.5px solid var(--color-border-tertiary); }
+  .role-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; font-weight: 500; font-size: 14px; }
+
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: var(--color-border-secondary); }
+  .tl-item { position: relative; margin-bottom: 14px; }
+  .tl-dot { position: absolute; left: -22px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+  .tl-year { font-size: 11px; font-weight: 500; color: var(--accent); }
+  .tl-desc { font-size: 13px; color: var(--color-text-primary); }
+
+  .v-model { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 4px; align-items: center; margin: 10px 0; }
+  .v-left, .v-right { display: flex; flex-direction: column; gap: 4px; }
+  .v-left .v-box { margin-left: auto; }
+  .v-box { font-size: 12px; padding: 6px 10px; border-radius: 6px; text-align: center; width: 160px; }
+  .v-arrow-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+  .sprint-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 0; }
+  .sprint-col { background: var(--color-background-secondary); border-radius: 8px; padding: 8px; }
+  .sprint-col-title { font-size: 12px; font-weight: 500; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .sprint-task { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 6px; padding: 6px 8px; margin-bottom: 4px; font-size: 11px; }
+</style>
+
+<div class="nav-bar">
+  <button class="nav-btn active" onclick="showSection('intro')">Intro & Crisis</button>
+  <button class="nav-btn" onclick="showSection('evolution')">Evolution</button>
+  <button class="nav-btn" onclick="showSection('quality')">Quality & Layers</button>
+  <button class="nav-btn" onclick="showSection('sdlc')">SDLC & Process</button>
+  <button class="nav-btn" onclick="showSection('models')">Process Models</button>
+  <button class="nav-btn" onclick="showSection('agile')">Agile & Scrum</button>
+  <button class="nav-btn" onclick="showSection('casestudy')">Case Study</button>
+  <button class="nav-btn" onclick="showSection('revision')">Quick Revision</button>
+  <button class="nav-btn" onclick="showSection('quiz')">Self-Test Quiz</button>
+</div>
+
+<!-- SECTION 1: INTRO & CRISIS -->
+<div class="section active" id="s-intro">
+  <h1>Introduction to Software Engineering <span class="tag tag-def">Foundation</span></h1>
+  <p style="color:var(--color-text-secondary); font-size:13px;">Unit 1 — All fundamentals from first principles to software crisis</p>
+
+  <h2>What is Software?</h2>
+  <div class="card-grid">
+    <div class="card card-accent">
+      <h3>Definition</h3>
+      <p>Software = <strong>Programs + Data + Documentation</strong>. It is the set of instructions that controls hardware to produce a desired output.</p>
+    </div>
+    <div class="card card-green">
+      <h3>Not just code</h3>
+      <p>Software includes executable programs, configuration data, documentation, and supporting procedures.</p>
+    </div>
+    <div class="card card-purple">
+      <h3>Categories</h3>
+      <ul>
+        <li>System software (OS, compilers)</li>
+        <li>Application software</li>
+        <li>Embedded software</li>
+        <li>Web applications</li>
+        <li>AI/ML software</li>
+        <li>Scientific software</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>What is Software Engineering? <span class="tag tag-def">Core Definition</span></h2>
+  <div class="info-box">
+    <strong>IEEE Definition:</strong> "The application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software."
+  </div>
+  <p>It is the <strong>application of engineering principles</strong> to software development to produce reliable, efficient, maintainable software within budget and schedule constraints.</p>
+  <div class="highlight">
+    <strong>Why Engineering?</strong> Writing code is easy. Building software that is correct, maintainable, scalable, and delivered on time/budget — that's engineering.
+  </div>
+
+  <h2>The Software Crisis <span class="tag tag-exam">High Exam Weight</span></h2>
+  <div class="warn-box">
+    <strong>Definition:</strong> The software crisis refers to the difficulty of writing useful, efficient, and maintainable computer programs in the late 1960s–1980s. It led to the formalization of Software Engineering as a discipline.
+  </div>
+  <h3>Symptoms of Software Crisis</h3>
+  <div class="card-grid">
+    <div class="card card-red">
+      <strong>Cost overruns</strong>
+      <p>Projects costing 2–10x the original budget</p>
+    </div>
+    <div class="card card-red">
+      <strong>Schedule slippage</strong>
+      <p>Delivery months or years late</p>
+    </div>
+    <div class="card card-red">
+      <strong>Poor reliability</strong>
+      <p>Software that crashes, fails, has bugs in production</p>
+    </div>
+    <div class="card card-red">
+      <strong>Unmet requirements</strong>
+      <p>Software doesn't do what the customer wanted</p>
+    </div>
+    <div class="card card-red">
+      <strong>Unmaintainable code</strong>
+      <p>Adding features breaks existing functionality</p>
+    </div>
+    <div class="card card-red">
+      <strong>No documentation</strong>
+      <p>Knowledge trapped in developers' heads</p>
+    </div>
+  </div>
+
+  <h3>Real-World Software Failures (Crisis Evidence)</h3>
+  <table>
+    <tr><th>Project</th><th>Year</th><th>Problem</th><th>Impact</th></tr>
+    <tr><td>IBM OS/360</td><td>1964</td><td>Cost 100× original estimate</td><td>Frederick Brooks → "The Mythical Man-Month"</td></tr>
+    <tr><td>Therac-25 (Radiation)</td><td>1985</td><td>Race condition bug</td><td>3 deaths from radiation overdose</td></tr>
+    <tr><td>Denver Airport Baggage</td><td>1994</td><td>Software failures</td><td>$1B overrun, 16-month delay</td></tr>
+    <tr><td>NASA Mars Orbiter</td><td>1999</td><td>Unit mismatch (metric/imperial)</td><td>$327M loss</td></tr>
+  </table>
+
+  <h3>Causes of Software Crisis</h3>
+  <ul>
+    <li><strong>No methodology:</strong> Code-and-fix approach with no planning</li>
+    <li><strong>Complexity:</strong> Software grew faster than the ability to manage it</li>
+    <li><strong>No tools:</strong> Manual, error-prone development processes</li>
+    <li><strong>Poor communication:</strong> Developers and clients didn't speak the same language</li>
+    <li><strong>Unrealistic promises:</strong> Management underestimated difficulty</li>
+    <li><strong>No metrics:</strong> No way to measure progress or quality</li>
+  </ul>
+
+  <h3>Solution: Birth of Software Engineering</h3>
+  <div class="success-box">
+    The term "Software Engineering" was coined at the <strong>1968 NATO Conference</strong> in Garmisch, Germany, as a deliberate response to the software crisis. The goal: apply engineering discipline to software development.
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-title">MNEMONIC — Symptoms of Software Crisis: "CRUSHD"</div>
+    <strong>C</strong>ost overrun | <strong>R</strong>eliability failure | <strong>U</strong>nmet requirements | <strong>S</strong>chedule slippage | <strong>H</strong>ard to maintain | <strong>D</strong>ocumentation missing
+  </div>
+</div>
+
+<!-- SECTION 2: EVOLUTION -->
+<div class="section" id="s-evolution">
+  <h1>Evolution of Software Engineering <span class="tag tag-key">Historical</span></h1>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1950s — Machine Era</div>
+      <div class="tl-desc">Binary/Assembly code. One programmer, one machine. No methodology. "Clever hacking."</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1960s — Software Crisis</div>
+      <div class="tl-desc">High-level languages (FORTRAN, COBOL). Software complexity exploded. Crisis recognized. 1968 NATO Conference coins "Software Engineering."</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1970s — Structured Era</div>
+      <div class="tl-desc">Structured programming (Dijkstra). Waterfall model (Royce, 1970). First formal methodologies. GOTO-considered harmful.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1980s — OOP & Tools Era</div>
+      <div class="tl-desc">Object-Oriented Programming (C++, Smalltalk). CASE tools. CMM model for process maturity. Prototyping introduced.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1990s — Process & Internet Era</div>
+      <div class="tl-desc">UML (1994). RUP. RAD. Client-server & web development. "The Mythical Man-Month" revisited. Java emerges.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2000s — Agile Revolution</div>
+      <div class="tl-desc">Agile Manifesto (2001). XP, Scrum, Kanban. Open-source explosion. SOA architecture. TDD, CI/CD emerge.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2010s–Now — DevOps & Cloud</div>
+      <div class="tl-desc">DevOps, Microservices, Containers (Docker/Kubernetes), Cloud-native, AI-assisted coding. ML/AI software engineering challenges.</div>
+    </div>
+  </div>
+
+  <h2>Key Milestones Table</h2>
+  <table>
+    <tr><th>Era</th><th>Paradigm</th><th>Key Tool/Method</th><th>Problem Solved</th></tr>
+    <tr><td>1950s</td><td>Machine code</td><td>Assembly</td><td>Hardware control</td></tr>
+    <tr><td>1960s</td><td>HLL</td><td>FORTRAN, COBOL</td><td>Productivity</td></tr>
+    <tr><td>1970s</td><td>Structured</td><td>Waterfall, DFD</td><td>Methodology</td></tr>
+    <tr><td>1980s</td><td>OOP</td><td>C++, CASE tools</td><td>Reusability</td></tr>
+    <tr><td>1990s</td><td>Component-based</td><td>UML, RUP</td><td>Modeling</td></tr>
+    <tr><td>2000s</td><td>Agile</td><td>Scrum, XP</td><td>Flexibility</td></tr>
+    <tr><td>2010s+</td><td>DevOps/Cloud</td><td>Docker, Jenkins</td><td>Continuous delivery</td></tr>
+  </table>
+</div>
+
+<!-- SECTION 3: QUALITY & LAYERS -->
+<div class="section" id="s-quality">
+  <h1>Characteristics of Good Software & Quality Attributes</h1>
+
+  <h2>Characteristics of Good Software <span class="tag tag-exam">Frequently Asked</span></h2>
+  <div class="card-grid">
+    <div class="card card-green"><strong>Correctness</strong><p>Software does exactly what the specifications say. Zero tolerance for wrong outputs.</p></div>
+    <div class="card card-green"><strong>Reliability</strong><p>Performs its functions under stated conditions for a specified time. Measured as MTBF.</p></div>
+    <div class="card card-green"><strong>Efficiency</strong><p>Uses minimal CPU, memory, bandwidth. Meets performance requirements under load.</p></div>
+    <div class="card card-green"><strong>Maintainability</strong><p>Can be modified to fix bugs, improve performance, or adapt to new environment easily.</p></div>
+    <div class="card card-green"><strong>Usability</strong><p>Easy to learn and use. Good UI/UX. Minimal user errors.</p></div>
+    <div class="card card-green"><strong>Portability</strong><p>Can be transferred from one environment to another with minimal effort.</p></div>
+    <div class="card card-green"><strong>Scalability</strong><p>Can handle increasing workload without performance degradation.</p></div>
+    <div class="card card-green"><strong>Security</strong><p>Protected against unauthorized access, data breaches, attacks.</p></div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-title">MNEMONIC — "CREMUSP S"</div>
+    <strong>C</strong>orrectness | <strong>R</strong>eliability | <strong>E</strong>fficiency | <strong>M</strong>aintainability | <strong>U</strong>sability | <strong>S</strong>calability | <strong>P</strong>ortability | <strong>S</strong>ecurity
+  </div>
+
+  <h2>Software Quality Attributes (McCall's Quality Model)</h2>
+  <table>
+    <tr><th>Factor</th><th>Sub-characteristics</th><th>Question answered</th></tr>
+    <tr><td><strong>Product Operation</strong></td><td>Correctness, Reliability, Efficiency, Integrity, Usability</td><td>How well does it run?</td></tr>
+    <tr><td><strong>Product Revision</strong></td><td>Maintainability, Flexibility, Testability</td><td>Can we change it?</td></tr>
+    <tr><td><strong>Product Transition</strong></td><td>Portability, Reusability, Interoperability</td><td>Can it adapt?</td></tr>
+  </table>
+
+  <h2>ISO 9126 Quality Model</h2>
+  <div class="card-grid">
+    <div class="card"><strong>Functionality</strong> — Does it do the right things?</div>
+    <div class="card"><strong>Reliability</strong> — Does it maintain performance?</div>
+    <div class="card"><strong>Usability</strong> — Is it easy to use?</div>
+    <div class="card"><strong>Efficiency</strong> — Is it fast and lean?</div>
+    <div class="card"><strong>Maintainability</strong> — Can it be modified?</div>
+    <div class="card"><strong>Portability</strong> — Can it be moved?</div>
+  </div>
+
+  <h2>Software Engineering Layers <span class="tag tag-exam">Exam Diagram</span></h2>
+  <div class="info-box">
+    <strong>Pressman's Layers Model:</strong> Software engineering rests on a <em>quality focus</em> and is built from 3 layers.
+  </div>
+  <div style="margin: 16px 0;">
+    <div style="background:var(--accent); color:white; padding:14px; border-radius:8px 8px 0 0; text-align:center; font-weight:500; font-size:14px;">TOOLS <span style="font-size:11px;font-weight:400;">(CASE tools, IDEs, automated support)</span></div>
+    <div style="background:var(--accent-mid); color:white; padding:14px; text-align:center; font-weight:500; font-size:14px;">METHODS <span style="font-size:11px;font-weight:400;">(How to: analysis, design, code, test, maintenance)</span></div>
+    <div style="background:#185FA5; color:white; padding:14px; text-align:center; font-weight:500; font-size:14px;">PROCESS <span style="font-size:11px;font-weight:400;">(Framework: what, when, how, who, why)</span></div>
+    <div style="background:#0C447C; color:white; padding:14px; border-radius:0 0 8px 8px; text-align:center; font-weight:500; font-size:14px;">QUALITY FOCUS <span style="font-size:11px;font-weight:400;">(Foundation — commitment to quality at all levels)</span></div>
+  </div>
+  <ul>
+    <li><strong>Quality Focus:</strong> The bedrock. Every SE activity must have quality as the goal</li>
+    <li><strong>Process:</strong> The framework — defines phases, milestones, deliverables, and quality gates</li>
+    <li><strong>Methods:</strong> Technical HOW-TO — requirements analysis, design, coding, testing</li>
+    <li><strong>Tools:</strong> Automated support for process and methods (IDE, version control, CI/CD)</li>
+  </ul>
+</div>
+
+<!-- SECTION 4: SDLC & PROCESS -->
+<div class="section" id="s-sdlc">
+  <h1>Software Process Framework & SDLC</h1>
+
+  <h2>Software Process Framework <span class="tag tag-key">Core Concept</span></h2>
+  <p>A process framework defines the <strong>foundation for a complete SE process</strong>. It identifies framework activities, umbrella activities, and task sets.</p>
+
+  <h3>5 Generic Framework Activities (PRESSMAN)</h3>
+  <div class="process-flow">
+    <div class="flow-box">Communication</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Planning</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Modeling</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Construction</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Deployment</div>
+  </div>
+  <table>
+    <tr><th>Activity</th><th>What happens</th><th>Output</th></tr>
+    <tr><td><strong>Communication</strong></td><td>Understand stakeholder requirements, understand the problem</td><td>Requirements list</td></tr>
+    <tr><td><strong>Planning</strong></td><td>Define tasks, timeline, resources, risk</td><td>Project plan</td></tr>
+    <tr><td><strong>Modeling</strong></td><td>Create models (analysis + design)</td><td>UML diagrams, architecture</td></tr>
+    <tr><td><strong>Construction</strong></td><td>Code + unit test</td><td>Working software</td></tr>
+    <tr><td><strong>Deployment</strong></td><td>Deliver, evaluate, support</td><td>Deployed product, feedback</td></tr>
+  </table>
+
+  <h3>Umbrella Activities (run across all phases)</h3>
+  <ul>
+    <li>Software project tracking & control</li>
+    <li>Risk management</li>
+    <li>Software quality assurance (SQA)</li>
+    <li>Technical reviews</li>
+    <li>Measurement & metrics</li>
+    <li>Software configuration management</li>
+    <li>Reusability management</li>
+    <li>Work product preparation & production</li>
+  </ul>
+
+  <h2>SDLC — Software Development Life Cycle <span class="tag tag-exam">Most Important</span></h2>
+  <div class="info-box">
+    <strong>Definition:</strong> SDLC is a systematic process for planning, creating, testing, deploying, and maintaining software. It provides a structured sequence of stages for building software.
+  </div>
+
+  <h3>SDLC Phases</h3>
+  <div style="display:flex; flex-direction:column; gap:4px; margin:12px 0;">
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:var(--accent-light); border-radius:8px 8px 0 0; border-left:4px solid var(--accent);">
+      <span style="font-weight:500; min-width:180px; color:var(--accent);">1. Requirement Analysis</span>
+      <span style="font-size:13px;">Gather, analyze, document requirements. SRS document produced. What should the system do?</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#EAF3DE; border-left:4px solid var(--green);">
+      <span style="font-weight:500; min-width:180px; color:var(--green);">2. System Design</span>
+      <span style="font-size:13px;">High-level architecture, database design, interface design. HLD and LLD documents.</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:var(--purple-light); border-left:4px solid var(--purple);">
+      <span style="font-weight:500; min-width:180px; color:var(--purple);">3. Implementation (Coding)</span>
+      <span style="font-size:13px;">Actual code written based on design documents. Unit tests performed by developers.</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:var(--amber-light); border-left:4px solid var(--amber);">
+      <span style="font-weight:500; min-width:180px; color:var(--amber);">4. Testing</span>
+      <span style="font-size:13px;">Integration, system, UAT. Defect finding and fixing. Verify system meets requirements.</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:var(--teal-light); border-left:4px solid var(--teal);">
+      <span style="font-weight:500; min-width:180px; color:var(--teal);">5. Deployment</span>
+      <span style="font-size:13px;">Release to production. User training, rollout, go-live.</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:var(--coral-light); border-radius:0 0 8px 8px; border-left:4px solid var(--coral);">
+      <span style="font-weight:500; min-width:180px; color:var(--coral);">6. Maintenance</span>
+      <span style="font-size:13px;">Bug fixes (corrective), enhancements (perfective), adaptation (adaptive), prevention (preventive).</span>
+    </div>
+  </div>
+
+  <h3>Types of Maintenance</h3>
+  <table>
+    <tr><th>Type</th><th>Purpose</th><th>Example</th></tr>
+    <tr><td>Corrective</td><td>Fix bugs discovered after deployment</td><td>Fixing a login crash</td></tr>
+    <tr><td>Adaptive</td><td>Adapt to new environment</td><td>Upgrading for new OS</td></tr>
+    <tr><td>Perfective</td><td>Add new features, improve performance</td><td>Adding dark mode</td></tr>
+    <tr><td>Preventive</td><td>Prevent future problems (refactoring)</td><td>Code restructuring</td></tr>
+  </table>
+
+  <h2>Generic Process Model</h2>
+  <p>A generic model captures the <strong>essence of all SDLC models</strong>. It defines a framework that any specific model (Waterfall, Spiral, etc.) instantiates.</p>
+  <ul>
+    <li>All models must address: Requirements, Design, Implementation, Testing, Deployment</li>
+    <li>Variation is in the <strong>order, iteration, and overlap</strong> of these activities</li>
+    <li>Choice of model depends on: project size, requirement clarity, risk level, team size</li>
+  </ul>
+</div>
+
+<!-- SECTION 5: MODELS -->
+<div class="section" id="s-models">
+  <h1>Process Models <span class="tag tag-exam">Core Exam Topic</span></h1>
+
+  <h2>1. Waterfall Model <span class="tag tag-def">Classic / Linear Sequential</span></h2>
+  <div class="process-flow">
+    <div class="flow-box">Requirements</div><div class="flow-arrow">↓</div>
+    <div class="flow-box">System Design</div><div class="flow-arrow">↓</div>
+    <div class="flow-box">Implementation</div><div class="flow-arrow">↓</div>
+    <div class="flow-box">Testing</div><div class="flow-arrow">↓</div>
+    <div class="flow-box">Deployment</div><div class="flow-arrow">↓</div>
+    <div class="flow-box">Maintenance</div>
+  </div>
+  <div class="card-grid">
+    <div class="card card-green">
+      <strong>Advantages</strong>
+      <ul style="margin-top:6px;">
+        <li>Simple and easy to manage</li>
+        <li>Clear milestones and deliverables</li>
+        <li>Good documentation</li>
+        <li>Works well for small, well-defined projects</li>
+      </ul>
+    </div>
+    <div class="card card-red">
+      <strong>Disadvantages</strong>
+      <ul style="margin-top:6px;">
+        <li>No working software until end</li>
+        <li>Cannot accommodate changing requirements</li>
+        <li>Testing only at the end — late defect discovery</li>
+        <li>High risk for complex projects</li>
+      </ul>
+    </div>
+  </div>
+  <div class="highlight">
+    <strong>Best for:</strong> Projects with clear, fixed requirements. Defense/government contracts. Small projects.
+    <br><strong>Worst for:</strong> Projects where requirements are unclear or will change.
+  </div>
+  <div class="warn-box">
+    <strong>Pitfall:</strong> The original Royce (1970) paper actually showed the Waterfall as FLAWED and advocated iterative development. Many people cite Waterfall without knowing this history.
+  </div>
+
+  <h2>2. Incremental Model <span class="tag tag-def">Iterative Delivery</span></h2>
+  <p>Software is built and delivered in <strong>increments (chunks)</strong>. Each increment adds new functionality. Core product delivered first, then enhanced incrementally.</p>
+  <div style="margin: 10px 0;">
+    <div style="display:flex; gap:4px; flex-wrap:wrap; margin-bottom:4px;">
+      <div style="background:var(--accent-light); border:0.5px solid var(--accent); padding:6px 12px; border-radius:6px; font-size:12px; font-weight:500; color:var(--accent);">Increment 1: Core Features</div>
+      <div style="color:var(--color-text-secondary)">+</div>
+      <div style="background:var(--green-light); border:0.5px solid var(--green); padding:6px 12px; border-radius:6px; font-size:12px; font-weight:500; color:var(--green);">Increment 2: Feature Set A</div>
+      <div style="color:var(--color-text-secondary)">+</div>
+      <div style="background:var(--purple-light); border:0.5px solid var(--purple); padding:6px 12px; border-radius:6px; font-size:12px; font-weight:500; color:var(--purple);">Increment 3: Feature Set B</div>
+      <div style="color:var(--color-text-secondary)">=</div>
+      <div style="background:var(--amber-light); border:0.5px solid var(--amber); padding:6px 12px; border-radius:6px; font-size:12px; font-weight:500; color:var(--amber);">Complete Product</div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card card-green"><strong>When to use:</strong> When you need early delivery of partial functionality. When requirements are moderately understood.</div>
+    <div class="card card-amber"><strong>Risk:</strong> System architecture may not accommodate later increments well if not planned ahead.</div>
+  </div>
+  <p><strong>Types:</strong> Staged delivery (increments pre-planned), Evolutionary (each increment refined based on feedback)</p>
+
+  <h2>3. Prototype Model <span class="tag tag-def">Throwaway / Evolutionary</span></h2>
+  <div class="process-flow">
+    <div class="flow-box">Requirements</div><div class="flow-arrow">→</div>
+    <div class="flow-box">Quick Design</div><div class="flow-arrow">→</div>
+    <div class="flow-box">Build Prototype</div><div class="flow-arrow">→</div>
+    <div class="flow-box">Customer Evaluation</div><div class="flow-arrow">→</div>
+    <div class="flow-box">Refine Requirements</div>
+  </div>
+  <p style="margin-top:8px;">After the loop stabilizes → full system developed. A <strong>prototype</strong> is a preliminary working model of the system to explore requirements.</p>
+
+  <table>
+    <tr><th>Type</th><th>Description</th><th>When to use</th></tr>
+    <tr><td>Throwaway</td><td>Prototype built to understand requirements, then discarded</td><td>Unclear requirements</td></tr>
+    <tr><td>Evolutionary</td><td>Prototype continuously refined into the final system</td><td>Requirements evolve</td></tr>
+    <tr><td>Incremental</td><td>Multiple prototypes built, each covering different parts</td><td>Large complex systems</td></tr>
+    <tr><td>Extreme</td><td>3 phases: static HTML → simulated services → full implementation</td><td>Web applications</td></tr>
+  </table>
+
+  <div class="warn-box">
+    <strong>Pitfall:</strong> Customer sees working prototype and thinks the product is "almost done." Also, prototypes built quickly often have poor quality code that gets shipped — "the prototype that became the product."
+  </div>
+
+  <h2>4. Spiral Model <span class="tag tag-exam">Most Complex — High Exam Weight</span></h2>
+  <div class="info-box">
+    <strong>Boehm (1988):</strong> Risk-driven process model. Combines iterative development with the systematic control of the Waterfall model. Software is developed in a series of spirals (iterations).
+  </div>
+  <p>Each spiral (loop) consists of 4 quadrants:</p>
+  <div class="spiral-ring">
+    <div class="spiral-row s1"><strong style="min-width:200px;">Quadrant 1: Planning</strong> Determine objectives, alternatives, constraints</div>
+    <div class="spiral-row s2"><strong style="min-width:200px;">Quadrant 2: Risk Analysis</strong> Identify, analyze, resolve risks. Prototype may be built here.</div>
+    <div class="spiral-row s3"><strong style="min-width:200px;">Quadrant 3: Engineering</strong> Design, code, test for this spiral's increment</div>
+    <div class="spiral-row s4"><strong style="min-width:200px;">Quadrant 4: Evaluation</strong> Customer evaluates progress; planning for next spiral</div>
+  </div>
+  <div class="card-grid">
+    <div class="card card-green"><strong>Advantages</strong><ul><li>Risk-driven — high-risk items addressed early</li><li>Suitable for large, high-risk projects</li><li>Incorporates user feedback every spiral</li><li>Flexible to requirement changes</li></ul></div>
+    <div class="card card-red"><strong>Disadvantages</strong><ul><li>Expensive and complex to manage</li><li>Requires risk assessment expertise</li><li>Not suitable for small/low-risk projects</li><li>May go on forever (infinite spiral)</li></ul></div>
+  </div>
+  <div class="highlight">
+    <strong>Key insight:</strong> In the Spiral model, <em>risk</em> is the primary driver. If you identify a risk early, you address it early. The number of spirals = number of iterations until the product is complete.
+  </div>
+
+  <h2>5. V-Model (Verification & Validation) <span class="tag tag-exam">Diagram Exam</span></h2>
+  <div class="info-box">
+    Extension of Waterfall where each development phase has a corresponding testing phase. Called V-model because of the V-shape of the diagram.
+  </div>
+
+  <div style="margin: 14px 0; overflow-x:auto;">
+    <table style="width:100%; font-size:12px;">
+      <tr>
+        <th style="background:var(--accent-light); color:var(--accent);">Development (Left Side)</th>
+        <th style="background:var(--color-background-secondary);">↔</th>
+        <th style="background:var(--green-light); color:var(--green);">Testing (Right Side)</th>
+      </tr>
+      <tr><td>Requirements Analysis</td><td style="text-align:center; color:var(--color-text-secondary);">⟺</td><td>Acceptance Testing (UAT)</td></tr>
+      <tr><td>System Design</td><td style="text-align:center; color:var(--color-text-secondary);">⟺</td><td>System Testing</td></tr>
+      <tr><td>Architectural Design</td><td style="text-align:center; color:var(--color-text-secondary);">⟺</td><td>Integration Testing</td></tr>
+      <tr><td>Module Design</td><td style="text-align:center; color:var(--color-text-secondary);">⟺</td><td>Unit Testing</td></tr>
+      <tr style="background:var(--amber-light)"><td colspan="3" style="text-align:center; font-weight:500; color:var(--amber);">▼ Implementation / Coding (Bottom of V) ▲</td></tr>
+    </table>
+  </div>
+  <ul>
+    <li><strong>Verification:</strong> Are we building the product right? (Left side — review, inspection)</li>
+    <li><strong>Validation:</strong> Are we building the right product? (Right side — testing)</li>
+    <li>Test planning happens <strong>simultaneously</strong> with development on the corresponding left phase</li>
+  </ul>
+  <div class="card-grid">
+    <div class="card card-green"><strong>Advantage:</strong> Early test planning, higher chance of success. Clear correspondence between dev and test phases.</div>
+    <div class="card card-red"><strong>Disadvantage:</strong> Rigid. No iteration. No prototype. Late delivery. Not good for changing requirements.</div>
+  </div>
+
+  <h2>Model Comparison Table <span class="tag tag-exam">High Value</span></h2>
+  <table>
+    <tr><th>Model</th><th>Risk Handling</th><th>Flexibility</th><th>Best For</th><th>Customer Involvement</th></tr>
+    <tr><td>Waterfall</td><td>Low</td><td>Rigid</td><td>Clear requirements, small projects</td><td>Start & end only</td></tr>
+    <tr><td>Incremental</td><td>Medium</td><td>Moderate</td><td>Partial delivery needed</td><td>After each increment</td></tr>
+    <tr><td>Prototype</td><td>Medium</td><td>High</td><td>Unclear requirements</td><td>Continuous (prototype reviews)</td></tr>
+    <tr><td>Spiral</td><td>Very High</td><td>High</td><td>Large, complex, high-risk</td><td>Every spiral cycle</td></tr>
+    <tr><td>V-Model</td><td>Low</td><td>Rigid</td><td>Safety-critical systems</td><td>Requirements & UAT</td></tr>
+    <tr><td>Agile/Scrum</td><td>High</td><td>Very High</td><td>Fast-changing requirements</td><td>Every sprint</td></tr>
+  </table>
+</div>
+
+<!-- SECTION 6: AGILE & SCRUM -->
+<div class="section" id="s-agile">
+  <h1>Agile Overview & Scrum <span class="tag tag-exam">Modern Practice</span></h1>
+
+  <h2>Agile Manifesto (2001) — 4 Core Values</h2>
+  <div class="card-grid">
+    <div class="card card-accent"><strong>Individuals & Interactions</strong><p>over processes and tools</p></div>
+    <div class="card card-accent"><strong>Working Software</strong><p>over comprehensive documentation</p></div>
+    <div class="card card-accent"><strong>Customer Collaboration</strong><p>over contract negotiation</p></div>
+    <div class="card card-accent"><strong>Responding to Change</strong><p>over following a plan</p></div>
+  </div>
+  <div class="info-box">Note: Items on the LEFT are valued more. Items on the RIGHT still have value — just LESS value.</div>
+
+  <h2>12 Agile Principles (Key ones)</h2>
+  <ul>
+    <li>Deliver working software frequently (weeks, not months)</li>
+    <li>Welcome changing requirements, even late in development</li>
+    <li>Business people and developers work together daily</li>
+    <li>Build projects around motivated individuals</li>
+    <li>Working software is the primary measure of progress</li>
+    <li>Sustainable development — constant pace indefinitely</li>
+    <li>Simplicity — maximize the amount of work NOT done</li>
+    <li>Self-organizing teams produce the best architectures</li>
+    <li>Regular reflection and adaptation (retrospectives)</li>
+  </ul>
+
+  <h2>Scrum Framework <span class="tag tag-exam">All Details Required</span></h2>
+  <div class="info-box">
+    Scrum is an <strong>agile framework</strong> for developing complex products using iterations called <strong>Sprints</strong>. Created by Ken Schwaber and Jeff Sutherland.
+  </div>
+
+  <h3>Scrum Roles</h3>
+  <div class="scrum-role" style="background:var(--accent-light)">
+    <div class="role-icon" style="background:var(--accent); color:white;">PO</div>
+    <div>
+      <strong>Product Owner</strong>
+      <p style="font-size:13px; margin-top:4px;">Represents stakeholders. Owns the <strong>Product Backlog</strong>. Prioritizes features by business value. Says WHAT to build. Accepts or rejects sprint output.</p>
+      <p style="font-size:12px; color:var(--accent);">Key tools: Product Backlog, User Stories, Release Plan</p>
+    </div>
+  </div>
+  <div class="scrum-role" style="background:var(--green-light)">
+    <div class="role-icon" style="background:var(--green); color:white;">SM</div>
+    <div>
+      <strong>Scrum Master</strong>
+      <p style="font-size:13px; margin-top:4px;">Facilitator and servant-leader. Removes impediments. Protects the team. Ensures Scrum is understood and followed. NOT a project manager.</p>
+      <p style="font-size:12px; color:var(--green);">Key activities: Facilitate ceremonies, remove blockers, coach team</p>
+    </div>
+  </div>
+  <div class="scrum-role" style="background:var(--purple-light)">
+    <div class="role-icon" style="background:var(--purple); color:white;">DT</div>
+    <div>
+      <strong>Development Team</strong>
+      <p style="font-size:13px; margin-top:4px;">Cross-functional, self-organizing team (3–9 members). Decides HOW to build. Owns the Sprint Backlog. Commits to Sprint goals.</p>
+      <p style="font-size:12px; color:var(--purple);">Skills: Design, code, test — all in one team</p>
+    </div>
+  </div>
+
+  <h3>Scrum Artifacts</h3>
+  <div class="card-grid">
+    <div class="card card-accent">
+      <strong>Product Backlog</strong>
+      <p>Ordered list of all features, enhancements, fixes needed. Owned by Product Owner. Never "done" — evolves continuously.</p>
+      <p style="font-size:12px; color:var(--color-text-secondary);">Contains: User Stories, Epics, Bugs, Tasks</p>
+    </div>
+    <div class="card card-green">
+      <strong>Sprint Backlog</strong>
+      <p>Subset of Product Backlog selected for the current Sprint. Team's plan for the Sprint. Owned by Dev Team.</p>
+    </div>
+    <div class="card card-purple">
+      <strong>Increment</strong>
+      <p>Sum of all Product Backlog items completed during a Sprint. Must be in a useable, potentially shippable condition.</p>
+    </div>
+  </div>
+
+  <h3>Scrum Ceremonies (Events)</h3>
+  <table>
+    <tr><th>Event</th><th>Duration</th><th>Who</th><th>Purpose</th></tr>
+    <tr><td><strong>Sprint Planning</strong></td><td>≤8 hrs (for 4-week sprint)</td><td>All 3 roles</td><td>Select backlog items, define Sprint Goal, plan tasks</td></tr>
+    <tr><td><strong>Daily Scrum (Standup)</strong></td><td>15 min</td><td>Dev Team</td><td>Sync: What did I do? What will I do? Any blockers?</td></tr>
+    <tr><td><strong>Sprint Review</strong></td><td>≤4 hrs</td><td>All + stakeholders</td><td>Demo working product, get feedback, update backlog</td></tr>
+    <tr><td><strong>Sprint Retrospective</strong></td><td>≤3 hrs</td><td>Scrum Team</td><td>Inspect process: What went well? What to improve?</td></tr>
+    <tr><td><strong>Backlog Refinement</strong></td><td>Ongoing (~10% of sprint)</td><td>PO + Dev Team</td><td>Clarify, estimate, break down backlog items</td></tr>
+  </table>
+
+  <h3>Sprint Lifecycle</h3>
+  <div class="process-flow">
+    <div class="flow-box">Product Backlog</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Sprint Planning</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Sprint Backlog</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Sprint (1–4 weeks)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Increment</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Review + Retro</div>
+  </div>
+
+  <h3>Sprint Board (Kanban-style)</h3>
+  <div class="sprint-board">
+    <div class="sprint-col">
+      <div class="sprint-col-title">To Do</div>
+      <div class="sprint-task">User login feature</div>
+      <div class="sprint-task">Product search</div>
+      <div class="sprint-task">Cart persistence</div>
+    </div>
+    <div class="sprint-col">
+      <div class="sprint-col-title">In Progress</div>
+      <div class="sprint-task">Add to cart API</div>
+      <div class="sprint-task">Payment UI</div>
+    </div>
+    <div class="sprint-col">
+      <div class="sprint-col-title">Done</div>
+      <div class="sprint-task">User registration</div>
+      <div class="sprint-task">Product listing</div>
+    </div>
+  </div>
+
+  <h2>Agile vs Traditional (Waterfall) Comparison</h2>
+  <table>
+    <tr><th>Aspect</th><th>Waterfall</th><th>Agile</th></tr>
+    <tr><td>Requirement</td><td>Fixed upfront</td><td>Evolves throughout</td></tr>
+    <tr><td>Delivery</td><td>Single final delivery</td><td>Incremental sprints</td></tr>
+    <tr><td>Customer</td><td>Start & end only</td><td>Continuous involvement</td></tr>
+    <tr><td>Testing</td><td>After development</td><td>Throughout every sprint</td></tr>
+    <tr><td>Documentation</td><td>Heavy & formal</td><td>Lightweight, just enough</td></tr>
+    <tr><td>Team</td><td>Siloed specialists</td><td>Cross-functional</td></tr>
+    <tr><td>Risk</td><td>Detected late</td><td>Managed early, per sprint</td></tr>
+    <tr><td>Changes</td><td>Costly, resisted</td><td>Welcomed</td></tr>
+  </table>
+</div>
+
+<!-- SECTION 7: CASE STUDY -->
+<div class="section" id="s-casestudy">
+  <h1>Case Study: Online Shopping System <span class="tag tag-exam">Applied Knowledge</span></h1>
+
+  <h2>System Overview</h2>
+  <div class="info-box">
+    An <strong>Online Shopping System</strong> (e.g., Amazon-like) allows users to browse products, add to cart, checkout, and track orders. Sellers manage inventory. Admins manage platform.
+  </div>
+
+  <h2>Applying SDLC Phases</h2>
+
+  <h3>Phase 1: Requirement Analysis</h3>
+  <div class="card-grid">
+    <div class="card card-accent">
+      <strong>Functional Requirements</strong>
+      <ul style="margin-top:6px; font-size:13px;">
+        <li>User Registration & Login</li>
+        <li>Product Browsing & Search</li>
+        <li>Product Details Page</li>
+        <li>Shopping Cart Management</li>
+        <li>Order Placement & Checkout</li>
+        <li>Payment Processing</li>
+        <li>Order Tracking</li>
+        <li>Product Reviews & Ratings</li>
+        <li>Seller Product Management</li>
+        <li>Admin Dashboard</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <strong>Non-Functional Requirements</strong>
+      <ul style="margin-top:6px; font-size:13px;">
+        <li>Performance: Page load ≤2s</li>
+        <li>Scalability: 1M concurrent users</li>
+        <li>Availability: 99.99% uptime</li>
+        <li>Security: PCI-DSS compliance for payments</li>
+        <li>Usability: Mobile responsive</li>
+        <li>Reliability: Data consistency in cart</li>
+        <li>Maintainability: Microservices arch</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Phase 2: System Design</h3>
+  <div class="card-grid">
+    <div class="card card-purple">
+      <strong>High-Level Design (HLD)</strong>
+      <ul style="font-size:13px; margin-top:6px;">
+        <li>3-tier architecture: Client → Server → DB</li>
+        <li>Modules: Auth, Product, Cart, Order, Payment, Notification</li>
+        <li>Microservices: Each module = independent service</li>
+        <li>Database: PostgreSQL (orders), MongoDB (catalog), Redis (cart/cache)</li>
+        <li>CDN for static assets</li>
+      </ul>
+    </div>
+    <div class="card card-teal">
+      <strong>Low-Level Design (LLD)</strong>
+      <ul style="font-size:13px; margin-top:6px;">
+        <li>ER Diagram: Users, Products, Orders, Cart, Payments</li>
+        <li>API Design: RESTful endpoints</li>
+        <li>Class Diagrams for each module</li>
+        <li>Sequence diagrams for checkout flow</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Key Entities / Data Model</h3>
+  <table style="font-size:12px;">
+    <tr><th>Entity</th><th>Key Attributes</th><th>Relationships</th></tr>
+    <tr><td>User</td><td>user_id, name, email, password_hash, address</td><td>Places Orders, Writes Reviews</td></tr>
+    <tr><td>Product</td><td>product_id, name, description, price, stock, category_id</td><td>Belongs to Category, Sold by Seller</td></tr>
+    <tr><td>Cart</td><td>cart_id, user_id, items[], total</td><td>Belongs to User, Contains Products</td></tr>
+    <tr><td>Order</td><td>order_id, user_id, items[], status, total, timestamp</td><td>Placed by User, Contains Products</td></tr>
+    <tr><td>Payment</td><td>payment_id, order_id, method, status, amount</td><td>Linked to Order</td></tr>
+    <tr><td>Review</td><td>review_id, product_id, user_id, rating, comment</td><td>By User, For Product</td></tr>
+  </table>
+
+  <h3>Phase 3: Implementation (Code Snippets)</h3>
+  <div class="card">
+    <strong>User Authentication — Simplified</strong>
+    <pre style="font-family:var(--font-mono); font-size:12px; margin-top:8px; overflow-x:auto; line-height:1.5; color:var(--color-text-primary);">
+class User:
+    def __init__(self, user_id, name, email):
+        self.user_id = user_id
+        self.name = name
+        self.email = email
+        self.orders = []
+
+class ShoppingCart:
+    def __init__(self, user_id):
+        self.user_id = user_id
+        self.items = {}  # product_id: quantity
+
+    def add_item(self, product_id, quantity=1):
+        if product_id in self.items:
+            self.items[product_id] += quantity
+        else:
+            self.items[product_id] = quantity
+
+    def remove_item(self, product_id):
+        if product_id in self.items:
+            del self.items[product_id]
+
+    def get_total(self, catalog):
+        total = 0
+        for pid, qty in self.items.items():
+            total += catalog[pid].price * qty
+        return total
+    </pre>
+  </div>
+
+  <h3>Phase 4: Testing Strategy</h3>
+  <table>
+    <tr><th>Test Type</th><th>What is tested</th><th>Example</th></tr>
+    <tr><td>Unit Testing</td><td>Individual functions/classes</td><td>Test add_to_cart() method</td></tr>
+    <tr><td>Integration Testing</td><td>Module interactions</td><td>Cart + Payment service integration</td></tr>
+    <tr><td>System Testing</td><td>End-to-end flow</td><td>Full checkout flow from login to order confirmation</td></tr>
+    <tr><td>Performance Testing</td><td>Load, stress, scalability</td><td>1000 concurrent users checking out</td></tr>
+    <tr><td>Security Testing</td><td>Vulnerabilities</td><td>SQL injection in search, XSS in reviews</td></tr>
+    <tr><td>UAT</td><td>Customer acceptance</td><td>Real users validate against requirements</td></tr>
+  </table>
+
+  <h3>Which SDLC Model Fits Best for Online Shopping?</h3>
+  <div class="success-box">
+    <strong>Recommended: Agile/Scrum</strong>
+    <ul style="margin-top:6px; font-size:13px;">
+      <li>Requirements evolve (new features, market competition)</li>
+      <li>Need frequent releases (weekly sprints)</li>
+      <li>Customer feedback drives priorities</li>
+      <li>Parallel development of modules</li>
+    </ul>
+    <strong>Sprint breakdown example:</strong>
+    <ul style="margin-top:6px; font-size:13px;">
+      <li>Sprint 1: User Auth + Product Listing</li>
+      <li>Sprint 2: Cart + Wishlist</li>
+      <li>Sprint 3: Checkout + Payment</li>
+      <li>Sprint 4: Order Tracking + Notifications</li>
+      <li>Sprint 5: Reviews + Recommendations</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 8: QUICK REVISION -->
+<div class="section" id="s-revision">
+  <h1>Quick Revision Sheet <span class="tag tag-tip">One-Page Reference</span></h1>
+
+  <h2>Key Definitions at a Glance</h2>
+  <div class="revision-grid">
+    <div class="rev-card"><div class="rev-label">Software</div><div class="rev-val">Programs + Data + Docs</div></div>
+    <div class="rev-card"><div class="rev-label">SE Definition</div><div class="rev-val">Systematic, disciplined, quantifiable approach to software</div></div>
+    <div class="rev-card"><div class="rev-label">Software Crisis</div><div class="rev-val">1960s–80s: cost, schedule, quality failures</div></div>
+    <div class="rev-card"><div class="rev-label">NATO Conference</div><div class="rev-val">1968 — coined "Software Engineering"</div></div>
+    <div class="rev-card"><div class="rev-label">SE Layers</div><div class="rev-val">Quality → Process → Methods → Tools</div></div>
+    <div class="rev-card"><div class="rev-label">SDLC Phases</div><div class="rev-val">Req → Design → Code → Test → Deploy → Maintain</div></div>
+    <div class="rev-card"><div class="rev-label">Waterfall</div><div class="rev-val">Linear sequential; no iteration</div></div>
+    <div class="rev-card"><div class="rev-label">Spiral</div><div class="rev-val">Risk-driven; 4 quadrants; iterative</div></div>
+    <div class="rev-card"><div class="rev-label">V-Model</div><div class="rev-val">Each dev phase ↔ test phase</div></div>
+    <div class="rev-card"><div class="rev-label">Prototype</div><div class="rev-val">Quick model to clarify requirements</div></div>
+    <div class="rev-card"><div class="rev-label">Agile Values</div><div class="rev-val">4 values, 12 principles (2001)</div></div>
+    <div class="rev-card"><div class="rev-label">Scrum Sprint</div><div class="rev-val">1–4 week iteration with 4 ceremonies</div></div>
+    <div class="rev-card"><div class="rev-label">Product Owner</div><div class="rev-val">Owns backlog; prioritizes features</div></div>
+    <div class="rev-card"><div class="rev-label">Scrum Master</div><div class="rev-val">Removes impediments; servant-leader</div></div>
+    <div class="rev-card"><div class="rev-label">McCall's Model</div><div class="rev-val">Operation + Revision + Transition</div></div>
+    <div class="rev-card"><div class="rev-label">ISO 9126</div><div class="rev-val">6 quality attributes</div></div>
+  </div>
+
+  <h2>All Mnemonics Consolidated</h2>
+  <div class="mnemonic">
+    <div class="mnemonic-title">Software Crisis Symptoms — "CRUSHD"</div>
+    Cost | Reliability | Unmet req | Schedule | Hard to maintain | Documentation missing
+  </div>
+  <div class="mnemonic">
+    <div class="mnemonic-title">Good Software Attributes — "CREMUSP S"</div>
+    Correctness | Reliability | Efficiency | Maintainability | Usability | Scalability | Portability | Security
+  </div>
+  <div class="mnemonic">
+    <div class="mnemonic-title">SE Layers (bottom to top) — "QPMT"</div>
+    Quality focus → Process → Methods → Tools
+  </div>
+  <div class="mnemonic">
+    <div class="mnemonic-title">Pressman's Framework Activities — "CP MCD"</div>
+    Communication → Planning → Modeling → Construction → Deployment
+  </div>
+  <div class="mnemonic">
+    <div class="mnemonic-title">Spiral Quadrants — "PARE"</div>
+    Planning → risk Analysis → engineering (Requirements/Design) → Evaluation
+  </div>
+  <div class="mnemonic">
+    <div class="mnemonic-title">Scrum Ceremonies — "PDRR"</div>
+    Planning → Daily standup → Review → Retrospective
+  </div>
+  <div class="mnemonic">
+    <div class="mnemonic-title">Maintenance Types — "CAPP"</div>
+    Corrective | Adaptive | Perfective | Preventive
+  </div>
+
+  <h2>Interview Questions Bank</h2>
+  <h3>Easy</h3>
+  <ul>
+    <li>Define software engineering. How does it differ from programming?</li>
+    <li>What is the software crisis? When and why did it occur?</li>
+    <li>List the phases of SDLC.</li>
+    <li>What are the layers of software engineering according to Pressman?</li>
+    <li>What is the difference between verification and validation?</li>
+    <li>What is a Scrum Sprint?</li>
+  </ul>
+  <h3>Medium</h3>
+  <ul>
+    <li>Compare Waterfall and Agile models with pros/cons and use cases.</li>
+    <li>Explain the 4 quadrants of the Spiral model. Why is it called risk-driven?</li>
+    <li>What is the V-Model? Draw the correspondence between dev and test phases.</li>
+    <li>What are the three Scrum roles and their responsibilities?</li>
+    <li>Explain McCall's quality model with its three factors.</li>
+    <li>What is the difference between throwaway and evolutionary prototyping?</li>
+  </ul>
+  <h3>Hard / Scenario-Based</h3>
+  <ul>
+    <li>A bank wants to develop a core banking system with well-defined regulatory requirements. Which SDLC model and why?</li>
+    <li>A startup wants to build a social media app but requirements change weekly. Which model? Justify.</li>
+    <li>A nuclear reactor control system is being built. Which model handles this best and what testing strategy would you apply?</li>
+    <li>"Prototypes can be dangerous." Explain this statement with examples.</li>
+    <li>How does the Spiral model reduce risk compared to Waterfall? Give a concrete example.</li>
+    <li>What happens in a Scrum team when the Product Owner keeps changing sprint requirements mid-sprint?</li>
+  </ul>
+</div>
+
+<!-- SECTION 9: QUIZ -->
+<div class="section" id="s-quiz">
+  <h1>Self-Test Quiz <span class="tag tag-exam">Active Recall</span></h1>
+  <p style="color:var(--color-text-secondary); font-size:13px; margin-bottom:16px;">Select the best answer for each question, then click "Check Answer".</p>
+
+  <div class="quiz-section" id="quiz-container"></div>
+  <div style="margin-top:16px; display:flex; gap:10px;">
+    <button onclick="checkAllAnswers()" style="padding:8px 20px; background:var(--accent); color:white; border:none; border-radius:8px; cursor:pointer; font-family:inherit; font-size:14px;">Check All Answers</button>
+    <button onclick="resetQuiz()" style="padding:8px 20px; background:transparent; border:0.5px solid var(--color-border-secondary); border-radius:8px; cursor:pointer; font-family:inherit; font-size:14px; color:var(--color-text-primary);">Reset</button>
+  </div>
+  <div id="score-box" style="display:none; margin-top:12px; padding:12px 16px; border-radius:8px; font-weight:500; font-size:15px;"></div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "The term 'Software Engineering' was formally coined at which conference?",
+    opts: ["ACM Conference 1965", "NATO Conference 1968", "IEEE Symposium 1972", "Bell Labs Conference 1970"],
+    ans: 1,
+    explanation: "The 1968 NATO Conference in Garmisch, Germany coined the term 'Software Engineering' as a response to the software crisis."
+  },
+  {
+    q: "In Pressman's Software Engineering layers, what is the FOUNDATION layer?",
+    opts: ["Process", "Methods", "Tools", "Quality Focus"],
+    ans: 3,
+    explanation: "Quality Focus is the bedrock/foundation. On top of it: Process → Methods → Tools."
+  },
+  {
+    q: "Which process model is primarily RISK-DRIVEN?",
+    opts: ["Waterfall Model", "V-Model", "Spiral Model", "Incremental Model"],
+    ans: 2,
+    explanation: "The Spiral Model (Boehm, 1988) is risk-driven. Each spiral cycle includes a dedicated risk analysis quadrant."
+  },
+  {
+    q: "In the V-Model, what corresponds to 'Requirements Analysis' on the right side?",
+    opts: ["Unit Testing", "Integration Testing", "System Testing", "Acceptance Testing (UAT)"],
+    ans: 3,
+    explanation: "Requirements Analysis ↔ Acceptance Testing (UAT). System Design ↔ System Testing. Module Design ↔ Unit Testing."
+  },
+  {
+    q: "Which Scrum role is responsible for REMOVING IMPEDIMENTS?",
+    opts: ["Product Owner", "Scrum Master", "Development Team Lead", "Project Manager"],
+    ans: 1,
+    explanation: "The Scrum Master is a servant-leader who facilitates the process and removes impediments blocking the team."
+  },
+  {
+    q: "How long is the Daily Scrum (standup) ceremony?",
+    opts: ["30 minutes", "15 minutes", "1 hour", "45 minutes"],
+    ans: 1,
+    explanation: "The Daily Scrum is a time-boxed 15-minute event for the Development Team to synchronize."
+  },
+  {
+    q: "Which maintenance type involves adapting software to a new operating environment?",
+    opts: ["Corrective", "Perfective", "Adaptive", "Preventive"],
+    ans: 2,
+    explanation: "Adaptive maintenance adapts software to changes in the environment (new OS, hardware, etc.)."
+  },
+  {
+    q: "The Agile Manifesto was published in which year?",
+    opts: ["1995", "1999", "2001", "2005"],
+    ans: 2,
+    explanation: "The Agile Manifesto was created in February 2001 by 17 software practitioners in Snowbird, Utah."
+  },
+  {
+    q: "What is the PRIMARY ARTIFACT owned by the Product Owner in Scrum?",
+    opts: ["Sprint Backlog", "Burndown Chart", "Product Backlog", "Increment"],
+    ans: 2,
+    explanation: "The Product Owner owns the Product Backlog — an ordered list of everything that might be needed in the product."
+  },
+  {
+    q: "In the Prototype model, a 'throwaway prototype' means:",
+    opts: [
+      "The prototype is never shown to the customer",
+      "The prototype is built to understand requirements and then discarded",
+      "The prototype becomes the final product",
+      "The prototype is used only for performance testing"
+    ],
+    ans: 1,
+    explanation: "A throwaway (or rapid) prototype is built quickly to clarify requirements and then discarded — the real system is built based on the understanding gained."
+  }
+];
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  questions.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-q';
+    div.innerHTML = `
+      <p style="font-weight:500; margin-bottom:8px; font-size:14px;">${i+1}. ${item.q}</p>
+      ${item.opts.map((o, j) => `
+        <label class="quiz-opt">
+          <input type="radio" name="q${i}" value="${j}" />
+          <span style="font-size:13px;">${o}</span>
+        </label>
+      `).join('')}
+      <div class="quiz-result" id="result-${i}"></div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function checkAllAnswers() {
+  let score = 0;
+  questions.forEach((item, i) => {
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+    const resultDiv = document.getElementById(`result-${i}`);
+    resultDiv.style.display = 'block';
+    if (!selected) {
+      resultDiv.className = 'quiz-result wrong-result';
+      resultDiv.textContent = '— Not answered. ' + item.explanation;
+      return;
+    }
+    const val = parseInt(selected.value);
+    if (val === item.ans) {
+      score++;
+      resultDiv.className = 'quiz-result correct-result';
+      resultDiv.textContent = 'Correct! ' + item.explanation;
+    } else {
+      resultDiv.className = 'quiz-result wrong-result';
+      resultDiv.textContent = `Incorrect. Correct answer: "${item.opts[item.ans]}". ${item.explanation}`;
+    }
+  });
+  const scoreBox = document.getElementById('score-box');
+  scoreBox.style.display = 'block';
+  const pct = Math.round(score/questions.length*100);
+  if (pct >= 80) {
+    scoreBox.style.background = 'var(--green-light)';
+    scoreBox.style.color = 'var(--green)';
+  } else if (pct >= 50) {
+    scoreBox.style.background = 'var(--amber-light)';
+    scoreBox.style.color = 'var(--amber)';
+  } else {
+    scoreBox.style.background = 'var(--red-light)';
+    scoreBox.style.color = 'var(--red)';
+  }
+  scoreBox.textContent = `Score: ${score}/${questions.length} (${pct}%) — ${pct>=80?'Excellent! Ready for exam.':pct>=50?'Good, review weak areas.':'Need more revision.'}`;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('.quiz-result').forEach(r => { r.style.display='none'; r.textContent=''; });
+  document.getElementById('score-box').style.display = 'none';
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+buildQuiz();
+</script>

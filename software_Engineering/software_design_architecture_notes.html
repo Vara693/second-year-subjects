@@ -1,0 +1,1172 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans,system-ui);font-size:14px;color:var(--color-text-primary);line-height:1.65}
+.nb{position:sticky;top:0;z-index:100;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:7px 10px;display:flex;gap:5px;flex-wrap:wrap}
+.nb button{font-size:11px;padding:4px 11px;border:0.5px solid var(--color-border-secondary);border-radius:20px;cursor:pointer;background:transparent;color:var(--color-text-secondary);white-space:nowrap;font-family:inherit;transition:all .15s}
+.nb button:hover,.nb button.on{background:#E6F1FB;color:#185FA5;border-color:#185FA5}
+.sec{display:none;padding:14px 2px 52px}
+.sec.on{display:block}
+h1{font-size:19px;font-weight:500;margin-bottom:4px}
+h2{font-size:16px;font-weight:500;margin:20px 0 8px}
+h3{font-size:14px;font-weight:500;margin:13px 0 5px}
+p{margin-bottom:8px;line-height:1.72}
+ul,ol{padding-left:20px;margin-bottom:8px}
+li{margin-bottom:3px}
+strong{font-weight:500}
+code{font-family:var(--font-mono,monospace);font-size:12px;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px}
+pre{font-family:var(--font-mono,monospace);font-size:12px;background:var(--color-background-secondary);padding:12px 14px;border-radius:8px;overflow-x:auto;line-height:1.6;margin:8px 0;border:0.5px solid var(--color-border-tertiary)}
+.tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;margin-left:6px;vertical-align:middle}
+.td{background:#EEEDFE;color:#3C3489}.tk{background:#E6F1FB;color:#0C447C}.te{background:#FAEEDA;color:#633806}.tw{background:#FCEBEB;color:#791F1F}.tn{background:#EAF3DE;color:#27500A}.tt{background:#E1F5EE;color:#085041}.tp{background:#FAECE7;color:#712B13}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:9px;margin:9px 0}
+.cg3{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px;margin:9px 0}
+.c{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:11px 14px}
+.ca{border-left:3px solid #185FA5}.cg2{border-left:3px solid #3B6D11}.cam{border-left:3px solid #854F0B}.cr{border-left:3px solid #A32D2D}.cp{border-left:3px solid #534AB7}.ct{border-left:3px solid #0F6E56}.cc{border-left:3px solid #993C1D}
+table{width:100%;border-collapse:collapse;margin:9px 0;font-size:13px}
+th{background:var(--color-background-secondary);padding:7px 10px;text-align:left;font-weight:500;border:0.5px solid var(--color-border-tertiary)}
+td{padding:6px 10px;border:0.5px solid var(--color-border-tertiary);vertical-align:top}
+tr:hover td{background:var(--color-background-secondary)}
+.info{background:#E6F1FB;border-left:3px solid #185FA5;padding:10px 13px;margin:8px 0}
+.warn{background:#FCEBEB;border-left:3px solid #A32D2D;padding:10px 13px;margin:8px 0}
+.tip{background:#EAF3DE;border-left:3px solid #3B6D11;padding:10px 13px;margin:8px 0}
+.hl{background:#FAEEDA;border-left:3px solid #854F0B;padding:10px 13px;margin:8px 0}
+.pur{background:#EEEDFE;border-left:3px solid #534AB7;padding:10px 13px;margin:8px 0}
+.tel{background:#E1F5EE;border-left:3px solid #0F6E56;padding:10px 13px;margin:8px 0}
+.mn{background:#EEEDFE;border-radius:8px;padding:11px 13px;margin:8px 0}
+.mn-t{font-size:11px;font-weight:500;color:#534AB7;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.pf{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:10px 0}
+.fb{background:#E6F1FB;color:#185FA5;border:0.5px solid #185FA5;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:500;white-space:nowrap}
+.fa{color:var(--color-text-secondary);font-size:14px}
+.pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:20px;font-weight:500;margin:2px}
+.p-ok{background:#EAF3DE;color:#27500A}.p-no{background:#FCEBEB;color:#791F1F}.p-mid{background:#FAEEDA;color:#633806}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:18px 0}
+.step{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+.step-n{min-width:26px;height:26px;border-radius:50%;background:#E6F1FB;color:#185FA5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;margin-top:2px}
+.layer{display:flex;flex-direction:column;gap:3px;margin:10px 0}
+.lr{display:flex;align-items:center;gap:10px;padding:9px 13px;border-left:4px solid transparent}
+.qb{background:var(--color-background-secondary);border-radius:8px;padding:12px 14px;margin:8px 0}
+.qo{display:flex;align-items:center;gap:8px;margin:5px 0;cursor:pointer;padding:5px 9px;border-radius:6px}
+.qr{font-size:12px;margin-top:6px;padding:4px 10px;border-radius:4px;display:none}
+.arch-box{text-align:center;padding:10px 8px;border-radius:8px;font-size:13px;font-weight:500;border:0.5px solid var(--color-border-tertiary)}
+</style>
+
+<div class="nb">
+  <button class="on" onclick="show('overview')">Overview</button>
+  <button onclick="show('process')">Design Process</button>
+  <button onclick="show('principles')">Design Principles</button>
+  <button onclick="show('concepts')">Design Concepts</button>
+  <button onclick="show('model')">Design Model</button>
+  <button onclick="show('architecture')">Architecture</button>
+  <button onclick="show('genres')">Arch. Genres</button>
+  <button onclick="show('patterns')">Design Patterns</button>
+  <button onclick="show('ui')">UI Design</button>
+  <button onclick="show('casestudy')">Case Study: LMS</button>
+  <button onclick="show('revision')">Quick Revision</button>
+  <button onclick="show('quiz')">Self-Test Quiz</button>
+</div>
+
+<!-- OVERVIEW -->
+<div class="sec on" id="s-overview">
+<h1>Software Design and Architecture <span class="tag td">Unit 3</span></h1>
+<p style="color:var(--color-text-secondary);font-size:13px">Transforming requirements into a blueprint that engineers can implement — from high-level architecture down to module-level design.</p>
+
+<h2>What is Software Design?</h2>
+<div class="info">
+<strong>Definition (IEEE):</strong> Software design is the process of defining the architecture, components, interfaces, and other characteristics of a system or component and the result of that process.
+</div>
+<p>Design is the bridge between <strong>requirements</strong> (what to build) and <strong>implementation</strong> (code). A good design makes the system correct, maintainable, extensible, and efficient. Bad design produces a system that works today but collapses under change.</p>
+
+<div class="hl">
+<strong>The design imperative:</strong> Every software system has an architecture — even if no one designed it intentionally. Without deliberate design, architecture emerges chaotically. Deliberate design = controlled complexity.
+</div>
+
+<h2>Design vs Architecture — Key Distinction</h2>
+<table>
+<tr><th>Dimension</th><th>Software Architecture</th><th>Software Design</th></tr>
+<tr><td>Scope</td><td>System-wide structural decisions</td><td>Module/component-level decisions</td></tr>
+<tr><td>Audience</td><td>Stakeholders, lead architects, client</td><td>Development team</td></tr>
+<tr><td>Decisions</td><td>Which components exist, how they communicate, which technology stack</td><td>Class structures, algorithms, data formats, module internals</td></tr>
+<tr><td>Artefact</td><td>Architecture document, component diagrams</td><td>Class diagrams, sequence diagrams, pseudocode</td></tr>
+<tr><td>Reversibility</td><td>Extremely expensive to change</td><td>Costly but manageable to change</td></tr>
+<tr><td>Analogy</td><td>Blueprint of a building (load-bearing walls, floor plan)</td><td>Interior design (room layout, wiring, plumbing details)</td></tr>
+</table>
+
+<h2>Levels of Design</h2>
+<div class="layer">
+<div class="lr" style="background:#EEEDFE;border-left-color:#534AB7"><strong style="color:#3C3489">Architectural design:</strong> <span style="color:#534AB7;font-size:13px">High-level structure — subsystems, layers, major components, communication patterns</span></div>
+<div class="lr" style="background:#E6F1FB;border-left-color:#185FA5"><strong style="color:#0C447C">Interface design:</strong> <span style="color:#185FA5;font-size:13px">How components and subsystems communicate — APIs, protocols, message formats</span></div>
+<div class="lr" style="background:#EAF3DE;border-left-color:#3B6D11"><strong style="color:#27500A">Component design:</strong> <span style="color:#3B6D11;font-size:13px">Internal design of each component — classes, methods, algorithms, data structures</span></div>
+<div class="lr" style="background:#FAEEDA;border-left-color:#854F0B"><strong style="color:#633806">Data design:</strong> <span style="color:#854F0B;font-size:13px">Data structures, database schema, file formats, data transformation</span></div>
+</div>
+
+<div class="mn">
+<div class="mn-t">Mnemonic — Levels of Design: "AICD"</div>
+<strong>A</strong>rchitectural → <strong>I</strong>nterface → <strong>C</strong>omponent → <strong>D</strong>ata
+</div>
+</div>
+
+<!-- DESIGN PROCESS -->
+<div class="sec" id="s-process">
+<h1>The Design Process <span class="tag te">How design happens</span></h1>
+
+<h2>Design as a Wicked Problem</h2>
+<p>Design is not a linear process — it is iterative, creative, and often <strong>wicked</strong> (each attempt to solve the problem reveals new aspects of the problem). Unlike analysis which discovers the problem, design invents the solution.</p>
+<div class="hl"><strong>Analogy:</strong> Design is like sculpting. You start with a block (requirements) and iteratively remove and reshape until you reveal the form. You cannot design the whole thing top-down perfectly on the first pass.</div>
+
+<h2>The Design Process — Steps</h2>
+<div class="step"><div class="step-n">1</div><div><strong>Understand the problem:</strong> Study SRS deeply. Identify design constraints (performance, platform, budget). Define architectural drivers — the key decisions that will shape everything.</div></div>
+<div class="step"><div class="step-n">2</div><div><strong>Identify design elements:</strong> What major components/subsystems are needed? Identify candidate architectures and patterns. Decompose the problem space.</div></div>
+<div class="step"><div class="step-n">3</div><div><strong>Describe abstractions:</strong> Develop high-level models — component diagrams, collaboration diagrams. Assign responsibilities to components.</div></div>
+<div class="step"><div class="step-n">4</div><div><strong>Evaluate and select design:</strong> Compare candidate designs against quality attributes (performance, security, maintainability). Use architectural trade-off analysis (ATAM).</div></div>
+<div class="step"><div class="step-n">5</div><div><strong>Refine and detail:</strong> Elaborate each component's internals — class diagrams, sequence diagrams, database schema. Apply design patterns.</div></div>
+<div class="step"><div class="step-n">6</div><div><strong>Validate design:</strong> Walk through scenarios using the design. Verify all requirements are satisfied. Check for consistency across design levels.</div></div>
+<div class="step"><div class="step-n">7</div><div><strong>Document:</strong> Produce the Software Design Document (SDD) / Architecture Description. Create diagrams, decisions log (ADR — Architectural Decision Records).</div></div>
+
+<h2>Design Input and Output</h2>
+<table>
+<tr><th>Input to design</th><th>Output of design</th></tr>
+<tr><td>SRS (Software Requirements Specification)</td><td>Software Architecture Document (SAD)</td></tr>
+<tr><td>Feasibility study results</td><td>Component/Class diagrams (UML)</td></tr>
+<tr><td>Domain model</td><td>Sequence and collaboration diagrams</td></tr>
+<tr><td>NFRs (quality attributes)</td><td>Data model / Database schema (ERD)</td></tr>
+<tr><td>Technology constraints</td><td>Interface specifications (API contracts)</td></tr>
+<tr><td>Analysis model (DFD, ERD, use cases)</td><td>UI wireframes / design mockups</td></tr>
+</table>
+
+<h2>Good Design vs Bad Design — The Test</h2>
+<div class="cg">
+<div class="c cg2"><strong>Good design</strong><ul style="font-size:13px;margin-top:5px"><li>Implements all requirements correctly</li><li>Readable and understandable</li><li>Provides complete picture for implementation</li><li>Exhibits low coupling, high cohesion</li><li>Extensible — new features fit naturally</li><li>Testable — modules can be tested in isolation</li></ul></div>
+<div class="c cr"><strong>Bad design (Technical Debt)</strong><ul style="font-size:13px;margin-top:5px"><li>Spaghetti code — no clear structure</li><li>God class/module — one component does everything</li><li>Tight coupling — changing one thing breaks everything</li><li>No separation of concerns</li><li>Hard to test (dependencies tangled)</li><li>Magic numbers, implicit assumptions everywhere</li></ul></div>
+</div>
+
+<h2>Design Documentation: Architectural Decision Records (ADR)</h2>
+<div class="c ca" style="margin:8px 0">
+<pre>ADR-001: Use Layered Architecture for LMS
+Date: 2024-01-15
+Status: Accepted
+
+Context: Library Management System requires clear separation between UI,
+         business logic, and data access for team of 6 developers.
+
+Decision: Adopt a 3-tier layered architecture (Presentation → Business → Data).
+
+Rationale: Team familiarity, clear boundaries, enables parallel development,
+           supports future database migration without touching UI code.
+
+Consequences:
+  (+) Clear separation of concerns; easier testing
+  (+) New team members can work on one layer without understanding others
+  (-) Strict layering can cause performance overhead (must pass through all layers)
+  (-) Risk of "just call the layer below" temptation breaking the abstraction</pre>
+</div>
+</div>
+
+<!-- PRINCIPLES -->
+<div class="sec" id="s-principles">
+<h1>Software Design Principles <span class="tag te">Exam Core</span></h1>
+<div class="info">Design principles are guidelines that, when followed, produce software that is easier to understand, maintain, test, and extend. They capture decades of hard-won engineering experience.</div>
+
+<h2>1. Abstraction</h2>
+<p>Focus on <strong>essential characteristics</strong> while hiding irrelevant details. The most fundamental design principle — without abstraction, every system degenerates into unmanageable complexity.</p>
+<div class="cg">
+<div class="c ca"><strong>Procedural abstraction</strong><p style="font-size:13px;margin-top:4px">A named function with a defined interface. Caller knows <em>what</em> it does, not <em>how</em>. e.g., <code>searchBook(isbn)</code></p></div>
+<div class="c cp"><strong>Data abstraction</strong><p style="font-size:13px;margin-top:4px">A class/ADT that hides its data representation. e.g., <code>Book</code> class — caller uses methods, not raw fields.</p></div>
+<div class="c cg2"><strong>Architectural abstraction</strong><p style="font-size:13px;margin-top:4px">Layers — each layer hides its implementation from layers above. e.g., Data Access Layer hides SQL from Business Logic Layer.</p></div>
+</div>
+<div class="hl"><strong>Why it works:</strong> Human working memory can hold ~7 items (Miller's Law). Abstraction lets us reason about a system at the right level of detail without drowning in everything at once.</div>
+
+<h2>2. Modularity</h2>
+<p>Divide the system into separate, well-defined modules that can be developed, tested, and understood independently.</p>
+<div class="hl">
+<strong>Optimal module count:</strong> Cost of developing individual modules decreases as you have more modules (simpler units). But the cost of integrating them increases. The optimal number minimises total cost. Too few = complex monoliths. Too many = integration nightmare.
+</div>
+<pre>LMS modules: BookCatalogue | MemberManagement | Circulation | 
+             Reservations | Fines | Reporting | Authentication</pre>
+
+<h2>3. Coupling (LOW is BEST) <span class="tag te">Exam Favourite</span></h2>
+<p>Measure of <strong>interdependence between modules</strong>. High coupling = a change in one module ripples through many others.</p>
+<table>
+<tr><th>Type</th><th>Description</th><th>LMS Example</th><th>Quality</th></tr>
+<tr><td>Content</td><td>Module A directly modifies internals of Module B</td><td>Circulation code directly writes to Book table bypassing BookService</td><td><span class="pill p-no">Worst</span></td></tr>
+<tr><td>Common</td><td>Both modules share global data</td><td>Global <code>currentUser</code> variable read by all modules</td><td><span class="pill p-no">Bad</span></td></tr>
+<tr><td>External</td><td>Both share externally imposed format/device</td><td>Both modules hard-code CSV format for data exchange</td><td><span class="pill p-no">Bad</span></td></tr>
+<tr><td>Control</td><td>One module passes a control flag to another</td><td><code>processLoan(book, isRenewal=True)</code></td><td><span class="pill p-mid">Medium</span></td></tr>
+<tr><td>Stamp</td><td>Entire data structure passed when only part needed</td><td>Pass entire <code>Member</code> object when only <code>memberId</code> needed</td><td><span class="pill p-mid">Medium</span></td></tr>
+<tr><td>Data</td><td>Only required data passed as parameters</td><td><code>issueLoan(memberId, isbn, dueDate)</code></td><td><span class="pill p-ok">Good</span></td></tr>
+<tr><td>Message</td><td>Communicate via message passing only (microservices)</td><td>Circulation service publishes <code>BookIssued</code> event; Fine service subscribes</td><td><span class="pill p-ok">Best</span></td></tr>
+</table>
+
+<h2>4. Cohesion (HIGH is BEST) <span class="tag te">Exam Favourite</span></h2>
+<p>Measure of how strongly related the elements <strong>within</strong> a module are. High cohesion = each module has one clear purpose.</p>
+<table>
+<tr><th>Type</th><th>Description</th><th>Quality</th></tr>
+<tr><td>Coincidental</td><td>Elements grouped randomly — no logical relationship</td><td><span class="pill p-no">Worst</span></td></tr>
+<tr><td>Logical</td><td>Elements perform logically similar but unrelated functions</td><td><span class="pill p-no">Bad</span></td></tr>
+<tr><td>Temporal</td><td>Elements executed at same time (initialisation routines)</td><td><span class="pill p-no">Bad</span></td></tr>
+<tr><td>Procedural</td><td>Elements follow a specific execution sequence</td><td><span class="pill p-mid">Medium</span></td></tr>
+<tr><td>Communicational</td><td>Elements operate on the same data</td><td><span class="pill p-mid">Medium</span></td></tr>
+<tr><td>Sequential</td><td>Output of one element is input to the next</td><td><span class="pill p-ok">Good</span></td></tr>
+<tr><td>Functional</td><td>All elements contribute to a single, well-defined task</td><td><span class="pill p-ok">Best</span></td></tr>
+</table>
+
+<h2>5. Separation of Concerns (SoC)</h2>
+<p>A system should be organised so that each concern (feature, problem, responsibility) is addressed in a distinct place. Changes to one concern should not ripple into others.</p>
+<pre>LMS — Separation of Concerns:
+  View layer:        HTML/CSS templates (rendering)
+  Controller layer:  Handles HTTP requests, input validation
+  Service layer:     Business logic (fine calculation, loan rules)
+  Repository layer:  Database queries (SQL, ORM)
+  Domain layer:      Book, Member, Loan entities (pure data + behaviour)</pre>
+<div class="tip"><strong>SoC in action:</strong> When the database changes from MySQL to PostgreSQL, only the Repository layer changes. No business logic or UI code is touched. This is the power of SoC.</div>
+
+<h2>6. SOLID Principles</h2>
+<table>
+<tr><th>Principle</th><th>Meaning</th><th>LMS Violation</th><th>LMS Fix</th></tr>
+<tr><td><strong>S</strong>ingle Responsibility</td><td>One class = one reason to change</td><td><code>BookManager</code> handles search, serialisation, email notification, and fine calculation</td><td>Split: <code>BookSearchService</code>, <code>BookSerializer</code>, <code>NotificationService</code>, <code>FineCalculator</code></td></tr>
+<tr><td><strong>O</strong>pen/Closed</td><td>Open for extension, closed for modification</td><td>Adding a new fine type requires modifying <code>FineCalculator.calculate()</code> with a new <code>if</code> branch</td><td>Use <code>FineStrategy</code> interface; add new strategy classes without touching existing code</td></tr>
+<tr><td><strong>L</strong>iskov Substitution</td><td>Subtypes must be substitutable for base types</td><td><code>DigitalBook extends Book</code> overrides <code>getShelfLocation()</code> to throw exception — breaks callers</td><td>Separate <code>PhysicalBook</code> and <code>DigitalBook</code> from a shared <code>LibraryItem</code> interface</td></tr>
+<tr><td><strong>I</strong>nterface Segregation</td><td>Don't force clients to depend on methods they don't use</td><td><code>IBookOperations</code> includes <code>printBarcode()</code> — digital books must implement it but can't</td><td>Split into <code>ILendable</code>, <code>IPrintable</code>, <code>ISearchable</code></td></tr>
+<tr><td><strong>D</strong>ependency Inversion</td><td>Depend on abstractions, not concretions</td><td><code>CirculationService</code> directly instantiates <code>MySQLBookRepository</code></td><td>Inject <code>IBookRepository</code> — swap database without touching service</td></tr>
+</table>
+
+<h2>7. DRY, KISS, YAGNI</h2>
+<div class="cg">
+<div class="c ca"><strong>DRY</strong> — Don't Repeat Yourself<p style="font-size:13px;margin-top:4px">Every piece of knowledge must have a single, authoritative representation. If fine calculation logic appears in 3 places, a change requires updating 3 places — and you'll miss one.</p></div>
+<div class="c cg2"><strong>KISS</strong> — Keep It Simple, Stupid<p style="font-size:13px;margin-top:4px">Prefer the simplest solution that works. Complexity is the enemy of reliability. A 10-line solution you understand beats a 50-line "clever" one.</p></div>
+<div class="c cp"><strong>YAGNI</strong> — You Aren't Gonna Need It<p style="font-size:13px;margin-top:4px">Don't build features "for the future" that aren't needed now. Unused abstractions accumulate and create dead weight. Build for today's requirements.</p></div>
+</div>
+
+<div class="mn">
+<div class="mn-t">Coupling worst → best: "CCE-CS-DM"</div>
+Content → Common → External → Control → Stamp → Data → Message
+</div>
+<div class="mn">
+<div class="mn-t">Cohesion worst → best: "CLTPCSEF"</div>
+Coincidental → Logical → Temporal → Procedural → Communicational → Sequential → Functional
+</div>
+</div>
+
+<!-- CONCEPTS -->
+<div class="sec" id="s-concepts">
+<h1>Design Concepts <span class="tag te">Theory + Intuition</span></h1>
+
+<h2>1. Information Hiding (Encapsulation)</h2>
+<div class="info"><strong>Parnas (1972):</strong> Each module should hide a design decision — an aspect of the system that is likely to change. The module's interface should not expose how it makes that decision.</div>
+<p>If a module hides how it stores books (flat file, relational DB, document store), then changing the storage mechanism only requires changing that one module — all callers remain unchanged.</p>
+<pre>// Good: Information hiding
+class BookRepository {
+    private db: Database; // hidden — callers don't know it's a DB
+    
+    findByISBN(isbn: string): Book {
+        return this.db.query(`SELECT * FROM books WHERE isbn = ?`, isbn);
+    }
+}
+
+// Bad: Leaking internals
+class BookRepository {
+    public db: Database; // caller can directly write SQL — disaster waiting to happen
+}</pre>
+
+<h2>2. Stepwise Refinement (Top-Down Decomposition)</h2>
+<p>Start with a high-level description and progressively refine each component into lower-level detail. Niklaus Wirth's approach — design in layers, each layer more concrete than the previous.</p>
+<pre>Level 1: Process loan request
+Level 2: 
+  1. Validate member is active
+  2. Check book availability
+  3. Create loan record
+  4. Update book status
+  5. Send confirmation
+Level 3 (Validate member):
+  1.1 Look up member by ID
+  1.2 Check membership expiry date
+  1.3 Check overdue fines threshold
+  1.4 Return validation result</pre>
+
+<h2>3. Structural Partitioning</h2>
+<p>Dividing system structure into horizontal (layers) and vertical (functions/features) partitions.</p>
+<div class="cg">
+<div class="c ca"><strong>Horizontal partitioning</strong><p style="font-size:13px;margin-top:4px">Divide into layers by role: UI, Business Logic, Data. Each layer serves the layer above it. Classic 3-tier architecture.</p></div>
+<div class="c cg2"><strong>Vertical partitioning</strong><p style="font-size:13px;margin-top:4px">Divide into feature-based modules: Books module, Members module, Loans module. Each module is a complete vertical slice (UI + logic + data).</p></div>
+</div>
+<div class="tip"><strong>Modern trend:</strong> Microservices use vertical partitioning — each service is a complete vertical slice that can be deployed independently. Monoliths typically use horizontal partitioning.</div>
+
+<h2>4. Refactoring</h2>
+<p>Improving internal structure of code without changing external behaviour. Essential for managing technical debt and preventing design decay.</p>
+<ul>
+<li><strong>When to refactor:</strong> When adding a new feature is hard due to existing structure, when code is duplicated, when a class is too large, when tests are hard to write.</li>
+<li><strong>Common refactorings:</strong> Extract Method, Extract Class, Rename, Move Method, Replace Conditional with Polymorphism, Introduce Interface.</li>
+<li><strong>Safety net:</strong> Never refactor without tests. Tests verify that behaviour is preserved.</li>
+</ul>
+
+<h2>5. Design Patterns</h2>
+<div class="info">Reusable solutions to commonly occurring problems in software design (GoF — Gang of Four, 1994). Not copy-paste code — conceptual templates that solve recurring structural problems.</div>
+<p>Three categories: Creational, Structural, Behavioural (covered in detail in Design Patterns tab).</p>
+
+<h2>6. Component-Level Design</h2>
+<p>A software component is a modular, deployable, replaceable part of a system that encapsulates its implementation and exposes a set of interfaces. Key properties:</p>
+<ul>
+<li><strong>Interface:</strong> The contract — what the component provides and requires</li>
+<li><strong>Encapsulation:</strong> Implementation details are hidden</li>
+<li><strong>Replaceability:</strong> Can swap implementations without changing the caller</li>
+<li><strong>Independence:</strong> Can be developed and tested independently</li>
+</ul>
+<pre>LMS Component: CirculationComponent
+  Provides interface: ICirculationService
+    + issueBook(memberId, isbn): Loan
+    + returnBook(loanId): ReturnReceipt
+    + renewLoan(loanId): Loan
+    + getActiveLoansByMember(memberId): List&lt;Loan&gt;
+  
+  Requires interface: IBookRepository, IMemberRepository, IFineCalculator
+  
+  Internal classes: LoanFactory, LoanValidator, LoanPersistence</pre>
+</div>
+
+<!-- DESIGN MODEL -->
+<div class="sec" id="s-model">
+<h1>The Design Model <span class="tag te">4 Design Dimensions</span></h1>
+<div class="info">The design model is the set of design artefacts that collectively describe the complete design of a software system. It has four dimensions, each addressing different aspects of the system.</div>
+
+<h2>The 4-Dimension Design Model (Pressman)</h2>
+<div class="cg">
+<div class="c ca"><strong>Data/Class design</strong><p style="font-size:13px;margin-top:4px">Transforms analysis domain objects and data relationships into class definitions and data structures. Entity classes, persistent data schema, data formats.</p></div>
+<div class="c cp"><strong>Architectural design</strong><p style="font-size:13px;margin-top:4px">Defines overall structure — how major components are organised, how they communicate. The skeleton of the system.</p></div>
+<div class="c cg2"><strong>Interface design</strong><p style="font-size:13px;margin-top:4px">Defines how components communicate with each other, with external systems, and with users. APIs, protocols, UI design.</p></div>
+<div class="c cam"><strong>Component design</strong><p style="font-size:13px;margin-top:4px">Detailed internal design of each component — algorithms, local data structures, interfaces between internal elements.</p></div>
+</div>
+
+<h2>1. Data/Class Design</h2>
+<h3>LMS Class Design</h3>
+<pre>// Entity classes (domain objects)
+class Book {
+    isbn: string (PK)
+    title: string
+    author: string
+    publisher: string
+    year: int
+    category: BookCategory
+    totalCopies: int
+    availableCopies: int
+    
+    isAvailable(): boolean
+    getOverdueLoans(): List&lt;Loan&gt;
+}
+
+class Member {
+    memberId: string (PK)
+    name: string
+    email: string
+    membershipType: enum {STUDENT, FACULTY, PUBLIC}
+    membershipExpiry: Date
+    maxBooksAllowed: int  // derived from membershipType
+    
+    isActive(): boolean
+    getTotalFinesDue(): decimal
+}
+
+class Loan {
+    loanId: string (PK)
+    book: Book (FK)
+    member: Member (FK)
+    issueDate: Date
+    dueDate: Date
+    returnDate: Date (nullable)
+    renewalCount: int
+    status: enum {ACTIVE, RETURNED, OVERDUE}
+    
+    isOverdue(): boolean
+    getDaysOverdue(): int
+    calculateFine(): decimal
+}</pre>
+
+<h2>2. Architectural Design</h2>
+<p>Covered in depth in the Architecture tab. Key output: Component diagram, deployment diagram, technology stack decisions.</p>
+
+<h2>3. Interface Design</h2>
+<h3>Internal interface (API contract)</h3>
+<pre>// Interface design — contract between modules
+interface ICirculationService {
+    issueBook(memberId: string, isbn: string): LoanResult
+    returnBook(loanId: string): ReturnResult  
+    renewLoan(loanId: string): RenewResult
+    searchAvailableBooks(query: string): List&lt;Book&gt;
+}
+
+// External interface — REST API contract
+GET    /api/books?query=&category=&available=true    → 200 List&lt;BookDTO&gt;
+GET    /api/books/{isbn}                              → 200 BookDTO | 404
+POST   /api/loans                                     → 201 LoanDTO | 400 | 409
+PATCH  /api/loans/{loanId}/return                    → 200 ReturnReceiptDTO
+PATCH  /api/loans/{loanId}/renew                     → 200 LoanDTO | 409</pre>
+
+<h3>UI Interface design</h3>
+<p>Covered in the UI Design tab — follows the Golden Rules of Interface Design.</p>
+
+<h2>4. Component Design — Algorithmic Detail</h2>
+<pre>// Component: FineCalculator — detailed design
+class FineCalculator {
+    FINE_RATE_PER_DAY = {
+        STUDENT: 1.00,   // ₹1/day
+        FACULTY: 0.50,   // ₹0.50/day (subsidised)
+        PUBLIC:  2.00    // ₹2/day
+    }
+    MAX_FINE_CAP = 200.00  // Maximum ₹200 regardless of days
+    GRACE_PERIOD_DAYS = 1  // 1-day grace period
+    
+    algorithm calculateFine(loan: Loan, memberType: MemberType):
+        if loan.returnDate is null:
+            daysLate = today - loan.dueDate
+        else:
+            daysLate = loan.returnDate - loan.dueDate
+        
+        daysLate = max(0, daysLate - GRACE_PERIOD_DAYS)
+        
+        rate = FINE_RATE_PER_DAY[memberType]
+        fine = min(daysLate * rate, MAX_FINE_CAP)
+        return fine</pre>
+
+<h2>Design Model Documentation — SDD (Software Design Document)</h2>
+<ul>
+<li>Section 1: Introduction and scope</li>
+<li>Section 2: Architectural overview (patterns, layers, major components)</li>
+<li>Section 3: Component descriptions (each component's responsibility, interfaces, dependencies)</li>
+<li>Section 4: Data design (ERD, schema, data dictionary)</li>
+<li>Section 5: Interface design (APIs, UI wireframes, external system interfaces)</li>
+<li>Section 6: UML diagrams (class, sequence, state, activity, deployment)</li>
+<li>Section 7: Design rationale and trade-off decisions</li>
+</ul>
+</div>
+
+<!-- ARCHITECTURE -->
+<div class="sec" id="s-architecture">
+<h1>Software Architecture <span class="tag te">The System Skeleton</span></h1>
+
+<div class="info"><strong>IEEE Definition:</strong> The fundamental organisation of a system embodied in its components, their relationships to each other and to the environment, and the principles guiding its design and evolution.</div>
+
+<h2>Why Architecture Matters</h2>
+<ul>
+<li><strong>Communication:</strong> Architecture is the primary vehicle for communicating system structure to stakeholders</li>
+<li><strong>Decisions:</strong> Architectural decisions are the most consequential — they are expensive to undo</li>
+<li><strong>Quality:</strong> Architecture largely determines quality attributes (performance, security, scalability, maintainability)</li>
+<li><strong>Risk reduction:</strong> Architectural analysis early catches problems that would be catastrophic later</li>
+</ul>
+<div class="warn"><strong>Architectural debt:</strong> Poor architectural decisions — a monolith when microservices were needed, synchronous coupling when async was required — become the most expensive form of technical debt. Refactoring architecture at scale costs millions.</div>
+
+<h2>Quality Attributes (Architectural Drivers)</h2>
+<p>Non-functional requirements that architecture must satisfy. Known as the "-ilities":</p>
+<div class="cg3">
+<div class="c ca" style="padding:8px 10px"><strong style="font-size:13px">Performance</strong><p style="font-size:12px;margin-top:3px">Response time, throughput, latency</p></div>
+<div class="c cp" style="padding:8px 10px"><strong style="font-size:13px">Scalability</strong><p style="font-size:12px;margin-top:3px">Handle increasing load gracefully</p></div>
+<div class="c cg2" style="padding:8px 10px"><strong style="font-size:13px">Availability</strong><p style="font-size:12px;margin-top:3px">Uptime, fault tolerance, recovery</p></div>
+<div class="c cam" style="padding:8px 10px"><strong style="font-size:13px">Security</strong><p style="font-size:12px;margin-top:3px">Auth, encryption, audit trails</p></div>
+<div class="c cr" style="padding:8px 10px"><strong style="font-size:13px">Maintainability</strong><p style="font-size:12px;margin-top:3px">Ease of change, modularity</p></div>
+<div class="c ct" style="padding:8px 10px"><strong style="font-size:13px">Testability</strong><p style="font-size:12px;margin-top:3px">Can modules be tested in isolation?</p></div>
+</div>
+
+<h2>Major Architectural Styles / Patterns</h2>
+
+<h3>1. Layered Architecture (N-tier) <span class="tag te">Most Common</span></h3>
+<div class="layer">
+<div class="lr" style="background:#EEEDFE;border-left-color:#534AB7"><strong style="color:#3C3489;min-width:140px">Presentation Layer</strong><span style="color:#534AB7;font-size:13px">UI, views, controllers — what users see and interact with</span></div>
+<div class="lr" style="background:#E6F1FB;border-left-color:#185FA5"><strong style="color:#0C447C;min-width:140px">Business Logic Layer</strong><span style="color:#185FA5;font-size:13px">Domain rules, services, use case implementations</span></div>
+<div class="lr" style="background:#EAF3DE;border-left-color:#3B6D11"><strong style="color:#27500A;min-width:140px">Data Access Layer</strong><span style="color:#3B6D11;font-size:13px">Repository classes, ORM, query builders</span></div>
+<div class="lr" style="background:#FAEEDA;border-left-color:#854F0B"><strong style="color:#633806;min-width:140px">Database Layer</strong><span style="color:#854F0B;font-size:13px">PostgreSQL / MySQL / MongoDB — persistent storage</span></div>
+</div>
+<table>
+<tr><th>Pros</th><th>Cons</th></tr>
+<tr><td>Clear separation of concerns; easy to understand</td><td>Can cause performance overhead — must traverse all layers</td></tr>
+<tr><td>Change in one layer doesn't affect others</td><td>"Lasagne code" risk — too many thin layers add no value</td></tr>
+<tr><td>Easy to test each layer in isolation</td><td>Not suitable for high-performance, real-time systems</td></tr>
+<tr><td>Familiar — widely understood by developers</td><td>Monolithic deployment — whole stack deployed together</td></tr>
+</table>
+
+<h3>2. Client-Server Architecture</h3>
+<p>System divided into clients (request services) and servers (provide services). Clients don't need to know implementation details of servers.</p>
+<pre>LMS Client-Server:
+  Client: Browser running Angular/React SPA
+  Server: Node.js/Django REST API
+  Variants: 2-tier (client ↔ DB), 3-tier (client ↔ app server ↔ DB)</pre>
+
+<h3>3. Microservices Architecture</h3>
+<p>System decomposed into small, independently deployable services. Each service: owns its data, can be deployed separately, communicates via HTTP/message queue.</p>
+<pre>LMS Microservices:
+  book-service:       Catalogue, search, availability
+  member-service:     Registration, authentication, profiles
+  circulation-service: Issue, return, renew
+  fine-service:       Fine calculation, payment
+  notification-service: Email/SMS for reminders, dues
+  report-service:     Analytics, management reports
+
+Communication: REST APIs (sync) + RabbitMQ events (async)
+  e.g. circulation-service publishes BookIssued event →
+       fine-service and notification-service subscribe</pre>
+<table>
+<tr><th>Pros</th><th>Cons</th></tr>
+<tr><td>Independent deployment and scaling</td><td>Distributed system complexity</td></tr>
+<tr><td>Technology diversity per service</td><td>Network latency for inter-service calls</td></tr>
+<tr><td>Fault isolation — one service fails, others continue</td><td>Data consistency across services is hard</td></tr>
+<tr><td>Small teams own services end-to-end</td><td>Operational overhead (monitoring, tracing, deployment)</td></tr>
+</table>
+
+<h3>4. Repository Architecture</h3>
+<p>All components share a central data repository. Components communicate by reading/writing to the repository, not directly to each other.</p>
+<pre>LMS example: All modules (Catalogue, Circulation, Fines, Reports) 
+read/write to central LMS Database. Decouples modules from 
+each other — they only need to know the data schema, not each other's APIs.</pre>
+
+<h3>5. Pipe-and-Filter Architecture</h3>
+<p>Data flows through a series of processing steps (filters) connected by data channels (pipes). Each filter transforms data and passes it to the next.</p>
+<pre>LMS Report Generation Pipeline:
+  RawLoanData → [Filter: Clean/Validate] → [Filter: Aggregate] → 
+  [Filter: Calculate KPIs] → [Filter: Format as PDF] → Report</pre>
+
+<h3>6. Event-Driven Architecture (EDA)</h3>
+<p>Components communicate by publishing and subscribing to events. Publisher and subscriber are decoupled — publisher doesn't know who is listening.</p>
+<pre>LMS Events:
+  BookReturned → triggers: FineCalculation, BookAvailabilityUpdate, 
+                           NotifyReservationQueue
+  MembershipExpired → triggers: AccountSuspension, NotificationEmail
+  LowInventoryDetected → triggers: PurchaseRecommendation</pre>
+
+<h2>Architecture Comparison Table</h2>
+<table>
+<tr><th>Style</th><th>Best for</th><th>Key strength</th><th>Key weakness</th></tr>
+<tr><td>Layered</td><td>Business apps, web apps</td><td>Simplicity, familiarity</td><td>Performance overhead, monolithic</td></tr>
+<tr><td>Client-Server</td><td>Distributed apps with clear service provider</td><td>Centralised control</td><td>Server bottleneck, single point of failure</td></tr>
+<tr><td>Microservices</td><td>Large-scale, high-availability systems</td><td>Independent scaling, fault isolation</td><td>Complexity, distributed system problems</td></tr>
+<tr><td>Repository</td><td>Shared-data systems (IDEs, CASE tools)</td><td>Simple data sharing</td><td>Repository becomes bottleneck</td></tr>
+<tr><td>Pipe-and-Filter</td><td>Data transformation, batch processing, compilers</td><td>Composable, reusable filters</td><td>Poor for interactive systems</td></tr>
+<tr><td>Event-Driven</td><td>Reactive systems, IoT, real-time analytics</td><td>Loose coupling, extensibility</td><td>Hard to trace and debug</td></tr>
+</table>
+</div>
+
+<!-- GENRES -->
+<div class="sec" id="s-genres">
+<h1>Architectural Genres <span class="tag td">Pressman's Classification</span></h1>
+<div class="info"><strong>Definition:</strong> An architectural genre is a category of software systems that share common domain characteristics. The domain dictates which architectural styles are appropriate and what quality attributes are paramount.</div>
+<p>Pressman identifies architectural genres as domain-driven categories that guide architectural decisions. Understanding the genre first prevents choosing an inappropriate architecture.</p>
+
+<h2>1. Open Systems / Network Architecture</h2>
+<p>Systems designed to operate within the internet/network infrastructure. Must handle distributed communication, interoperability, and network reliability.</p>
+<ul>
+<li><strong>Characteristics:</strong> Stateless protocols, REST/GraphQL APIs, CDNs, load balancers, horizontal scaling</li>
+<li><strong>Key concerns:</strong> Latency, bandwidth, security (TLS), caching, service discovery</li>
+<li><strong>Examples:</strong> E-commerce platforms, social media, web services, cloud APIs</li>
+<li><strong>Common styles:</strong> Microservices, SOA, client-server, event-driven</li>
+</ul>
+
+<h2>2. Distributed Systems</h2>
+<p>Computation is distributed across multiple machines connected by a network. Multiple processes run in parallel and communicate via messages.</p>
+<ul>
+<li><strong>Characteristics:</strong> No shared memory, asynchronous communication, partial failure possible</li>
+<li><strong>Key concerns:</strong> Consistency (CAP theorem), fault tolerance, consensus, distributed transactions</li>
+<li><strong>CAP Theorem:</strong> A distributed system can guarantee at most 2 of: Consistency, Availability, Partition Tolerance</li>
+<li><strong>Examples:</strong> Banking systems, airline reservations, blockchain</li>
+</ul>
+<div class="hl"><strong>CAP Theorem for LMS:</strong> If the LMS goes fully distributed, which do you sacrifice? For a library, Availability + Partition Tolerance (AP) is often preferred — it's better to show a book as available (slightly stale data) than to fail completely when the network is partitioned.</div>
+
+<h2>3. Real-Time Systems</h2>
+<p>Must respond to events within strict time constraints. Correctness depends on both logical correctness AND timing.</p>
+<ul>
+<li><strong>Hard real-time:</strong> Missing deadline = system failure (airbag control, flight management)</li>
+<li><strong>Soft real-time:</strong> Missing occasional deadlines degrades quality (video streaming, trading systems)</li>
+<li><strong>Key concerns:</strong> Deterministic scheduling, interrupt handling, priority inversion, deadline monitoring</li>
+<li><strong>Common styles:</strong> Event-driven, priority-driven, time-triggered</li>
+</ul>
+
+<h2>4. Embedded Systems</h2>
+<p>Software embedded in hardware devices. Extremely resource-constrained (CPU, memory, power). Must interface directly with hardware.</p>
+<ul>
+<li><strong>Characteristics:</strong> Bare-metal or RTOS, device drivers, interrupt service routines, no operating system abstraction</li>
+<li><strong>Key concerns:</strong> Memory footprint, power consumption, hardware reliability, real-time behaviour</li>
+<li><strong>Examples:</strong> Medical devices, automotive ECU, industrial controllers, smart home devices</li>
+<li><strong>Common styles:</strong> Layered (with hardware abstraction layer), pipe-and-filter</li>
+</ul>
+
+<h2>5. Product-Line (Software Families) Architecture</h2>
+<p>A set of related software products built from a common set of shared assets (components, frameworks, architecture). Variations are built by composition and configuration, not rewriting.</p>
+<ul>
+<li><strong>Examples:</strong> Microsoft Office (Word, Excel, PowerPoint share UI, spell-check, file format components), Google Workspace, ERP systems (SAP, Oracle)</li>
+<li><strong>Key technique:</strong> Feature flags, plugin architecture, dependency injection for variation points</li>
+<li><strong>LMS example:</strong> Academic library variant vs. public library variant — different fine rules, membership types, reporting formats, but same core catalogue and circulation engine</li>
+</ul>
+
+<h2>6. Data-Intensive and Batch Systems</h2>
+<p>Process large volumes of data. Performance at scale, data integrity, and throughput are paramount.</p>
+<ul>
+<li><strong>Batch processing:</strong> Process large datasets periodically (overnight fine calculation for all overdue books)</li>
+<li><strong>Stream processing:</strong> Process data in real-time as it arrives (Apache Kafka, Spark Streaming)</li>
+<li><strong>Examples:</strong> Data warehouses, analytics pipelines, billing systems, bank reconciliation</li>
+<li><strong>Common styles:</strong> Pipe-and-filter, Lambda architecture (batch + stream), repository</li>
+</ul>
+
+<h2>Genre → Architecture Style Mapping</h2>
+<table>
+<tr><th>Genre</th><th>Primary quality attribute</th><th>Common architecture styles</th></tr>
+<tr><td>Open/Web systems</td><td>Scalability, availability</td><td>Microservices, client-server, REST</td></tr>
+<tr><td>Distributed systems</td><td>Reliability, consistency</td><td>Event-driven, SOA, P2P</td></tr>
+<tr><td>Real-time systems</td><td>Performance, determinism</td><td>Event-driven, priority-driven</td></tr>
+<tr><td>Embedded systems</td><td>Efficiency, reliability</td><td>Layered (HAL), pipe-and-filter</td></tr>
+<tr><td>Product-line</td><td>Variability, reusability</td><td>Plugin/component, layered</td></tr>
+<tr><td>Data-intensive</td><td>Throughput, correctness</td><td>Pipe-and-filter, repository, lambda</td></tr>
+</table>
+</div>
+
+<!-- DESIGN PATTERNS -->
+<div class="sec" id="s-patterns">
+<h1>Design Patterns — GoF and Beyond <span class="tag tn">Applied to LMS</span></h1>
+<div class="info"><strong>Definition:</strong> A design pattern is a reusable solution to a commonly occurring problem within a given context in software design. Patterns are not code — they are conceptual templates. (Gamma, Helm, Johnson, Vlissides — Gang of Four, 1994)</div>
+
+<h2>Pattern Template (PNAME)</h2>
+<ul>
+<li><strong>Name:</strong> A memorable identifier for the pattern</li>
+<li><strong>Problem:</strong> The context and forces that motivate the pattern</li>
+<li><strong>Solution:</strong> The structure of elements and their relationships</li>
+<li><strong>Consequences:</strong> Trade-offs and results of applying the pattern</li>
+</ul>
+
+<h2>Category 1: Creational Patterns</h2>
+<h3>Singleton — ensure one instance</h3>
+<pre>// LMS: Single database connection pool, single configuration manager
+class DatabasePool {
+    private static instance: DatabasePool;
+    private connections: Connection[];
+    
+    private constructor() { this.connections = []; }
+    
+    static getInstance(): DatabasePool {
+        if (!DatabasePool.instance) {
+            DatabasePool.instance = new DatabasePool();
+        }
+        return DatabasePool.instance;
+    }
+}
+// Both BookRepository and MemberRepository use same pool</pre>
+<div class="warn"><strong>Singleton pitfall:</strong> Makes testing hard (global state). Prefer dependency injection where possible. Thread-safety must be explicitly handled.</div>
+
+<h3>Factory Method — delegate object creation</h3>
+<pre>// LMS: Create different notification types without knowing concrete class
+interface Notification { send(recipient, message): void }
+class EmailNotification implements Notification { ... }
+class SMSNotification implements Notification { ... }
+
+class NotificationFactory {
+    create(type: string): Notification {
+        if (type === 'EMAIL') return new EmailNotification();
+        if (type === 'SMS') return new SMSNotification();
+        throw new Error('Unknown notification type');
+    }
+}
+// Caller never knows which class is instantiated</pre>
+
+<h3>Builder — construct complex objects step by step</h3>
+<pre>// LMS: Build complex search query
+const results = new BookQueryBuilder()
+    .withTitle("python")
+    .withCategory("PROGRAMMING")
+    .availableOnly()
+    .publishedAfter(2020)
+    .sortByTitle()
+    .limit(20)
+    .build()
+    .execute();</pre>
+
+<h2>Category 2: Structural Patterns</h2>
+<h3>Adapter — make incompatible interfaces work together</h3>
+<pre>// LMS: Legacy book catalogue uses XML; new system expects JSON
+interface IBookSource { getBooks(): Book[] }
+
+class LegacyCatalogueAdapter implements IBookSource {
+    private legacyCatalogue: LegacyXMLCatalogue;
+    
+    getBooks(): Book[] {
+        const xmlData = this.legacyCatalogue.fetchBooksXML();
+        return this.parseXMLToBooks(xmlData); // adapt XML → Book[]
+    }
+}</pre>
+
+<h3>Facade — simplified interface to a complex subsystem</h3>
+<pre>// LMS: LibraryFacade hides complexity of borrowing a book
+class LibraryFacade {
+    issueBook(memberId: string, isbn: string): IssueResult {
+        const member = this.memberService.findById(memberId);
+        this.memberService.validateEligibility(member);
+        const book = this.bookService.findByISBN(isbn);
+        this.bookService.validateAvailability(book);
+        const loan = this.circulationService.createLoan(member, book);
+        this.notificationService.sendIssueConfirmation(member, loan);
+        this.bookService.decrementAvailability(book);
+        return IssueResult.success(loan);
+    }
+    // Controller just calls facade — doesn't orchestrate 6 services
+}</pre>
+
+<h3>Decorator — add responsibilities dynamically</h3>
+<pre>// LMS: Add logging and caching to BookRepository without changing it
+class LoggingBookRepository implements IBookRepository {
+    constructor(private wrapped: IBookRepository) {}
+    findByISBN(isbn: string): Book {
+        console.log(`Searching book: ${isbn}`);
+        const result = this.wrapped.findByISBN(isbn);
+        console.log(`Found: ${result?.title}`);
+        return result;
+    }
+}
+const repo = new LoggingBookRepository(
+               new CachingBookRepository(
+                 new SQLBookRepository()));
+// Behaviour layered without modifying original class</pre>
+
+<h2>Category 3: Behavioural Patterns</h2>
+<h3>Observer — notify multiple objects of state change</h3>
+<pre>// LMS: When a book is returned, notify multiple systems
+class BookReturnedEvent {
+    book: Book; member: Member; loan: Loan;
+}
+
+class CirculationService {
+    private observers: BookReturnObserver[] = [];
+    
+    registerObserver(obs: BookReturnObserver) { this.observers.push(obs); }
+    
+    returnBook(loanId: string): void {
+        const loan = this.processReturn(loanId);
+        // Notify all observers — FineCalculator, ReservationQueue, Analytics
+        this.observers.forEach(obs => obs.onBookReturned(loan));
+    }
+}
+// Adding a new system that cares about returns = just register a new observer</pre>
+
+<h3>Strategy — encapsulate interchangeable algorithms</h3>
+<pre>// LMS: Different fine calculation strategies for different member types
+interface FineStrategy { calculate(daysOverdue: int): decimal }
+
+class StudentFineStrategy implements FineStrategy {
+    calculate(days: int): decimal { return Math.min(days * 1.0, 50); }
+}
+class FacultyFineStrategy implements FineStrategy {
+    calculate(days: int): decimal { return 0; } // Faculty exempt
+}
+
+class FineCalculator {
+    constructor(private strategy: FineStrategy) {}
+    calculateFine(loan: Loan): decimal {
+        return this.strategy.calculate(loan.getDaysOverdue());
+    }
+}
+// Swap strategies without changing FineCalculator</pre>
+
+<h3>Template Method — define skeleton, defer details to subclasses</h3>
+<pre>// LMS: Report generation — same steps, different output formats
+abstract class ReportGenerator {
+    generateReport(): void {  // template method
+        const data = this.fetchData();      // same for all
+        const processed = this.process(data); // same for all
+        this.renderOutput(processed);        // DIFFERENT per subclass
+    }
+    
+    abstract renderOutput(data: ReportData): void; // defer to subclass
+}
+
+class PDFReportGenerator extends ReportGenerator {
+    renderOutput(data: ReportData): void { /* render PDF */ }
+}
+class ExcelReportGenerator extends ReportGenerator {
+    renderOutput(data: ReportData): void { /* render Excel */ }
+}</pre>
+
+<h2>MVC — Model-View-Controller (Architecture Pattern)</h2>
+<p>Separates an application into three interconnected components. Fundamental to web frameworks (Django, Rails, Spring MVC).</p>
+<pre>Model: LMS domain objects (Book, Member, Loan) + business logic + data access
+View: HTML templates rendered in browser — what user sees
+Controller: Handles HTTP requests, orchestrates Model operations, selects View
+
+Request flow:
+  Browser → Controller.issueBook(memberId, isbn)
+           → Model: CirculationService.issue(memberId, isbn)
+           → returns LoanDTO
+           → View: loan_confirmation.html rendered with LoanDTO</pre>
+<table>
+<tr><th>Component</th><th>Responsibility</th><th>LMS Example</th></tr>
+<tr><td>Model</td><td>Business logic, data, state</td><td><code>BookService</code>, <code>Book</code>, <code>LoanRepository</code></td></tr>
+<tr><td>View</td><td>Presentation, rendering</td><td>Jinja2 templates, React components</td></tr>
+<tr><td>Controller</td><td>Input handling, orchestration</td><td><code>BookController</code>, <code>LoanController</code></td></tr>
+</table>
+</div>
+
+<!-- UI DESIGN -->
+<div class="sec" id="s-ui">
+<h1>User Interface Design Principles <span class="tag te">Shneiderman + Nielsen</span></h1>
+<div class="info">UI design is a critical part of software design. A technically perfect system that users cannot or will not use has failed. UI design bridges the gap between the system and the human using it.</div>
+
+<h2>The 3 Golden Rules of Interface Design (Shneiderman)</h2>
+<div class="cg">
+<div class="c ca"><strong>1. Place the user in control</strong><p style="font-size:13px;margin-top:5px">Users should feel they are in command of the interface. They initiate actions; the system responds. Provide undo, customisation, and flexible interaction modes.</p></div>
+<div class="c cp"><strong>2. Reduce the user's memory load</strong><p style="font-size:13px;margin-top:5px">Don't make users remember information across screens. Use recognition over recall. Show options; don't make users remember them. Provide defaults.</p></div>
+<div class="c cg2"><strong>3. Make the interface consistent</strong><p style="font-size:13px;margin-top:5px">Same actions should produce same results. Same visual elements should mean the same thing. Users transfer learning within and across applications.</p></div>
+</div>
+
+<h2>Shneiderman's 8 Golden Rules</h2>
+<table>
+<tr><th>#</th><th>Rule</th><th>LMS Application</th></tr>
+<tr><td>1</td><td>Strive for consistency</td><td>All forms use the same layout: label above field, required fields marked with *, primary action button always bottom-right</td></tr>
+<tr><td>2</td><td>Enable frequent users to use shortcuts</td><td>Keyboard shortcuts: Ctrl+N = new member, Ctrl+B = search book, F5 = refresh catalogue</td></tr>
+<tr><td>3</td><td>Offer informative feedback</td><td>After issuing a book: "Book 'Python Crash Course' issued to Ravi Kumar. Due: 14 Jan 2025." — not just "Success."</td></tr>
+<tr><td>4</td><td>Design dialogues to yield closure</td><td>Issue book flow has clear beginning (scan member), middle (select book), end (confirmation screen with all details)</td></tr>
+<tr><td>5</td><td>Offer error prevention and simple error handling</td><td>ISBN field validates format before submission; member lookup prevents issuing to expired members</td></tr>
+<tr><td>6</td><td>Permit easy reversal of actions</td><td>"Undo last issue" button on confirmation screen (within 5 minutes). Librarian can cancel loan same day.</td></tr>
+<tr><td>7</td><td>Support internal locus of control</td><td>Never lock users in a modal they cannot escape. Always provide Cancel/Back. Don't auto-submit forms.</td></tr>
+<tr><td>8</td><td>Reduce short-term memory load</td><td>Member's name and photo displayed throughout loan process — no need to remember member ID across screens</td></tr>
+</table>
+
+<h2>Nielsen's 10 Usability Heuristics</h2>
+<div class="cg">
+<div class="c ca"><strong>1. Visibility of system status</strong><p style="font-size:12px;margin-top:4px">Always keep user informed about what's happening. LMS: Progress bar for batch imports; loading spinner for search.</p></div>
+<div class="c cp"><strong>2. Match system and real world</strong><p style="font-size:12px;margin-top:4px">Use words/concepts the user knows. LMS: "Issue" not "CREATE_LOAN_RECORD", "Return" not "TERMINATE_LOAN_SESSION".</p></div>
+<div class="c cg2"><strong>3. User control and freedom</strong><p style="font-size:12px;margin-top:4px">Undo and redo for mistakes. LMS: Cancel book issue; undo fine payment.</p></div>
+<div class="c cam"><strong>4. Consistency and standards</strong><p style="font-size:12px;margin-top:4px">Follow platform conventions. LMS: Same date format throughout; same button styles for same actions.</p></div>
+<div class="c cr"><strong>5. Error prevention</strong><p style="font-size:12px;margin-top:4px">Better than good error messages: design that prevents errors. LMS: Disable "Issue" button if member has unpaid fines.</p></div>
+<div class="c ct"><strong>6. Recognition over recall</strong><p style="font-size:12px;margin-top:4px">Make options visible. LMS: Show list of recently searched books; autocomplete member names.</p></div>
+<div class="c ca"><strong>7. Flexibility and efficiency</strong><p style="font-size:12px;margin-top:4px">Accelerators for experts. LMS: Barcode scanner for rapid book issue; bulk operations for librarians.</p></div>
+<div class="c cp"><strong>8. Aesthetic and minimalist design</strong><p style="font-size:12px;margin-top:4px">Only show relevant info. LMS: Issue screen shows only fields needed for issuing — not member's full profile.</p></div>
+<div class="c cg2"><strong>9. Help recognise, diagnose errors</strong><p style="font-size:12px;margin-top:4px">Plain language errors. LMS: "This book has 0 copies available. 3 copies are currently on loan." not "Error: availability=0".</p></div>
+<div class="c cam"><strong>10. Help and documentation</strong><p style="font-size:12px;margin-top:4px">Easy to search, focused on task. LMS: Context-sensitive help — clicking ? on fine screen shows fine policy.</p></div>
+</div>
+
+<h2>UI Design Process</h2>
+<div class="pf">
+<div class="fb">User analysis</div><div class="fa">→</div>
+<div class="fb">Task analysis</div><div class="fa">→</div>
+<div class="fb">Information architecture</div><div class="fa">→</div>
+<div class="fb">Wireframing</div><div class="fa">→</div>
+<div class="fb">Prototyping</div><div class="fa">→</div>
+<div class="fb">Usability testing</div><div class="fa">→</div>
+<div class="fb">Iteration</div>
+</div>
+
+<h2>LMS Screen Design — Issue Book Workflow</h2>
+<div style="background:var(--color-background-secondary);border-radius:12px;padding:14px;margin:10px 0">
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:12px;margin-bottom:8px">
+<div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;font-weight:500">LMS — Issue Book screen (wireframe concept)</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+<div style="background:var(--color-background-secondary);border-radius:6px;padding:8px">
+<div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">Member ID / scan</div>
+<div style="height:28px;border:0.5px solid var(--color-border-secondary);border-radius:4px;background:var(--color-background-primary);padding:4px 8px;font-size:12px;display:flex;align-items:center;color:var(--color-text-secondary)">MEM-2024-00142</div>
+<div style="margin-top:6px;display:flex;gap:8px;align-items:center">
+<div style="width:32px;height:32px;border-radius:50%;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#185FA5">RK</div>
+<div><div style="font-size:12px;font-weight:500">Ravi Kumar</div><div style="font-size:11px;color:var(--color-text-secondary)">Faculty · Active · 0 fines</div></div>
+</div>
+</div>
+<div style="background:var(--color-background-secondary);border-radius:6px;padding:8px">
+<div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">Book ISBN / scan</div>
+<div style="height:28px;border:0.5px solid var(--color-border-secondary);border-radius:4px;background:var(--color-background-primary);padding:4px 8px;font-size:12px;display:flex;align-items:center;color:var(--color-text-secondary)">978-0-13-468599-1</div>
+<div style="margin-top:6px;font-size:12px"><div style="font-weight:500">Clean Code</div><div style="color:var(--color-text-secondary);font-size:11px">Robert C. Martin · 2 copies available</div></div>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div style="font-size:12px;color:var(--color-text-secondary)">Due date: <strong style="color:var(--color-text-primary)">14 Jan 2025</strong> (30 days)</div>
+<div style="display:flex;gap:8px">
+<div style="padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:6px;font-size:12px;color:var(--color-text-secondary)">Cancel</div>
+<div style="padding:6px 14px;background:#185FA5;border-radius:6px;font-size:12px;color:white;font-weight:500">Issue Book</div>
+</div>
+</div>
+</div>
+<p style="font-size:12px;color:var(--color-text-secondary);margin-top:6px">Design principles applied: member context visible throughout (rule 8), member status shown upfront preventing invalid issues (rule 5), clear closure — one action button (rule 4).</p>
+</div>
+
+<h2>Accessibility — WCAG 2.1 Essentials</h2>
+<ul>
+<li><strong>Perceivable:</strong> Text alternatives for images; sufficient colour contrast (4.5:1); not colour-only information</li>
+<li><strong>Operable:</strong> All functions keyboard accessible; no time limits without warning; no content that flashes 3+ times/second</li>
+<li><strong>Understandable:</strong> Readable language; predictable navigation; error identification and suggestion</li>
+<li><strong>Robust:</strong> Compatible with assistive technologies (screen readers)</li>
+</ul>
+
+<h2>Responsive Design for LMS</h2>
+<ul>
+<li><strong>Desktop:</strong> Full catalogue browse, complex search filters, multi-column layout</li>
+<li><strong>Tablet:</strong> Librarian counter operations — member + book scan, issue/return</li>
+<li><strong>Mobile:</strong> Member self-service — view loans, renew books, check fines, browse catalogue</li>
+</ul>
+</div>
+
+<!-- CASE STUDY -->
+<div class="sec" id="s-casestudy">
+<h1>Case Study: Library Management System (LMS) <span class="tag te">Full Design</span></h1>
+
+<h2>System Overview</h2>
+<div class="c ca" style="margin:8px 0">
+<table style="font-size:13px">
+<tr><td><strong>Client:</strong></td><td>City Public Library — 50,000 books, 5,000 active members</td></tr>
+<tr><td><strong>Users:</strong></td><td>Librarians (10), Members (self-service), Admin (2)</td></tr>
+<tr><td><strong>Key challenge:</strong></td><td>Replace paper-based system; integrate online member self-service portal</td></tr>
+<tr><td><strong>Architecture chosen:</strong></td><td>3-tier layered architecture (suitable scale, team of 5, monolithic deployment)</td></tr>
+<tr><td><strong>Genre:</strong></td><td>Open system (web-based) + Product-line (adaptable for other libraries)</td></tr>
+</table>
+</div>
+
+<h2>Architecture Design Decision</h2>
+<div class="hl">
+<strong>Why Layered Architecture (not Microservices)?</strong> Team of 5 developers, single deployment, ~5,000 members. Microservices would add distributed system complexity with no benefit at this scale. Layered architecture gives clear SoC, easy testing, and familiar pattern for the team. Revisit for microservices if system scales to 50,000+ members across multiple branches.
+</div>
+
+<h2>LMS 3-Tier Architecture</h2>
+<pre>┌─────────────────────────────────────────────────────────┐
+│  PRESENTATION LAYER (Web UI + REST API)                 │
+│  Angular SPA (Member portal) + Jinja2 templates         │
+│  (Librarian desktop) + REST API (mobile apps)           │
+│  Controllers: BookController, MemberController,         │
+│               LoanController, ReportController          │
+├─────────────────────────────────────────────────────────┤
+│  BUSINESS LOGIC LAYER (Services)                        │
+│  BookService, MemberService, CirculationService,        │
+│  FineService, ReservationService, NotificationService,  │
+│  ReportService, AuthenticationService                   │
+├─────────────────────────────────────────────────────────┤
+│  DATA ACCESS LAYER (Repositories + ORM)                 │
+│  BookRepository, MemberRepository, LoanRepository,      │
+│  FineRepository, ReservationRepository                  │
+│  Uses: SQLAlchemy ORM (Python/Flask)                    │
+├─────────────────────────────────────────────────────────┤
+│  DATABASE LAYER                                         │
+│  PostgreSQL 15 — primary database                       │
+│  Redis — session cache + reservation queue              │
+└─────────────────────────────────────────────────────────┘</pre>
+
+<h2>Module Design — All Modules</h2>
+<table>
+<tr><th>Module</th><th>Responsibility</th><th>Key classes</th><th>Interfaces</th></tr>
+<tr><td>Book Catalogue</td><td>Book inventory, search, availability tracking</td><td><code>Book, BookCopy, BookCategory</code></td><td><code>IBookService</code></td></tr>
+<tr><td>Member Management</td><td>Registration, membership, authentication</td><td><code>Member, MembershipType, MemberRepository</code></td><td><code>IMemberService</code></td></tr>
+<tr><td>Circulation</td><td>Issue, return, renew loans; loan lifecycle</td><td><code>Loan, LoanFactory, LoanValidator</code></td><td><code>ICirculationService</code></td></tr>
+<tr><td>Reservations</td><td>Hold/reserve unavailable books; notification on availability</td><td><code>Reservation, ReservationQueue</code></td><td><code>IReservationService</code></td></tr>
+<tr><td>Fine Management</td><td>Calculate, record, collect overdue fines</td><td><code>Fine, FineCalculator, FineStrategy</code></td><td><code>IFineService</code></td></tr>
+<tr><td>Notifications</td><td>Email/SMS for reminders, due dates, reservations</td><td><code>NotificationChannel, EmailNotification, SMSNotification</code></td><td><code>INotificationService</code></td></tr>
+<tr><td>Reporting</td><td>Analytics, management dashboards, export</td><td><code>ReportGenerator, ReportTemplate</code></td><td><code>IReportService</code></td></tr>
+<tr><td>Authentication</td><td>Login, roles, permissions, sessions</td><td><code>User, Role, Permission, JWTTokenService</code></td><td><code>IAuthService</code></td></tr>
+</table>
+
+<h2>Key Class Design (UML in text form)</h2>
+<pre>Book
+├── isbn: string
+├── title: string
+├── authors: string[]
+├── publisher: string
+├── year: int
+├── category: BookCategory
+├── copies: BookCopy[]
+├── isAvailable(): boolean
+├── getAvailableCount(): int
+└── reservations: Reservation[]
+
+Member
+├── memberId: string
+├── name: string
+├── email: string
+├── phone: string
+├── membershipType: {STUDENT, FACULTY, PUBLIC}
+├── membershipExpiry: Date
+├── activeLoans: Loan[]
+├── unpaidFines: Fine[]
+├── isEligibleToBorrow(): boolean  ← checks expiry + fines + loan limit
+└── maxBooksAllowed(): int         ← based on membershipType
+
+Loan
+├── loanId: string
+├── book: Book
+├── member: Member
+├── issueDate: Date
+├── dueDate: Date
+├── returnDate: Date | null
+├── renewalCount: int
+├── status: ACTIVE | RETURNED | OVERDUE
+├── isOverdue(): boolean
+├── getDaysOverdue(): int
+└── calculateFine(): decimal</pre>
+
+<h2>Design Patterns Applied in LMS</h2>
+<table>
+<tr><th>Pattern</th><th>Applied where</th><th>Problem solved</th></tr>
+<tr><td>Facade</td><td><code>LibraryFacade</code></td><td>Controller calls one method instead of orchestrating 6 services</td></tr>
+<tr><td>Strategy</td><td><code>FineCalculator</code></td><td>Different fine rules for Student/Faculty/Public without if-else chains</td></tr>
+<tr><td>Observer</td><td><code>BookReturnEvent</code></td><td>Multiple systems notified on book return without tight coupling</td></tr>
+<tr><td>Factory</td><td><code>NotificationFactory</code></td><td>Create Email/SMS notification without caller knowing concrete class</td></tr>
+<tr><td>Repository</td><td><code>BookRepository</code></td><td>Isolate data access — swap database without touching services</td></tr>
+<tr><td>Decorator</td><td><code>LoggingBookRepository</code></td><td>Add logging/caching without modifying BookRepository</td></tr>
+<tr><td>Template Method</td><td><code>ReportGenerator</code></td><td>Same report steps, different output formats (PDF, Excel, HTML)</td></tr>
+<tr><td>MVC</td><td>Overall application</td><td>Separate UI, business logic, data — team works on layers in parallel</td></tr>
+</table>
+
+<h2>Database Schema (Data Design)</h2>
+<pre>books(isbn PK, title, publisher, year, category_id FK, total_copies)
+book_copies(copy_id PK, isbn FK, condition, location, status)
+categories(category_id PK, name, max_loan_days)
+members(member_id PK, name, email, phone, type, expiry_date, created_at)
+loans(loan_id PK, copy_id FK, member_id FK, issue_date, due_date, 
+      return_date, renewal_count, status)
+reservations(reservation_id PK, isbn FK, member_id FK, reserved_date, 
+             expiry_date, status)
+fines(fine_id PK, loan_id FK, member_id FK, amount, paid, paid_date)
+authors(author_id PK, name, bio)
+book_authors(isbn FK, author_id FK) -- many-to-many</pre>
+
+<h2>Key Sequence — Issue Book Workflow</h2>
+<pre>Librarian → BookController.issueBook(memberId, isbn)
+  → LibraryFacade.issueBook(memberId, isbn)
+    → MemberService.findAndValidate(memberId)
+      → MemberRepository.findById(memberId)    [DB query]
+      → MemberValidator.checkEligibility(member) [business rules]
+    → BookService.findAndValidateAvailability(isbn)
+      → BookRepository.findByISBN(isbn)         [DB query]
+      → BookService.checkAvailability(book)     [business rules]
+    → CirculationService.createLoan(member, book)
+      → LoanFactory.create(member, book)        [creates Loan entity]
+      → LoanRepository.save(loan)               [DB insert]
+      → BookCopyService.markAsLoaned(copy)      [DB update]
+    → NotificationService.sendIssueConfirmation(member, loan)
+      → NotificationFactory.create('EMAIL')
+      → EmailNotification.send(member.email, loanDetails)
+  → BookController returns 201 with LoanDTO
+Librarian ← "Book issued successfully. Due: 14 Jan 2025"</pre>
+
+<h2>Quality Attribute Analysis</h2>
+<table>
+<tr><th>Quality attribute</th><th>Target</th><th>Design decision</th></tr>
+<tr><td>Performance</td><td>Search &lt;1s; issue &lt;2s</td><td>PostgreSQL full-text search index on title/author; Redis cache for popular queries</td></tr>
+<tr><td>Availability</td><td>99.5% (library hours)</td><td>Single server with daily backup; library closed overnight — 99.5% achievable</td></tr>
+<tr><td>Security</td><td>Role-based access</td><td>JWT tokens, RBAC middleware, bcrypt passwords, HTTPS only</td></tr>
+<tr><td>Maintainability</td><td>New report in &lt;1 day</td><td>Template Method for reports; clear layer separation; ORM for DB changes</td></tr>
+<tr><td>Scalability</td><td>Support 5,000 members</td><td>Layered monolith sufficient; connection pooling; query optimisation</td></tr>
+<tr><td>Usability</td><td>Barcode scan → issue in &lt;10s</td><td>Barcode scanner integration; one-screen issue workflow; keyboard shortcuts</td></tr>
+</table>
+</div>
+
+<!-- REVISION -->
+<div class="sec" id="s-revision">
+<h1>Quick Revision Sheet <span class="tag tn">One-page reference</span></h1>
+
+<h2>Key definitions at a glance</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:9px 0">
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Software design</div><div style="font-size:13px;font-weight:500">Blueprint: architecture + interfaces + components + data</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Architecture</div><div style="font-size:13px;font-weight:500">Fundamental structure: components + relationships + principles</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Coupling</div><div style="font-size:13px;font-weight:500">Interdependence between modules. LOW is best. Data coupling = best.</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Cohesion</div><div style="font-size:13px;font-weight:500">Relatedness within module. HIGH is best. Functional = best.</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Design model</div><div style="font-size:13px;font-weight:500">Data + Architecture + Interface + Component (DAIC)</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Design pattern</div><div style="font-size:13px;font-weight:500">Reusable solution to recurring design problem (GoF 1994)</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Arch. genre</div><div style="font-size:13px;font-weight:500">Domain category: Web, Distributed, Real-time, Embedded, Product-line, Data</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Golden rules UI</div><div style="font-size:13px;font-weight:500">User control + Reduce memory load + Consistency</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">SOLID</div><div style="font-size:13px;font-weight:500">Single resp. | Open/closed | Liskov | Interface seg. | Dependency inv.</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Facade pattern</div><div style="font-size:13px;font-weight:500">Simplified interface to a complex subsystem</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Observer pattern</div><div style="font-size:13px;font-weight:500">Publish-subscribe: notify multiple objects of state change</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Strategy pattern</div><div style="font-size:13px;font-weight:500">Encapsulate interchangeable algorithms; select at runtime</div></div>
+</div>
+
+<h2>All mnemonics</h2>
+<div class="mn"><div class="mn-t">Levels of design — "AICD"</div><strong>A</strong>rchitectural → <strong>I</strong>nterface → <strong>C</strong>omponent → <strong>D</strong>ata</div>
+<div class="mn"><div class="mn-t">Coupling worst → best — "CCE-CS-D-M"</div>Content → Common → External → Control → Stamp → Data → Message</div>
+<div class="mn"><div class="mn-t">Cohesion worst → best — "CLTPCSEF"</div>Coincidental → Logical → Temporal → Procedural → Communicational → Sequential → Functional</div>
+<div class="mn"><div class="mn-t">SOLID principles — "SOLID"</div><strong>S</strong>ingle Responsibility | <strong>O</strong>pen/Closed | <strong>L</strong>iskov Substitution | <strong>I</strong>nterface Segregation | <strong>D</strong>ependency Inversion</div>
+<div class="mn"><div class="mn-t">Design model dimensions — "DAIC"</div><strong>D</strong>ata/Class design | <strong>A</strong>rchitectural design | <strong>I</strong>nterface design | <strong>C</strong>omponent design</div>
+<div class="mn"><div class="mn-t">Design patterns by category — "CBS"</div><strong>C</strong>reational (Singleton, Factory, Builder) | <strong>B</strong>ehavioural (Observer, Strategy, Template) | <strong>S</strong>tructural (Adapter, Facade, Decorator)</div>
+<div class="mn"><div class="mn-t">Architectural genres — "OREEPD"</div><strong>O</strong>pen systems | <strong>R</strong>eal-time | <strong>E</strong>mbedded | <strong>E</strong>nterprise/Distributed | <strong>P</strong>roduct-line | <strong>D</strong>ata-intensive</div>
+<div class="mn"><div class="mn-t">Shneiderman's 3 golden rules</div>User Control + Reduce Memory Load + Consistency</div>
+
+<h2>Exam questions bank</h2>
+<h3>Easy (2–4 marks)</h3>
+<ul>
+<li>Define software architecture. How does it differ from software design?</li>
+<li>What is coupling? List any 4 types from worst to best.</li>
+<li>What is cohesion? What is the best type of cohesion?</li>
+<li>State Shneiderman's 3 Golden Rules of Interface Design.</li>
+<li>What is a design pattern? Name 3 GoF patterns with their categories.</li>
+<li>What is the Facade design pattern? Give an example.</li>
+</ul>
+<h3>Medium (5–8 marks)</h3>
+<ul>
+<li>Explain the SOLID principles with LMS examples for each.</li>
+<li>Compare Layered Architecture with Microservices — pros, cons, when to use each.</li>
+<li>Explain the Observer pattern. How would you apply it in a Library Management System?</li>
+<li>What is the design model? Explain all 4 dimensions with examples.</li>
+<li>Explain any 5 of Nielsen's 10 usability heuristics with LMS examples.</li>
+<li>What is architectural genre? Explain any 3 genres with suitable architectural styles.</li>
+</ul>
+<h3>Hard / Scenario (10+ marks)</h3>
+<ul>
+<li>Design the class structure for the Circulation module of LMS. Include class names, attributes, methods, and relationships. Justify your design decisions using coupling and cohesion principles.</li>
+<li>You are designing the architecture for an LMS expected to scale from 1 library to 50 branches. How does your architectural choice change? Compare layered vs. microservices for this scenario with full trade-off analysis.</li>
+<li>Apply the Strategy, Observer, and Facade patterns to the fine management system of LMS. Show class diagrams and explain what problem each pattern solves.</li>
+<li>Design the UI for the book issue screen in LMS. Apply all 8 of Shneiderman's Golden Rules explicitly to your design decisions.</li>
+</ul>
+</div>
+
+<!-- QUIZ -->
+<div class="sec" id="s-quiz">
+<h1>Self-Test Quiz <span class="tag te">12 Questions — Active Recall</span></h1>
+<p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:14px">Select the best answer, then click "Check All Answers" for your score and detailed explanations.</p>
+<div id="quiz-c"></div>
+<div style="margin-top:14px;display:flex;gap:10px">
+  <button onclick="checkQ()" style="padding:8px 20px;background:#185FA5;color:white;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px">Check All Answers</button>
+  <button onclick="resetQ()" style="padding:8px 20px;background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--color-text-primary)">Reset</button>
+</div>
+<div id="q-score" style="display:none;margin-top:12px;padding:12px 16px;border-radius:8px;font-weight:500;font-size:15px"></div>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nb button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('s-'+id).classList.add('on');
+  event.target.classList.add('on');
+}
+
+const qs=[
+  {q:"Which coupling type is considered the BEST (lowest interdependence)?",opts:["Common coupling","Control coupling","Data coupling","Stamp coupling"],ans:2,exp:"Data coupling is the best — only necessary data is passed as parameters. Message coupling (microservices) is theoretically even better. Content coupling (accessing another module's internals) is the worst."},
+  {q:"The Observer design pattern is best used when:",opts:["You need to create objects without specifying exact classes","Multiple objects should be notified when one object changes state","You need to add behaviour to objects dynamically at runtime","You want to provide a simplified interface to a complex subsystem"],ans:1,exp:"Observer (publish-subscribe) allows multiple subscribers to react to state changes in a publisher without tight coupling. The publisher doesn't know who is subscribing. In LMS: BookReturnedEvent notifies FineCalculator, ReservationQueue, and Analytics."},
+  {q:"The 'O' in SOLID stands for Open/Closed Principle. In the context of LMS fine calculation, this means:",opts:["The FineCalculator class can be opened and modified freely","New fine strategies should be added by creating new classes, not modifying FineCalculator","FineCalculator must be open-source","The fine calculation method should be public (open)"],ans:1,exp:"Open/Closed: open for extension, closed for modification. Add new fine rules by creating new FineStrategy classes. Modifying FineCalculator for each new rule risks breaking existing rules."},
+  {q:"Which architectural style is MOST appropriate for a library system expected to scale from 1 library to 100 branches, requiring independent deployment of each service?",opts:["Layered (3-tier) architecture","Pipe-and-filter architecture","Microservices architecture","Repository architecture"],ans:2,exp:"Microservices enable independent deployment and scaling of individual services (catalogue, circulation, fines). Each branch or feature can scale independently. Layered monolith becomes deployment bottleneck at this scale."},
+  {q:"Shneiderman's Golden Rule 'Design dialogues to yield closure' means:",opts:["All dialog boxes should have a Close button","User interactions should have a clear beginning, middle, and end — users should know when a task is complete","System should close automatically after each session","Dialogues should close within 5 seconds"],ans:1,exp:"Closure principle: users need to know when they have successfully completed a task. After issuing a book in LMS, show a confirmation screen with all details — not just navigate silently back to the home screen."},
+  {q:"In the design model, which dimension is responsible for defining how components communicate with each other and with users?",opts:["Data/Class design","Architectural design","Interface design","Component design"],ans:2,exp:"Interface design defines APIs between components, protocols, message formats, and user interface design. It is the contract between collaborating modules. The 4 dimensions: Data/Class, Architectural, Interface, Component."},
+  {q:"The Facade pattern is applied in LMS where LibraryFacade.issueBook() orchestrates 6 service calls. Which design principle does this MOST directly support?",opts:["DRY (Don't Repeat Yourself)","Single Responsibility Principle","Separation of Concerns and reducing coupling of the controller","Liskov Substitution Principle"],ans:2,exp:"Facade reduces coupling between the controller and the subsystem. The controller has one dependency (LibraryFacade) instead of 6 service dependencies. It also supports SoC — the controller's concern is handling HTTP, not knowing how to orchestrate services."},
+  {q:"Functional cohesion is BEST because:",opts:["All elements execute at the same time","All elements contribute to a single, well-defined task — maximum focus","All elements share the same data","It is the most common type found in practice"],ans:1,exp:"Functional cohesion = every element in the module exists solely to perform one specific function. FineCalculator only calculates fines. This makes it easy to understand, test, and reuse without worrying about side effects on unrelated functions."},
+  {q:"Which architectural genre is characterised by systems that MUST respond to events within strict time constraints where missing a deadline equals system failure?",opts:["Distributed systems","Open/network systems","Hard real-time systems","Product-line architecture"],ans:2,exp:"Hard real-time systems: correctness requires both correct results AND correct timing. Examples: airbag deployment, pacemaker, flight control. Missing a deadline in these systems causes failure, not just degraded performance."},
+  {q:"The Strategy pattern applied to LMS fine calculation means:",opts:["Fines are calculated using a single algorithm for all members","Different fine calculation algorithms (StudentFine, FacultyFine, PublicFine) are encapsulated as interchangeable classes","Fine calculation is delayed until requested (lazy evaluation)","The fine calculation is defined in an abstract class and deferred to subclasses"],ans:1,exp:"Strategy encapsulates interchangeable algorithms. FineCalculator accepts any FineStrategy at runtime. Adding a new member type (e.g., Senior Citizen) = create new SeniorFineStrategy class without modifying FineCalculator. The last option describes Template Method, a different pattern."},
+  {q:"Information Hiding (Parnas, 1972) states that each module should hide:",opts:["All its methods from other modules","A design decision that is likely to change","Its performance characteristics","The number of classes it contains"],ans:1,exp:"Parnas: modules hide design decisions — things likely to change. BookRepository hides whether it uses SQL, NoSQL, or a file system. If storage changes, only BookRepository changes. This is the foundation of encapsulation in OOP."},
+  {q:"Which Nielsen usability heuristic is violated when a LMS error message says 'Error code: DB_CONSTRAINT_VIOLATION_FK_MEMBER_LOANS_001'?",opts:["Visibility of system status","Help users recognise, diagnose, and recover from errors","Aesthetic and minimalist design","User control and freedom"],ans:1,exp:"Heuristic 9: errors should be in plain language, indicate the problem, and constructively suggest a solution. The technical error code is meaningless to a librarian. Better: 'This member has 3 active loans and cannot borrow more until one is returned.'"}
+];
+
+function buildQ(){
+  const c=document.getElementById('quiz-c');
+  c.innerHTML='';
+  qs.forEach((item,i)=>{
+    const d=document.createElement('div');
+    d.className='qb';
+    d.innerHTML=`<p style="font-weight:500;margin-bottom:8px;font-size:14px">${i+1}. ${item.q}</p>${item.opts.map((o,j)=>`<label class="qo"><input type="radio" name="q${i}" value="${j}"> <span style="font-size:13px">${o}</span></label>`).join('')}<div id="qr-${i}" class="qr"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function checkQ(){
+  let sc=0;
+  qs.forEach((item,i)=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    const rd=document.getElementById('qr-'+i);
+    rd.style.display='block';
+    if(!sel){rd.style.background='#FCEBEB';rd.style.color='#791F1F';rd.textContent='Not answered. '+item.exp;return;}
+    if(parseInt(sel.value)===item.ans){sc++;rd.style.background='#EAF3DE';rd.style.color='#27500A';rd.textContent='Correct! '+item.exp;}
+    else{rd.style.background='#FCEBEB';rd.style.color='#791F1F';rd.textContent=`Incorrect. Correct: "${item.opts[item.ans]}". ${item.exp}`;}
+  });
+  const sb=document.getElementById('q-score');sb.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  if(pct>=80){sb.style.background='#EAF3DE';sb.style.color='#27500A';}
+  else if(pct>=50){sb.style.background='#FAEEDA';sb.style.color='#633806';}
+  else{sb.style.background='#FCEBEB';sb.style.color='#791F1F';}
+  sb.textContent=`Score: ${sc}/${qs.length} (${pct}%) — ${pct>=80?'Excellent! Exam-ready on this topic.':pct>=50?'Good progress — review incorrect answers and revisit those tabs.':'Keep going — reread the principles, patterns, and architecture tabs.'}`;
+}
+
+function resetQ(){
+  document.querySelectorAll('[name^="q"]').forEach(r=>r.checked=false);
+  document.querySelectorAll('[id^="qr-"]').forEach(r=>{r.style.display='none';r.textContent='';});
+  document.getElementById('q-score').style.display='none';
+}
+buildQ();
+</script>

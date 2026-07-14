@@ -1,0 +1,1163 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans,system-ui);font-size:14px;color:var(--color-text-primary);line-height:1.65}
+.nb{position:sticky;top:0;z-index:100;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:7px 10px;display:flex;gap:5px;flex-wrap:wrap}
+.nb button{font-size:11px;padding:4px 11px;border:0.5px solid var(--color-border-secondary);border-radius:20px;cursor:pointer;background:transparent;color:var(--color-text-secondary);white-space:nowrap;font-family:inherit;transition:all .15s}
+.nb button:hover,.nb button.on{background:#E6F1FB;color:#185FA5;border-color:#185FA5}
+.sec{display:none;padding:14px 2px 52px}.sec.on{display:block}
+h1{font-size:19px;font-weight:500;margin-bottom:4px}
+h2{font-size:16px;font-weight:500;margin:20px 0 8px}
+h3{font-size:14px;font-weight:500;margin:13px 0 5px}
+p{margin-bottom:8px;line-height:1.72}
+ul,ol{padding-left:20px;margin-bottom:8px}
+li{margin-bottom:3px}
+strong{font-weight:500}
+code{font-family:var(--font-mono,monospace);font-size:12px;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px}
+pre{font-family:var(--font-mono,monospace);font-size:12px;background:var(--color-background-secondary);padding:12px 14px;border-radius:8px;overflow-x:auto;line-height:1.6;margin:8px 0;border:0.5px solid var(--color-border-tertiary)}
+.tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;margin-left:6px;vertical-align:middle}
+.td{background:#EEEDFE;color:#3C3489}.tk{background:#E6F1FB;color:#0C447C}.te{background:#FAEEDA;color:#633806}.tw{background:#FCEBEB;color:#791F1F}.tn{background:#EAF3DE;color:#27500A}.tt{background:#E1F5EE;color:#085041}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:9px;margin:9px 0}
+.c{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:11px 14px}
+.ca{border-left:3px solid #185FA5}.cg2{border-left:3px solid #3B6D11}.cam{border-left:3px solid #854F0B}.cr{border-left:3px solid #A32D2D}.cp{border-left:3px solid #534AB7}.ct{border-left:3px solid #0F6E56}
+table{width:100%;border-collapse:collapse;margin:9px 0;font-size:13px}
+th{background:var(--color-background-secondary);padding:7px 10px;text-align:left;font-weight:500;border:0.5px solid var(--color-border-tertiary)}
+td{padding:6px 10px;border:0.5px solid var(--color-border-tertiary);vertical-align:top}
+tr:hover td{background:var(--color-background-secondary)}
+.info{background:#E6F1FB;border-left:3px solid #185FA5;padding:10px 13px;margin:8px 0}
+.warn{background:#FCEBEB;border-left:3px solid #A32D2D;padding:10px 13px;margin:8px 0}
+.tip{background:#EAF3DE;border-left:3px solid #3B6D11;padding:10px 13px;margin:8px 0}
+.hl{background:#FAEEDA;border-left:3px solid #854F0B;padding:10px 13px;margin:8px 0}
+.pur{background:#EEEDFE;border-left:3px solid #534AB7;padding:10px 13px;margin:8px 0}
+.tel{background:#E1F5EE;border-left:3px solid #0F6E56;padding:10px 13px;margin:8px 0}
+.mn{background:#EEEDFE;border-radius:8px;padding:11px 13px;margin:8px 0}
+.mn-t{font-size:11px;font-weight:500;color:#534AB7;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.pf{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:10px 0}
+.fb{background:#E6F1FB;color:#185FA5;border:0.5px solid #185FA5;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:500;white-space:nowrap}
+.fa{color:var(--color-text-secondary);font-size:14px}
+.pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:20px;font-weight:500;margin:2px}
+.p-ok{background:#EAF3DE;color:#27500A}.p-no{background:#FCEBEB;color:#791F1F}.p-mid{background:#FAEEDA;color:#633806}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:18px 0}
+.step{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+.sn{min-width:26px;height:26px;border-radius:50%;background:#E6F1FB;color:#185FA5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;margin-top:2px}
+.layer{display:flex;flex-direction:column;gap:3px;margin:10px 0}
+.lr{display:flex;align-items:center;gap:10px;padding:9px 13px;border-left:4px solid transparent}
+.qb{background:var(--color-background-secondary);border-radius:8px;padding:12px 14px;margin:8px 0}
+.qo{display:flex;align-items:center;gap:8px;margin:5px 0;cursor:pointer;padding:5px 9px;border-radius:6px}
+.qr{font-size:12px;margin-top:6px;padding:4px 10px;border-radius:4px;display:none}
+</style>
+
+<div class="nb">
+  <button class="on" onclick="show('overview')">Overview</button>
+  <button onclick="show('principles')">Objectives & Principles</button>
+  <button onclick="show('vv')">V&V</button>
+  <button onclick="show('levels')">Testing Levels</button>
+  <button onclick="show('alpha-beta')">Alpha & Beta</button>
+  <button onclick="show('whitebox')">White-Box Testing</button>
+  <button onclick="show('blackbox')">Black-Box Testing</button>
+  <button onclick="show('testdesign')">Test Case Design</button>
+  <button onclick="show('debugging')">Debugging</button>
+  <button onclick="show('maintenance')">Maintenance</button>
+  <button onclick="show('scm')">SCM</button>
+  <button onclick="show('risk')">Risk Management</button>
+  <button onclick="show('revision')">Quick Revision</button>
+  <button onclick="show('quiz')">Self-Test Quiz</button>
+</div>
+
+<!-- OVERVIEW -->
+<div class="sec on" id="s-overview">
+<h1>Testing, Deployment and Maintenance <span class="tag td">Unit 4</span></h1>
+<p style="color:var(--color-text-secondary);font-size:13px">The science and practice of verifying software works correctly, deploying it safely, and keeping it running over time.</p>
+
+<h2>Why testing is not optional</h2>
+<div class="info">
+Software without testing is a bet — not engineering. Testing does not prove the absence of defects, but it systematically reduces risk before software reaches users. The cost of finding a defect grows exponentially the later it is found.
+</div>
+<div class="cg">
+<div class="c cr"><strong>Requirements phase defect</strong><p style="font-size:13px;margin-top:4px">Cost to fix: $1. Found during requirements review in 10 minutes.</p></div>
+<div class="c cam"><strong>Design phase defect</strong><p style="font-size:13px;margin-top:4px">Cost to fix: $10. Requires design rework before coding starts.</p></div>
+<div class="c ca"><strong>Coding phase defect</strong><p style="font-size:13px;margin-top:4px">Cost to fix: $100. Code written to wrong spec must be rewritten.</p></div>
+<div class="c cp"><strong>Testing phase defect</strong><p style="font-size:13px;margin-top:4px">Cost to fix: $1,000. Full regression testing required after fix.</p></div>
+<div class="c cg2"><strong>Production defect</strong><p style="font-size:13px;margin-top:4px">Cost to fix: $10,000+. Emergency fix, hotfix deployment, customer impact, reputation damage.</p></div>
+</div>
+
+<h2>The testing landscape — complete picture</h2>
+<div class="layer">
+<div class="lr" style="background:#EEEDFE;border-left-color:#534AB7"><strong style="color:#3C3489;min-width:160px">Acceptance Testing</strong><span style="color:#534AB7;font-size:13px">Customer validates system meets their needs (Alpha, Beta, UAT)</span></div>
+<div class="lr" style="background:#E6F1FB;border-left-color:#185FA5"><strong style="color:#0C447C;min-width:160px">System Testing</strong><span style="color:#185FA5;font-size:13px">Complete integrated system tested against all requirements (functional + NFR)</span></div>
+<div class="lr" style="background:#EAF3DE;border-left-color:#3B6D11"><strong style="color:#27500A;min-width:160px">Integration Testing</strong><span style="color:#3B6D11;font-size:13px">Module interfaces and interactions tested — find interface defects</span></div>
+<div class="lr" style="background:#FAEEDA;border-left-color:#854F0B"><strong style="color:#633806;min-width:160px">Unit Testing</strong><span style="color:#854F0B;font-size:13px">Individual functions/modules tested in isolation — find logic defects</span></div>
+</div>
+<p style="font-size:13px;color:var(--color-text-secondary)">Each level builds on the previous. Defects found at lower levels are cheapest. The pyramid: many unit tests → fewer integration → fewer system → fewest acceptance tests.</p>
+
+<div class="mn">
+<div class="mn-t">Testing process mnemonic: "OPVTRD"</div>
+<strong>O</strong>bjectives → <strong>P</strong>lan → <strong>V</strong>erify/Design test cases → <strong>T</strong>est execution → <strong>R</strong>eport → <strong>D</strong>ebugging and fix
+</div>
+</div>
+
+<!-- OBJECTIVES AND PRINCIPLES -->
+<div class="sec" id="s-principles">
+<h1>Testing Objectives and Principles <span class="tag te">Foundation</span></h1>
+
+<h2>Software testing objectives</h2>
+<div class="info">
+<strong>Primary objective:</strong> To find defects before the user does, with minimum effort and maximum coverage.
+</div>
+<ul>
+<li><strong>Find defects:</strong> Reveal errors in requirements, design, or code that could cause failures in production</li>
+<li><strong>Assess quality:</strong> Give stakeholders confidence in the software's fitness for purpose</li>
+<li><strong>Prevent defects:</strong> Early testing and reviews prevent defects from being injected downstream</li>
+<li><strong>Reduce risk:</strong> Identify and mitigate risks before deployment</li>
+<li><strong>Verify correctness:</strong> Confirm software behaves as specified</li>
+<li><strong>Validate fitness:</strong> Confirm software meets actual user needs (beyond the specification)</li>
+</ul>
+
+<div class="hl">
+<strong>Dijkstra's Principle:</strong> "Testing can show the presence of bugs but never their absence." No amount of testing can prove a program is 100% correct — it can only increase confidence. This is why risk-based testing prioritises testing the most critical paths first.
+</div>
+
+<h2>Seven fundamental testing principles (ISTQB)</h2>
+<table>
+<tr><th>#</th><th>Principle</th><th>Meaning</th><th>Implication</th></tr>
+<tr><td>1</td><td>Testing shows presence of defects</td><td>Testing finds bugs; it cannot prove absence</td><td>Never say "tested = bug-free"</td></tr>
+<tr><td>2</td><td>Exhaustive testing is impossible</td><td>Cannot test every input combination</td><td>Use risk-based and equivalence partitioning to prioritise</td></tr>
+<tr><td>3</td><td>Early testing</td><td>Start testing as early as possible (requirements reviews)</td><td>Testing = reviews + inspections + dynamic tests</td></tr>
+<tr><td>4</td><td>Defect clustering</td><td>80% of defects found in 20% of modules (Pareto)</td><td>Focus effort on high-risk, complex modules</td></tr>
+<tr><td>5</td><td>Pesticide paradox</td><td>Running the same tests repeatedly stops finding new bugs</td><td>Continuously update and add new test cases</td></tr>
+<tr><td>6</td><td>Testing is context-dependent</td><td>Safety-critical software needs far more testing than a blog CMS</td><td>Match testing depth to system criticality and risk</td></tr>
+<tr><td>7</td><td>Absence of errors fallacy</td><td>A bug-free system that doesn't meet user needs has still failed</td><td>Validation (right product) is as important as verification (right build)</td></tr>
+</table>
+
+<div class="mn">
+<div class="mn-t">7 principles mnemonic: "SEED-PCA"</div>
+<strong>S</strong>hows presence (not absence) | <strong>E</strong>xhaustive impossible | <strong>E</strong>arly testing | <strong>D</strong>efect clustering | <strong>P</strong>esticide paradox | <strong>C</strong>ontext-dependent | <strong>A</strong>bsence-of-errors fallacy
+</div>
+
+<h2>Error vs Fault vs Failure — precise definitions</h2>
+<div class="cg">
+<div class="c cr"><strong>Error (Mistake)</strong><p style="font-size:13px;margin-top:4px">A human action that produces an incorrect result. Developer misunderstands a requirement or makes a typo. <em>Cause.</em></p></div>
+<div class="c cam"><strong>Fault (Bug/Defect)</strong><p style="font-size:13px;margin-top:4px">A flaw in the software artifact (code, design, spec) resulting from an error. The bug sitting in the code, discovered by testing or code review. <em>Manifestation of error.</em></p></div>
+<div class="c cp"><strong>Failure</strong><p style="font-size:13px;margin-top:4px">Observable incorrect behaviour when the system executes. The fault activates under specific conditions and produces wrong output. <em>Observable consequence.</em></p></div>
+</div>
+<div class="tip">
+<strong>Analogy:</strong> A developer types <code>age &gt; 18</code> instead of <code>age &gt;= 18</code> (error → fault in code). When a user who is exactly 18 tries to register, the system rejects them (failure). Not every fault causes a failure — some faults lie dormant until a specific input triggers them.
+</div>
+
+<h2>Testing vs Debugging — critical distinction</h2>
+<table>
+<tr><th>Dimension</th><th>Testing</th><th>Debugging</th></tr>
+<tr><td>Purpose</td><td>Find defects — expose failures</td><td>Locate and fix the fault that caused the failure</td></tr>
+<tr><td>Who</td><td>Testers (independent) or developers</td><td>Developers</td></tr>
+<tr><td>Process</td><td>Systematic execution of test cases</td><td>Investigation, hypothesis, diagnosis, repair</td></tr>
+<tr><td>Output</td><td>Defect reports: what failed, when, how to reproduce</td><td>Fixed code; root cause analysis</td></tr>
+<tr><td>Guarantees</td><td>Can never guarantee zero bugs</td><td>Fixes one known fault; may introduce new ones</td></tr>
+</table>
+</div>
+
+<!-- V&V -->
+<div class="sec" id="s-vv">
+<h1>Verification vs Validation <span class="tag te">Exam Favourite</span></h1>
+
+<div class="info">
+These two terms are among the most confused in software engineering. Both are essential. Both ask a different question.
+</div>
+
+<h2>The core distinction</h2>
+<div class="cg">
+<div class="c ca"><strong>Verification — "Are we building the product right?"</strong><p style="font-size:13px;margin-top:6px">Check that each phase's output conforms to the specification from the previous phase. Process-oriented. Static activities are sufficient.</p><ul style="font-size:13px;margin-top:6px"><li>Checks against: SRS, design documents, standards</li><li>Methods: Reviews, inspections, walkthroughs, static analysis</li><li>Who: QA team, developers, analysts</li><li>When: During development, after each phase</li></ul></div>
+<div class="c cp"><strong>Validation — "Are we building the right product?"</strong><p style="font-size:13px;margin-top:6px">Check that the final system meets actual user needs and intended use. Product-oriented. Requires running the software.</p><ul style="font-size:13px;margin-top:6px"><li>Checks against: Customer's real needs (not just written spec)</li><li>Methods: Testing, prototyping, UAT, beta testing</li><li>Who: Customers, end users</li><li>When: End of development; each sprint in Agile</li></ul></div>
+</div>
+
+<h2>Complete comparison table</h2>
+<table>
+<tr><th>Dimension</th><th>Verification</th><th>Validation</th></tr>
+<tr><td>Core question</td><td>Built it right?</td><td>Built the right thing?</td></tr>
+<tr><td>Process type</td><td>Static (no execution needed)</td><td>Dynamic (system must run)</td></tr>
+<tr><td>Reference document</td><td>Specification, design docs, standards</td><td>Customer actual needs, business goals</td></tr>
+<tr><td>Techniques</td><td>Inspection, walkthrough, formal review, static analysis</td><td>Unit test, integration test, system test, UAT</td></tr>
+<tr><td>Performed by</td><td>QA team, developers, analyst</td><td>End users, Product Owner, customers</td></tr>
+<tr><td>Can succeed independently?</td><td>Yes — but still miss user needs</td><td>Yes — but system may have internal errors</td></tr>
+<tr><td>Example (HMS)</td><td>SRS reviewed against IEEE 830 standard; code reviewed against design</td><td>Doctor uses HMS prototype and confirms it fits their workflow</td></tr>
+</table>
+
+<div class="warn">
+<strong>Classic failure — verified but not validated:</strong> Healthcare.gov (US, 2013) was technically built to specification (verified). The specification was wrong — it didn't reflect actual usage patterns. The system failed at launch (validation failure). You can pass every test and still ship the wrong product.
+</div>
+
+<div class="hl">
+<strong>Both must succeed.</strong> A system that passes all functional tests but doesn't match user workflow has failed validation. A system that matches user needs but has hidden race conditions has failed verification. Strong engineering requires both.
+</div>
+
+<h2>V&V techniques mapped to SDLC</h2>
+<table>
+<tr><th>SDLC Phase</th><th>Verification activity</th><th>Validation activity</th></tr>
+<tr><td>Requirements</td><td>SRS review — check completeness, consistency, ambiguity</td><td>Prototype shown to users; requirements walkthrough with customer</td></tr>
+<tr><td>Design</td><td>Design review — check design matches SRS; architecture review</td><td>UI prototype usability testing with actual users</td></tr>
+<tr><td>Coding</td><td>Code review, static analysis, unit test (code correctness)</td><td>Unit tests verify code meets user-facing scenarios</td></tr>
+<tr><td>Testing</td><td>Test plan review — are test cases tracing all requirements?</td><td>Acceptance testing, beta testing, UAT</td></tr>
+<tr><td>Deployment</td><td>Deployment checklist review, smoke test</td><td>User feedback, production monitoring</td></tr>
+</table>
+</div>
+
+<!-- TESTING LEVELS -->
+<div class="sec" id="s-levels">
+<h1>Types of Testing — Levels <span class="tag te">Core Exam Topic</span></h1>
+
+<h2>1. Unit Testing</h2>
+<div class="info"><strong>Definition:</strong> Testing individual components (functions, methods, classes) in isolation from the rest of the system. The smallest testable unit is verified independently.</div>
+<ul>
+<li><strong>Who:</strong> Developers (written alongside code in TDD; written before in BDD)</li>
+<li><strong>Scope:</strong> One function, method, or class at a time</li>
+<li><strong>Tools:</strong> JUnit (Java), pytest (Python), Jest (JavaScript), NUnit (.NET)</li>
+<li><strong>Isolation:</strong> Use stubs and mocks to replace real dependencies</li>
+<li><strong>Key technique:</strong> White-box testing — tester knows the code</li>
+</ul>
+<pre>// Unit test example (pytest) — LMS fine calculation
+def test_calculate_fine_one_day_overdue():
+    loan = Loan(due_date=date(2024, 1, 1), return_date=date(2024, 1, 2))
+    fine = FineCalculator().calculate(loan, MemberType.STUDENT)
+    assert fine == 1.0  # ₹1/day for student
+
+def test_calculate_fine_capped_at_maximum():
+    loan = Loan(due_date=date(2024, 1, 1), return_date=date(2024, 6, 1))
+    fine = FineCalculator().calculate(loan, MemberType.STUDENT)
+    assert fine == 200.0  # capped at ₹200 max, not 150 * 1 = 150 days
+
+def test_calculate_fine_within_grace_period():
+    loan = Loan(due_date=date(2024, 1, 1), return_date=date(2024, 1, 2))
+    # 1-day grace period — should be ₹0
+    fine = FineCalculator().calculate(loan, MemberType.STUDENT)
+    assert fine == 0.0</pre>
+
+<h3>Stubs vs Mocks vs Fakes — test doubles</h3>
+<table>
+<tr><th>Type</th><th>Definition</th><th>Example in LMS</th></tr>
+<tr><td><strong>Stub</strong></td><td>Returns hardcoded data; no logic or verification</td><td><code>StubBookRepo.findByISBN()</code> always returns the same Book object</td></tr>
+<tr><td><strong>Mock</strong></td><td>Records calls made to it; verifies expected interactions</td><td><code>MockNotificationService</code> verifies <code>.send()</code> was called exactly once</td></tr>
+<tr><td><strong>Fake</strong></td><td>Working but simplified implementation</td><td><code>InMemoryBookRepo</code> — real logic using a dictionary instead of DB</td></tr>
+<tr><td><strong>Spy</strong></td><td>Real object that records calls; some methods stubbed</td><td>Real FineCalculator but <code>notifyMember()</code> is stubbed</td></tr>
+</table>
+
+<h2>2. Integration Testing</h2>
+<div class="info"><strong>Definition:</strong> Testing the interactions between integrated modules. Reveals defects in interfaces, data flow between modules, and combined behaviour.</div>
+<ul>
+<li><strong>Who:</strong> Development team / QA team</li>
+<li><strong>Finds:</strong> Interface mismatches, incorrect assumptions about module contracts, data format errors</li>
+<li><strong>Approaches:</strong> Big Bang, Top-Down, Bottom-Up, Sandwich/Hybrid</li>
+</ul>
+
+<h3>Integration approaches compared</h3>
+<table>
+<tr><th>Approach</th><th>Method</th><th>Advantage</th><th>Disadvantage</th><th>Uses</th></tr>
+<tr><td><strong>Big Bang</strong></td><td>Integrate all modules at once, then test</td><td>Simple, no stubs needed</td><td>Hard to isolate defects; testing starts late</td><td>Small, low-risk systems</td></tr>
+<tr><td><strong>Top-Down</strong></td><td>Integrate top-level modules first; use stubs for lower modules</td><td>Critical control logic tested early; no drivers needed</td><td>Lower modules tested late; stubs must be written</td><td>Architecturally important top-level logic</td></tr>
+<tr><td><strong>Bottom-Up</strong></td><td>Integrate lowest modules first; use drivers to simulate upper modules</td><td>Lower utilities tested first; no stubs needed</td><td>Top-level logic tested late; drivers must be written</td><td>Systems with complex utility modules</td></tr>
+<tr><td><strong>Sandwich/Hybrid</strong></td><td>Top-down for upper layers, bottom-up for lower layers simultaneously</td><td>Combines benefits; parallelises work</td><td>Requires both stubs and drivers</td><td>Large teams; complex systems</td></tr>
+</table>
+
+<h3>Stubs vs Drivers</h3>
+<div class="cg">
+<div class="c ca"><strong>Stub (used in Top-Down)</strong><p style="font-size:13px;margin-top:4px">Replaces a called module (below) that doesn't exist yet. Returns canned responses so the caller can be tested.</p></div>
+<div class="c cp"><strong>Driver (used in Bottom-Up)</strong><p style="font-size:13px;margin-top:4px">Replaces a calling module (above) that doesn't exist yet. Simulates calls to the module being tested.</p></div>
+</div>
+
+<h2>3. System Testing</h2>
+<div class="info"><strong>Definition:</strong> Testing the complete, integrated system against all specified requirements — both functional and non-functional. The system is treated as a black box.</div>
+<ul>
+<li><strong>Who:</strong> Independent QA team (not the developers)</li>
+<li><strong>Scope:</strong> End-to-end workflows; system as a whole</li>
+<li><strong>Includes:</strong> Functional testing, performance testing, security testing, usability testing, compatibility testing, recovery testing, stress testing</li>
+</ul>
+<h3>System test types</h3>
+<table>
+<tr><th>Type</th><th>What it tests</th><th>LMS example</th></tr>
+<tr><td>Functional</td><td>System functions per requirements</td><td>Complete loan issue → return → fine workflow</td></tr>
+<tr><td>Performance / Load</td><td>Response time under normal load</td><td>500 users search simultaneously — response &lt;2s</td></tr>
+<tr><td>Stress</td><td>Behaviour beyond designed limits</td><td>1000+ concurrent users — does it degrade gracefully?</td></tr>
+<tr><td>Security</td><td>Vulnerabilities, auth bypass, injection</td><td>SQL injection in search field; unauthorised record access</td></tr>
+<tr><td>Usability</td><td>User experience and interface</td><td>New receptionist completes registration in &lt;5 min</td></tr>
+<tr><td>Recovery</td><td>System recovery from failures</td><td>Database crash — does LMS recover without data loss?</td></tr>
+<tr><td>Compatibility</td><td>Works across browsers/OS/devices</td><td>Chrome, Firefox, Edge — latest 2 versions</td></tr>
+<tr><td>Regression</td><td>New changes don't break existing features</td><td>After adding fine waiver, check loan issue still works</td></tr>
+</table>
+
+<h2>4. Acceptance Testing (AT)</h2>
+<div class="info"><strong>Definition:</strong> Formal testing conducted by customers/users to determine whether a system satisfies their acceptance criteria and is ready for deployment.</div>
+<ul>
+<li><strong>Who:</strong> Customer, end users, business stakeholders</li>
+<li><strong>Purpose:</strong> Validate the software meets business needs (not just technical spec)</li>
+<li><strong>Basis:</strong> Acceptance criteria (GIVEN-WHEN-THEN), user stories, use cases</li>
+<li><strong>Types:</strong> User Acceptance Testing (UAT), Operational Acceptance Testing (OAT), Alpha testing, Beta testing, Contract acceptance, Regulatory acceptance</li>
+</ul>
+<h3>UAT process</h3>
+<div class="pf">
+<div class="fb">Define acceptance criteria</div><div class="fa">→</div>
+<div class="fb">Plan UAT scenarios</div><div class="fa">→</div>
+<div class="fb">Execute with real users</div><div class="fa">→</div>
+<div class="fb">Evaluate results</div><div class="fa">→</div>
+<div class="fb">Accept / Reject</div>
+</div>
+
+<h2>Testing levels — complete comparison</h2>
+<table>
+<tr><th>Level</th><th>Scope</th><th>Who tests</th><th>Box type</th><th>When</th><th>Finds</th></tr>
+<tr><td><strong>Unit</strong></td><td>Single function/class</td><td>Developer</td><td>White-box</td><td>During coding</td><td>Logic errors, boundary bugs</td></tr>
+<tr><td><strong>Integration</strong></td><td>Module interactions</td><td>Dev/QA team</td><td>Grey-box</td><td>After unit tests pass</td><td>Interface mismatches, data flow errors</td></tr>
+<tr><td><strong>System</strong></td><td>Complete system</td><td>Independent QA</td><td>Black-box</td><td>After integration</td><td>Requirements gaps, performance issues</td></tr>
+<tr><td><strong>Acceptance</strong></td><td>Business scenarios</td><td>Customer/users</td><td>Black-box</td><td>Before go-live</td><td>Business fit, usability, workflow gaps</td></tr>
+</table>
+</div>
+
+<!-- ALPHA BETA -->
+<div class="sec" id="s-alpha-beta">
+<h1>Alpha and Beta Testing <span class="tag te">Exam Topic</span></h1>
+
+<h2>Alpha Testing</h2>
+<div class="info"><strong>Definition:</strong> Testing performed by the development organisation itself (internal users, QA team, or selected internal staff) at the developer's site, before releasing to external users.</div>
+<ul>
+<li><strong>Who:</strong> Internal users, QA team, selected in-house staff — NOT the development team itself</li>
+<li><strong>Location:</strong> Developer's premises / controlled environment</li>
+<li><strong>Simulates:</strong> Real user behaviour but in a controlled setting</li>
+<li><strong>Precedes:</strong> Always done before Beta testing</li>
+<li><strong>Tools available:</strong> Testers can ask developers for clarification; developers can observe and log in real time</li>
+<li><strong>Goal:</strong> Find and fix major defects before exposing to external users</li>
+</ul>
+<div class="hl">
+<strong>LMS Alpha testing example:</strong> Before launching the Library Management System to City Library staff, the software company's own employees use the system as if they were librarians and library members. They perform all workflows (register member, issue book, return, generate report). Developers observe and log issues. Major bugs are fixed before Beta release.
+</div>
+
+<h2>Beta Testing</h2>
+<div class="info"><strong>Definition:</strong> Testing performed by a limited number of real external users at their own locations (customer site / real environment), without the development team present.</div>
+<ul>
+<li><strong>Who:</strong> Selected external users, paying customers, early adopters</li>
+<li><strong>Location:</strong> Customer's real environment — real hardware, real network, real workflows</li>
+<li><strong>Simulates:</strong> True production conditions the developer cannot fully replicate in a lab</li>
+<li><strong>Follows:</strong> Always done after Alpha testing</li>
+<li><strong>Developers:</strong> Not present; users submit bug reports independently</li>
+<li><strong>Goal:</strong> Find defects that only surface in the real environment; get user feedback on usability</li>
+</ul>
+<div class="hl">
+<strong>LMS Beta testing example:</strong> The LMS software is deployed at 2 pilot libraries. Their librarians and members use it for 4 weeks in real operations. They submit bug reports, usability issues, and feature requests. The development team collects this feedback, prioritises fixes, and ships the production release.
+</div>
+
+<h2>Alpha vs Beta — full comparison</h2>
+<table>
+<tr><th>Dimension</th><th>Alpha Testing</th><th>Beta Testing</th></tr>
+<tr><td>Who</td><td>Internal users, in-house QA</td><td>External users, real customers</td></tr>
+<tr><td>Location</td><td>Developer's site (controlled)</td><td>Customer's real environment</td></tr>
+<tr><td>Developers present</td><td>Yes — can observe, log, intervene</td><td>No — users work independently</td></tr>
+<tr><td>Environment</td><td>Lab / simulated</td><td>Real production environment</td></tr>
+<tr><td>Duration</td><td>Shorter (days to weeks)</td><td>Longer (weeks to months)</td></tr>
+<tr><td>Defects found</td><td>Major functional defects</td><td>Environment-specific, edge-case, usability defects</td></tr>
+<tr><td>Comes before</td><td>Beta testing</td><td>Production release</td></tr>
+<tr><td>Feedback mechanism</td><td>Direct — developers observe in real time</td><td>Bug reports, surveys, feedback forms</td></tr>
+<tr><td>Real-world example</td><td>Google internal dogfooding</td><td>Google Workspace Beta programme</td></tr>
+</table>
+
+<div class="warn">
+<strong>Common exam trap:</strong> Alpha testing is NOT done by developers testing their own code — that is unit/integration testing. Alpha testers are internal users who are NOT the creators of the software. They simulate end-user behaviour.
+</div>
+
+<h2>Types of Acceptance Testing — broader picture</h2>
+<table>
+<tr><th>Type</th><th>Description</th><th>Example</th></tr>
+<tr><td>User Acceptance (UAT)</td><td>Users validate business workflows</td><td>Librarians confirm all daily tasks work as needed</td></tr>
+<tr><td>Operational Acceptance (OAT)</td><td>Operations team validates deployment, backup, recovery</td><td>IT team confirms nightly backup and restore procedure works</td></tr>
+<tr><td>Contract Acceptance</td><td>Vendor confirms all contract requirements met</td><td>Signed checklist against SRS deliverables</td></tr>
+<tr><td>Regulatory Acceptance</td><td>Compliance with laws/regulations verified</td><td>HIPAA compliance audit for medical software</td></tr>
+<tr><td>Alpha</td><td>Internal, developer's premises</td><td>In-house staff use pre-beta LMS</td></tr>
+<tr><td>Beta</td><td>External, customer's premises</td><td>Pilot libraries use LMS before general release</td></tr>
+</table>
+</div>
+
+<!-- WHITE BOX -->
+<div class="sec" id="s-whitebox">
+<h1>White-Box Testing <span class="tag te">Code-Based Testing</span></h1>
+<div class="info"><strong>Definition:</strong> White-box (glass-box / clear-box) testing is a technique where test cases are designed based on knowledge of the internal structure and logic of the software. The tester can "see inside" the code.</div>
+
+<h2>Objectives of white-box testing</h2>
+<ul>
+<li>Ensure every line of code is executed at least once</li>
+<li>Test all decision branches (true and false)</li>
+<li>Test all logical conditions</li>
+<li>Test all loops (zero times, once, multiple times, boundary)</li>
+<li>Find dead code (unreachable code)</li>
+</ul>
+
+<h2>Coverage criteria — types and hierarchy</h2>
+
+<h3>1. Statement coverage (C0)</h3>
+<p>Every executable statement in the program must be executed at least once.</p>
+<pre>def calculate_discount(price, member_type):
+    discount = 0                        # S1
+    if member_type == "PREMIUM":        # S2
+        discount = price * 0.20         # S3
+    total = price - discount            # S4
+    return total                        # S5
+
+# One test case: calculate_discount(100, "PREMIUM")
+# Covers: S1, S2 (True), S3, S4, S5 = 5/5 statements = 100% statement coverage
+# BUT — what if member_type is NOT "PREMIUM"? S3 never tested via False path</pre>
+<div class="warn"><strong>Statement coverage weakness:</strong> 100% statement coverage does not mean all branches are tested. The False branch of an if-statement may never execute but statement coverage still reports 100%.</div>
+
+<h3>2. Branch / Decision coverage (C1)</h3>
+<p>Every decision (branch) must execute both True and False outcomes at least once.</p>
+<pre>def calculate_discount(price, member_type):
+    discount = 0
+    if member_type == "PREMIUM":  # Decision: must test True AND False
+        discount = price * 0.20
+    total = price - discount
+    return total
+
+# Test 1: calculate_discount(100, "PREMIUM")   → True branch (S3 executed)
+# Test 2: calculate_discount(100, "STUDENT")   → False branch (S3 skipped)
+# 2 test cases → 100% branch coverage</pre>
+
+<h3>3. Condition coverage</h3>
+<p>Each individual boolean sub-expression (condition) must evaluate to both True and False at least once, independently.</p>
+<pre>if (age >= 18 AND income > 50000):    # 2 conditions: age>=18 AND income>50000
+    approve_loan()
+
+# Condition coverage requires:
+# Test 1: age=20(T), income=60000(T)
+# Test 2: age=16(F), income=60000(T)
+# Test 3: age=20(T), income=30000(F)
+# Branch coverage just needed T/F for the whole condition; 
+# condition coverage independently tests each sub-condition</pre>
+
+<h3>4. Path coverage (C2) — most thorough</h3>
+<p>Every possible path through the program must be executed. Impractical for complex programs (exponential paths with loops), but the gold standard for critical modules.</p>
+
+<h3>5. Cyclomatic Complexity (McCabe's metric)</h3>
+<div class="info"><strong>Formula:</strong> V(G) = E − N + 2P = number of decision points + 1</div>
+<ul>
+<li>E = edges in control flow graph, N = nodes, P = connected components</li>
+<li>Simpler: count all <code>if</code>, <code>while</code>, <code>for</code>, <code>case</code>, <code>and</code>, <code>or</code> statements and add 1</li>
+<li>V(G) = minimum number of test cases for full branch coverage</li>
+<li>V(G) ≤ 10: manageable. V(G) 11–20: complex. V(G) &gt; 20: very high risk — refactor</li>
+</ul>
+<pre>def issue_loan(member_id, isbn):
+    member = find_member(member_id)  
+    if not member:                       # decision 1
+        return Error("Member not found")
+    if not member.is_active():           # decision 2
+        return Error("Member inactive")
+    book = find_book(isbn)               
+    if not book:                         # decision 3
+        return Error("Book not found")
+    if not book.is_available():          # decision 4
+        return Error("Book unavailable")
+    loan = create_loan(member, book)
+    return loan
+
+# V(G) = 4 decisions + 1 = 5
+# Minimum 5 test cases needed for full branch coverage</pre>
+
+<h2>Loop testing strategies</h2>
+<table>
+<tr><th>Loop test</th><th>What to test</th><th>Why</th></tr>
+<tr><td>Skip loop entirely</td><td>Condition false from start — loop executes 0 times</td><td>Off-by-one: initialisation may fail</td></tr>
+<tr><td>One iteration</td><td>Loop executes exactly once</td><td>Boundary — first iteration special cases</td></tr>
+<tr><td>Two iterations</td><td>Loop executes exactly twice</td><td>Second iteration may have different behaviour</td></tr>
+<tr><td>Typical iteration</td><td>Loop executes a "normal" number of times</td><td>Main path</td></tr>
+<tr><td>Max − 1 iterations</td><td>One below maximum</td><td>Near boundary</td></tr>
+<tr><td>Max iterations</td><td>Exactly at loop limit</td><td>Boundary condition</td></tr>
+<tr><td>Max + 1 iterations</td><td>Beyond limit</td><td>Tests overflow / loop termination guard</td></tr>
+</table>
+
+<h2>Coverage criteria hierarchy</h2>
+<div class="layer">
+<div class="lr" style="background:#EEEDFE;border-left-color:#534AB7"><strong style="color:#3C3489;min-width:180px">Path coverage</strong><span style="color:#534AB7;font-size:13px">Strongest — every path. Impractical for loops. Use for critical modules.</span></div>
+<div class="lr" style="background:#E6F1FB;border-left-color:#185FA5"><strong style="color:#0C447C;min-width:180px">Condition coverage</strong><span style="color:#185FA5;font-size:13px">Each boolean sub-expression True and False independently</span></div>
+<div class="lr" style="background:#EAF3DE;border-left-color:#3B6D11"><strong style="color:#27500A;min-width:180px">Branch/Decision coverage</strong><span style="color:#3B6D11;font-size:13px">Every branch True and False — industry standard minimum</span></div>
+<div class="lr" style="background:#FAEEDA;border-left-color:#854F0B"><strong style="color:#633806;min-width:180px">Statement coverage</strong><span style="color:#854F0B;font-size:13px">Weakest — every statement executes once. Easy to achieve, little confidence.</span></div>
+</div>
+<p style="font-size:13px;color:var(--color-text-secondary)">Each higher level subsumes lower levels: path coverage implies branch coverage, which implies statement coverage.</p>
+</div>
+
+<!-- BLACK BOX -->
+<div class="sec" id="s-blackbox">
+<h1>Black-Box Testing <span class="tag te">Specification-Based</span></h1>
+<div class="info"><strong>Definition:</strong> Black-box testing designs test cases purely from the system's external specification — inputs, outputs, and behaviour — without any knowledge of internal code structure. Tests what the system does, not how it does it.</div>
+
+<h2>Black-box vs White-box — master comparison</h2>
+<table>
+<tr><th>Dimension</th><th>Black-Box</th><th>White-Box</th></tr>
+<tr><td>Knowledge required</td><td>Specification only (SRS, requirements)</td><td>Source code, design, logic</td></tr>
+<tr><td>Tests</td><td>External behaviour — inputs and outputs</td><td>Internal paths — branches, statements, conditions</td></tr>
+<tr><td>Who</td><td>QA testers, domain experts, users</td><td>Developers, security engineers</td></tr>
+<tr><td>Finds</td><td>Missing features, wrong outputs, UI defects, business rule violations</td><td>Dead code, missing branches, logic errors, security vulnerabilities</td></tr>
+<tr><td>Level</td><td>System, acceptance, integration</td><td>Unit, integration, component</td></tr>
+<tr><td>Techniques</td><td>Equivalence partitioning, BVA, decision tables, state transition, use case</td><td>Statement coverage, branch coverage, cyclomatic complexity, path testing</td></tr>
+<tr><td>Limitation</td><td>Cannot test code paths; may miss internal logic errors</td><td>Cannot validate business requirements; code may be perfect but wrong</td></tr>
+<tr><td>Analogy</td><td>Testing a vending machine by pressing buttons and checking output</td><td>Opening the vending machine and testing each internal component</td></tr>
+</table>
+
+<h2>Equivalence Partitioning (EP)</h2>
+<div class="info">Divide input data into classes (partitions) where all values in a class are expected to behave identically. Test one representative value from each partition. Reduces the number of test cases needed.</div>
+
+<h3>Rules for identifying partitions</h3>
+<ul>
+<li>For a range: one valid partition (inside range), one below, one above</li>
+<li>For a specific value: one valid (that value), one invalid (anything else)</li>
+<li>For a set: one valid (member of set), one invalid (non-member)</li>
+<li>Boolean: one true partition, one false partition</li>
+</ul>
+
+<h3>LMS example — member age for library card</h3>
+<pre>Requirement: Member age must be between 5 and 100 (inclusive) for library membership.
+
+Partitions:
+  Invalid below:  age < 5        → test with age = 2
+  Valid:          5 ≤ age ≤ 100  → test with age = 25
+  Invalid above:  age > 100      → test with age = 105
+
+3 partitions → 3 test cases (instead of testing ages 0-200)</pre>
+
+<h2>Boundary Value Analysis (BVA)</h2>
+<div class="info">Errors cluster at boundaries between partitions. BVA tests at the exact boundaries and values adjacent to them. Complements equivalence partitioning.</div>
+<p>For a range [min, max], test: min−1, min, min+1, typical middle, max−1, max, max+1</p>
+<pre>Requirement: Fine amount must be between ₹0 and ₹200 (inclusive).
+Min = 0, Max = 200
+
+BVA test values:
+  -1  → invalid (boundary below min)
+   0  → valid (min boundary)
+   1  → valid (just above min)
+  100 → valid (typical)
+  199 → valid (just below max)
+  200 → valid (max boundary)
+  201 → invalid (boundary above max)
+
+7 test cases for complete boundary coverage</pre>
+
+<h2>Decision Table Testing</h2>
+<div class="info">Model complex business rules involving combinations of conditions. Each column is a test case (rule). Ensures all condition combinations are tested systematically.</div>
+<pre>LMS: Issue book decision table
+Conditions (C):
+  C1: Member active?
+  C2: Member has unpaid fines &gt; threshold?
+  C3: Book available?
+
+Actions (A):
+  A1: Issue book
+  A2: Block — member inactive
+  A3: Block — unpaid fines
+  A4: Block — no copies available
+
+Rule:    R1    R2    R3    R4    R5    R6    R7    R8
+C1:       T     T     T     T     F     F     F     F
+C2:       T     T     F     F     T     T     F     F
+C3:       T     F     T     F     T     F     T     F
+A1:       -     -     X     -     -     -     -     -
+A2:       -     -     -     -     X     X     X     X
+A3:       X     X     -     -     -     -     -     -
+A4:       -     X     -     X     -     X     -     X
+
+8 rules = 8 test cases → complete coverage of all condition combinations</pre>
+
+<h2>State Transition Testing</h2>
+<div class="info">Design test cases based on the states a system can be in and the events that cause transitions. Tests all valid and invalid state transitions.</div>
+<pre>LMS: Loan state machine
+States: ACTIVE → OVERDUE → RETURNED (also: ACTIVE → RETURNED)
+
+Valid transitions:
+  ACTIVE + "due date passes" → OVERDUE     (test: pass due date without return)
+  ACTIVE + "return book"     → RETURNED    (test: return before due date)
+  OVERDUE + "return book"    → RETURNED    (test: return after due date — fine applies)
+
+Invalid transitions to test:
+  RETURNED + "return book"   → should reject (already returned)
+  RETURNED + "renew"         → should reject (cannot renew returned loan)</pre>
+
+<h2>Use Case Testing</h2>
+<p>Design test cases from use case descriptions — main flow, alternate flows, and exception flows. Ensures end-to-end scenarios are tested as the user would experience them.</p>
+<pre>Use Case: Issue Book
+Main flow test: Valid member scans card → scans book → confirms → success
+Alt flow tests:
+  Member has unpaid fines → system blocks and shows fine message
+  Book has 0 copies → system shows "unavailable" with reservation option
+Exception tests:
+  Network fails mid-transaction → loan not created; book not decremented</pre>
+</div>
+
+<!-- TEST DESIGN -->
+<div class="sec" id="s-testdesign">
+<h1>Test Case Design Techniques <span class="tag te">Applied Practice</span></h1>
+
+<h2>What makes a good test case?</h2>
+<div class="info">A test case is a set of conditions under which a tester determines whether a system under test satisfies requirements or works correctly.</div>
+<p>Required components of every test case:</p>
+<ul>
+<li><strong>Test case ID:</strong> Unique identifier for traceability (TC-001)</li>
+<li><strong>Test name:</strong> Short description of what is being tested</li>
+<li><strong>Pre-conditions:</strong> System state required before executing the test</li>
+<li><strong>Input data:</strong> Exact values to provide</li>
+<li><strong>Steps:</strong> Step-by-step actions to execute</li>
+<li><strong>Expected result:</strong> What should happen if the system is correct</li>
+<li><strong>Actual result:</strong> What actually happened (filled during execution)</li>
+<li><strong>Pass/Fail:</strong> Determined by comparing expected vs actual</li>
+<li><strong>Priority:</strong> Critical / High / Medium / Low</li>
+<li><strong>Traceability:</strong> Which requirement this test validates</li>
+</ul>
+
+<h2>Complete LMS test cases — all techniques applied</h2>
+<pre>TC-001: Unit test — fine calculation (BVA: zero days overdue)
+Pre-conditions: Loan exists with dueDate = today
+Input: returnDate = today (0 days overdue), memberType = STUDENT
+Steps: Call FineCalculator.calculate(loan, STUDENT)
+Expected: fine = 0.0 (within grace period)
+Traces to: FR-FINE-01
+
+TC-002: Unit test — fine calculation (BVA: 1 day overdue)
+Pre-conditions: Loan exists
+Input: returnDate = dueDate + 1 day
+Expected: fine = ₹1.00
+Traces to: FR-FINE-01
+
+TC-003: Unit test — fine cap (EP: very late return)
+Input: returnDate = dueDate + 300 days, memberType = STUDENT
+Expected: fine = ₹200.00 (cap applied, not ₹300.00)
+Traces to: FR-FINE-02
+
+TC-010: Integration test — issue book end-to-end
+Pre-conditions: Active member MEM-001 exists; book ISBN-123 has 2 copies available
+Steps:
+  1. POST /api/loans {memberId: "MEM-001", isbn: "ISBN-123"}
+  2. Verify response 201 with loanId
+  3. Query book — verify availableCopies = 1 (decremented)
+  4. Query member loans — verify loan appears as ACTIVE
+Expected: Loan created, book decremented, confirmation email sent
+Traces to: FR-CIRC-01, FR-CIRC-02, FR-NOTIFY-01
+
+TC-020: System test — concurrent issue (race condition)
+Pre-conditions: Book has exactly 1 copy available
+Steps: Send 2 concurrent POST /api/loans requests for same book
+Expected: Exactly one loan created (201); other rejected (409 Conflict)
+Traces to: NFR-CONCURR-01</pre>
+
+<h2>Test plan structure (IEEE 829)</h2>
+<ul>
+<li><strong>Test plan ID</strong> — unique identifier</li>
+<li><strong>Scope</strong> — what is in and out of scope</li>
+<li><strong>Testing approach</strong> — which techniques, which tools</li>
+<li><strong>Test items</strong> — what is being tested (features, modules)</li>
+<li><strong>Features to test</strong> — mapped from requirements</li>
+<li><strong>Features not to test</strong> — explicitly excluded with justification</li>
+<li><strong>Entry criteria</strong> — when testing can begin (e.g., unit tests passing)</li>
+<li><strong>Exit criteria</strong> — when testing is complete (e.g., all P1 bugs fixed)</li>
+<li><strong>Resources</strong> — team, tools, environments, schedule</li>
+<li><strong>Risks and contingencies</strong> — what could prevent testing; fallback plans</li>
+</ul>
+
+<h2>Test coverage metrics</h2>
+<table>
+<tr><th>Metric</th><th>Formula</th><th>Target</th></tr>
+<tr><td>Requirements coverage</td><td>Requirements tested / total requirements × 100</td><td>100% for Must Have requirements</td></tr>
+<tr><td>Code statement coverage</td><td>Statements executed / total statements × 100</td><td>&gt;80% for production code</td></tr>
+<tr><td>Branch coverage</td><td>Branches executed / total branches × 100</td><td>&gt;70% minimum; &gt;90% for critical modules</td></tr>
+<tr><td>Defect density</td><td>Defects found / KLOC (thousand lines of code)</td><td>&lt;1 defect/KLOC (excellent)</td></tr>
+<tr><td>Defect removal efficiency</td><td>Defects found before release / total defects × 100</td><td>&gt;95% excellent</td></tr>
+</table>
+</div>
+
+<!-- DEBUGGING -->
+<div class="sec" id="s-debugging">
+<h1>Debugging <span class="tag te">Diagnosis and Fix</span></h1>
+
+<div class="info"><strong>Definition:</strong> Debugging is the process of finding (locating) and fixing (removing) the fault in the software that caused an observed failure. It begins where testing ends — a test reveals a failure; debugging finds the fault responsible.</div>
+
+<h2>Debugging process</h2>
+<div class="pf">
+<div class="fb">Failure observed</div><div class="fa">→</div>
+<div class="fb">Reproduce</div><div class="fa">→</div>
+<div class="fb">Hypothesise cause</div><div class="fa">→</div>
+<div class="fb">Test hypothesis</div><div class="fa">→</div>
+<div class="fb">Locate fault</div><div class="fa">→</div>
+<div class="fb">Fix fault</div><div class="fa">→</div>
+<div class="fb">Verify fix</div><div class="fa">→</div>
+<div class="fb">Regression test</div>
+</div>
+
+<h2>Debugging strategies</h2>
+<h3>1. Brute force / Print debugging</h3>
+<ul>
+<li>Insert print/log statements to trace execution and variable values</li>
+<li>Simplest approach; clutters code; useful for quick investigation</li>
+<li>Modern equivalent: structured logging with log levels (DEBUG, INFO, WARN, ERROR)</li>
+</ul>
+<pre># Brute force debugging in LMS
+def calculate_fine(loan, member_type):
+    print(f"DEBUG: loan.dueDate={loan.due_date}, today={date.today()}")
+    days_overdue = (date.today() - loan.due_date).days
+    print(f"DEBUG: days_overdue={days_overdue}")
+    rate = RATES[member_type]
+    print(f"DEBUG: rate={rate}")
+    fine = min(days_overdue * rate, MAX_FINE)
+    print(f"DEBUG: fine={fine}")
+    return fine</pre>
+
+<h3>2. Backtracking</h3>
+<ul>
+<li>Start from the point of failure and work backwards through the code</li>
+<li>Trace which state change caused the incorrect output</li>
+<li>Effective for small programs; impractical for large codebases</li>
+</ul>
+
+<h3>3. Cause elimination (binary search / divide and conquer)</h3>
+<ul>
+<li>Progressively narrow down the location of the fault by eliminating sections of code</li>
+<li>Comment out half the code; if the failure disappears, fault is in that half; repeat</li>
+<li>Most systematic approach for large codebases</li>
+<li>Git bisect automates this: binary searches commit history to find the commit that introduced a bug</li>
+</ul>
+<pre># Git bisect — automated cause elimination
+git bisect start
+git bisect bad HEAD           # current commit is broken
+git bisect good v1.2.0        # this commit was working
+# Git automatically checks out midpoint commit
+# Test: does bug exist? mark good or bad
+git bisect good  # or: git bisect bad
+# Repeat until git identifies the exact breaking commit</pre>
+
+<h3>4. Induction / Deduction</h3>
+<div class="cg">
+<div class="c ca"><strong>Induction</strong><p style="font-size:13px;margin-top:4px">Start from specific symptoms (test failures), identify patterns in the data, form a hypothesis, and test it. Specific → General.</p></div>
+<div class="c cg2"><strong>Deduction</strong><p style="font-size:13px;margin-top:4px">Start from general knowledge (known failure categories), deduce which type matches the symptoms, test that hypothesis. General → Specific.</p></div>
+</div>
+
+<h3>5. Interactive debugging (using a debugger)</h3>
+<ul>
+<li><strong>Breakpoints:</strong> Pause execution at a specific line to inspect state</li>
+<li><strong>Step over:</strong> Execute the current line and move to the next (don't enter function calls)</li>
+<li><strong>Step into:</strong> Enter the function being called on the current line</li>
+<li><strong>Step out:</strong> Complete current function and return to caller</li>
+<li><strong>Watch expressions:</strong> Monitor value of variables as execution progresses</li>
+<li><strong>Call stack:</strong> See sequence of function calls that led to current position</li>
+</ul>
+
+<h2>Debugging pitfalls and best practices</h2>
+<div class="warn">
+<ul>
+<li><strong>Fix the symptom, not the cause:</strong> Adding <code>if fine < 0: fine = 0</code> when the real bug is in the days calculation — this hides the fault rather than fixing it</li>
+<li><strong>Introducing new bugs during fix:</strong> Always run full regression test suite after every fix</li>
+<li><strong>Not reproducing before fixing:</strong> "Works on my machine" — debugging without a reliable reproduction is guesswork</li>
+<li><strong>Fixing without understanding:</strong> Random change that accidentally fixes the symptom — leaves the root cause</li>
+</ul>
+</div>
+<div class="tip">
+<strong>Debugging mindset:</strong> The bug is not where you expect it to be — if it were, you'd have found it already. Question your assumptions about what the code does. Add assertions. Let the evidence lead the hypothesis, not the other way around.
+</div>
+
+<h2>Common defect categories and how to debug them</h2>
+<table>
+<tr><th>Defect type</th><th>Symptoms</th><th>Debugging approach</th></tr>
+<tr><td>Off-by-one error</td><td>Wrong count, boundary condition fails</td><td>Check loop conditions; BVA test with min/max values</td></tr>
+<tr><td>Null pointer / None dereference</td><td>NullPointerException, AttributeError on None</td><td>Add null guards; check every object before access</td></tr>
+<tr><td>Race condition</td><td>Intermittent failures; only fails under load</td><td>Add logging with timestamps; use thread-safe structures; stress test</td></tr>
+<tr><td>Memory leak</td><td>System slows down over time; eventually crashes</td><td>Profile memory usage over time; check resource cleanup in finally blocks</td></tr>
+<tr><td>Integer overflow</td><td>Suddenly negative or zero values</td><td>Check data type sizes; add overflow checks</td></tr>
+<tr><td>Logic error</td><td>Wrong output for specific inputs</td><td>Trace execution with debugger; add assertions at intermediate steps</td></tr>
+</table>
+</div>
+
+<!-- MAINTENANCE -->
+<div class="sec" id="s-maintenance">
+<h1>Software Maintenance <span class="tag te">Post-deployment Life</span></h1>
+
+<div class="info"><strong>Definition (IEEE):</strong> Software maintenance is the modification of a software product after delivery to correct faults, improve performance or other attributes, or adapt the product to a changed environment.</div>
+<div class="hl"><strong>The maintenance reality:</strong> Software maintenance consumes 60–80% of total software lifecycle cost. More effort is spent maintaining existing software than building new systems. Understanding maintenance is as important as understanding development.</div>
+
+<h2>The 4 types of maintenance (Swanson, 1976)</h2>
+
+<h3>1. Corrective Maintenance</h3>
+<div class="c cr" style="margin:8px 0;padding:12px 14px">
+<p><strong>Definition:</strong> Diagnosis and correction of errors (bugs/defects) discovered after delivery.</p>
+<p style="font-size:13px;margin-top:6px"><strong>Trigger:</strong> Bug report from user or production monitoring alert</p>
+<p style="font-size:13px"><strong>LMS example:</strong> Library manager reports that overdue fines are being calculated incorrectly for faculty members — showing $2/day instead of $0.50/day. Developer investigates, finds wrong rate constant used, fixes and redeploys.</p>
+<p style="font-size:13px"><strong>Urgency:</strong> Depends on severity — P1 (system down) → immediate fix; P3 (cosmetic) → next scheduled release</p>
+<p style="font-size:13px"><strong>~20%</strong> of maintenance effort (can be higher for immature systems)</p>
+</div>
+
+<h3>2. Adaptive Maintenance</h3>
+<div class="c ca" style="margin:8px 0;padding:12px 14px">
+<p><strong>Definition:</strong> Modification of software to keep it usable in a changed or changing environment. The software itself is not broken — the world around it changed.</p>
+<p style="font-size:13px;margin-top:6px"><strong>Triggers:</strong> OS upgrade, new database version, API change, regulatory change, hardware upgrade, cloud migration</p>
+<p style="font-size:13px"><strong>LMS example:</strong> Python 3.8 end-of-life — LMS must be migrated to Python 3.12. Database vendor changes REST API — LMS integration must be updated. Government changes library data privacy law — LMS must add consent management.</p>
+<p style="font-size:13px"><strong>~25%</strong> of maintenance effort</p>
+</div>
+
+<h3>3. Perfective Maintenance</h3>
+<div class="c cg2" style="margin:8px 0;padding:12px 14px">
+<p><strong>Definition:</strong> Enhancement of the software by adding new features, improving existing functionality, or improving performance/maintainability — based on user requests or strategic improvements.</p>
+<p style="font-size:13px;margin-top:6px"><strong>Triggers:</strong> User feature requests, performance improvements, usability improvements, code quality improvements (refactoring)</p>
+<p style="font-size:13px"><strong>LMS example:</strong> Library members request a mobile app. Admin wants analytics dashboard. Search is too slow — implement full-text search with PostgreSQL. Code is unmaintainable — refactor monolithic BookService into smaller services.</p>
+<p style="font-size:13px"><strong>~50%</strong> of maintenance effort — the largest category</p>
+</div>
+
+<h3>4. Preventive Maintenance</h3>
+<div class="c cp" style="margin:8px 0;padding:12px 14px">
+<p><strong>Definition:</strong> Activities to prevent future failures. Improve internal structure, quality, and reliability proactively — before problems manifest. Also called software re-engineering.</p>
+<p style="font-size:13px;margin-top:6px"><strong>Triggers:</strong> Complexity metrics exceed threshold, high defect rate in a module, technical debt accumulation, security vulnerability audit</p>
+<p style="font-size:13px"><strong>LMS example:</strong> Code review reveals LoanService has cyclomatic complexity &gt;25. Developer refactors it into smaller, testable functions before it causes bugs. Security audit recommends updating password hashing from MD5 to bcrypt — done proactively, not after a breach.</p>
+<p style="font-size:13px"><strong>~5%</strong> of maintenance effort but highest ROI per effort spent</p>
+</div>
+
+<h2>All 4 types compared</h2>
+<table>
+<tr><th>Type</th><th>Why it happens</th><th>Trigger</th><th>Changes the</th><th>% effort</th></tr>
+<tr><td><strong>Corrective</strong></td><td>Software is broken (defect)</td><td>Bug report, production failure</td><td>Defective code</td><td>~20%</td></tr>
+<tr><td><strong>Adaptive</strong></td><td>Environment changed</td><td>OS/API/law/hardware change</td><td>Integration points</td><td>~25%</td></tr>
+<tr><td><strong>Perfective</strong></td><td>User wants more / better</td><td>Feature request, performance need</td><td>Adds/improves features</td><td>~50%</td></tr>
+<tr><td><strong>Preventive</strong></td><td>Risk reduction</td><td>Metrics alert, technical debt</td><td>Code structure (no new features)</td><td>~5%</td></tr>
+</table>
+
+<div class="mn">
+<div class="mn-t">Maintenance types mnemonic: "CAPP"</div>
+<strong>C</strong>orrective (fix bugs) | <strong>A</strong>daptive (environment change) | <strong>P</strong>erfective (add features) | <strong>P</strong>reventive (prevent future problems)
+</div>
+
+<h2>Software maintainability factors</h2>
+<div class="cg">
+<div class="c ca"><strong>Analysability</strong><p style="font-size:13px;margin-top:4px">How easy is it to understand the software to find the cause of a failure or identify what to change?</p></div>
+<div class="c cg2"><strong>Changeability</strong><p style="font-size:13px;margin-top:4px">How easy is it to make a modification without introducing new defects?</p></div>
+<div class="c cp"><strong>Stability</strong><p style="font-size:13px;margin-top:4px">How likely is a change to cause failures in other, unrelated parts of the system?</p></div>
+<div class="c cam"><strong>Testability</strong><p style="font-size:13px;margin-top:4px">How easy is it to test the software after a modification?</p></div>
+</div>
+
+<h2>Lehman's Laws of Software Evolution</h2>
+<table>
+<tr><th>Law</th><th>Name</th><th>Meaning</th></tr>
+<tr><td>I</td><td>Continuing change</td><td>Software must be continually adapted or it becomes progressively less useful in its environment</td></tr>
+<tr><td>II</td><td>Increasing complexity</td><td>As software evolves, its complexity increases unless work is done to maintain or reduce it</td></tr>
+<tr><td>III</td><td>Self regulation</td><td>Software evolution processes are self-regulating with distribution of product and process measures close to normal</td></tr>
+<tr><td>IV</td><td>Conservation of organisational stability</td><td>Average effective global activity rate is invariant over lifetime of the system</td></tr>
+<tr><td>V</td><td>Conservation of familiarity</td><td>Average growth rate over lifetime of the system stays constant</td></tr>
+</table>
+</div>
+
+<!-- SCM -->
+<div class="sec" id="s-scm">
+<h1>Software Configuration Management (SCM) <span class="tag te">Control the Change</span></h1>
+
+<div class="info"><strong>Definition:</strong> SCM is the discipline of identifying, organising, and controlling modifications to software throughout the development and maintenance lifecycle. It answers: which version of what changed by whom, when, and why?</div>
+
+<h2>Why SCM is essential</h2>
+<ul>
+<li>Without SCM: "Which version is in production?" — nobody knows for certain</li>
+<li>Multiple developers change the same file simultaneously — who wins?</li>
+<li>A bug is fixed in one version but the fix never makes it to production — SCM prevents this</li>
+<li>Regulatory compliance requires an audit trail of all changes</li>
+<li>Emergency rollback: "Production is broken — revert to last working version immediately"</li>
+</ul>
+
+<h2>SCM core activities</h2>
+<h3>1. Configuration identification</h3>
+<p>Identify all software artifacts that must be controlled — define <strong>configuration items (CIs)</strong>.</p>
+<ul>
+<li>Source code files, test cases, build scripts, deployment scripts</li>
+<li>Requirements documents, design documents, SRS, architecture docs</li>
+<li>Test plans, test results, defect reports</li>
+<li>Third-party libraries and their versions</li>
+<li>Environment configuration files (.env, docker-compose.yml)</li>
+</ul>
+
+<h3>2. Configuration control (Change management)</h3>
+<p>Formal process for requesting, evaluating, approving, and implementing changes to CIs after they are baselined.</p>
+<div class="pf">
+<div class="fb">Change request (CR)</div><div class="fa">→</div>
+<div class="fb">Impact analysis</div><div class="fa">→</div>
+<div class="fb">CCB review</div><div class="fa">→</div>
+<div class="fb">Approve/Reject</div><div class="fa">→</div>
+<div class="fb">Implement</div><div class="fa">→</div>
+<div class="fb">Verify</div><div class="fa">→</div>
+<div class="fb">Update baseline</div>
+</div>
+<p><strong>Change Control Board (CCB):</strong> Cross-functional group (PM, architect, QA, business) that approves significant changes. Prevents uncontrolled scope creep and ensures impact is assessed before implementation.</p>
+
+<h3>3. Configuration status accounting</h3>
+<p>Record and report the status of all CIs and changes. Provides traceability: what version of each component is deployed where, which CRs have been implemented, and what is pending.</p>
+<pre>LMS Configuration Status Report:
+  Component          | Version  | Status      | Last Change  | CR #
+  -------------------|----------|-------------|--------------|------
+  CirculationService | v2.4.1   | In Production | 2024-01-10 | CR-047
+  FineCalculator     | v1.8.0   | In QA        | 2024-01-15 | CR-052
+  ReportModule       | v3.0.0   | In Dev       | 2024-01-18 | CR-055
+  Database Schema    | v12      | In Production | 2024-01-10 | CR-047</pre>
+
+<h3>4. Configuration audits</h3>
+<ul>
+<li><strong>Functional configuration audit (FCA):</strong> Verify the software's functional characteristics match the approved SRS</li>
+<li><strong>Physical configuration audit (PCA):</strong> Verify all items on the release manifest are actually present and correct</li>
+</ul>
+
+<h3>5. Version control</h3>
+<p>Track all changes to every file with full history — who changed what, when, and why.</p>
+<pre>Git version control — LMS workflow
+# Feature branch workflow
+git checkout -b feature/fine-waiver-functionality
+# ... make changes ...
+git add FineService.py tests/test_fine_service.py
+git commit -m "feat(fines): add fine waiver capability for senior librarians
+
+Implements CR-052. Senior librarians can now waive fines up to ₹50
+without admin approval. All waivers logged to audit_log table.
+
+Closes: #CR-052
+Breaking changes: None
+Test coverage: 94%"
+git push origin feature/fine-waiver-functionality
+# Create pull request → code review → merge to main → tag release</pre>
+
+<h3>6. Release and deployment management</h3>
+<ul>
+<li><strong>Baseline:</strong> A formally agreed, reviewed configuration of a CI — snapshot used as the basis for further development. Once baselined, all changes must go through formal change control.</li>
+<li><strong>Release:</strong> A specific, named version of the software delivered to customers (v2.4.0, v2.4.1)</li>
+<li><strong>Deployment:</strong> Installing and configuring the release in the target environment (production, staging, DR)</li>
+</ul>
+
+<h2>Git branching strategies</h2>
+<table>
+<tr><th>Strategy</th><th>Description</th><th>Best for</th></tr>
+<tr><td>Git Flow</td><td>main (production), develop, feature/*, release/*, hotfix/* branches</td><td>Scheduled releases; traditional teams</td></tr>
+<tr><td>Trunk-based</td><td>Everyone commits to main (trunk); feature flags hide incomplete features</td><td>Continuous deployment; experienced teams</td></tr>
+<tr><td>GitHub Flow</td><td>main + feature branches; PR to merge; deploy from main</td><td>Web applications with frequent deploys</td></tr>
+</table>
+
+<h2>SCM tools</h2>
+<table>
+<tr><th>Category</th><th>Purpose</th><th>Tools</th></tr>
+<tr><td>Version control</td><td>Track all changes</td><td>Git, SVN, Mercurial</td></tr>
+<tr><td>CI/CD</td><td>Automate build, test, deploy</td><td>Jenkins, GitHub Actions, GitLab CI, CircleCI</td></tr>
+<tr><td>Change management</td><td>Track CRs, defects, tickets</td><td>JIRA, GitHub Issues, Azure DevOps</td></tr>
+<tr><td>Artefact repository</td><td>Store versioned build artefacts</td><td>JFrog Artifactory, Nexus, AWS ECR</td></tr>
+<tr><td>Infrastructure as code</td><td>Version-control infrastructure config</td><td>Terraform, Ansible, Helm</td></tr>
+</table>
+</div>
+
+<!-- RISK MANAGEMENT -->
+<div class="sec" id="s-risk">
+<h1>Risk Management <span class="tag te">Proactive Risk Control</span></h1>
+
+<div class="info"><strong>Definition:</strong> Risk management is the systematic process of identifying, analysing, prioritising, and responding to project risks to minimise the probability and impact of adverse events on a software project.</div>
+
+<h2>What is a software risk?</h2>
+<p>A risk is a potential problem that <em>may</em> occur. It has two key properties:</p>
+<ul>
+<li><strong>Probability (likelihood):</strong> How likely is it to occur? (0–1 or %)</li>
+<li><strong>Impact (consequence):</strong> If it occurs, how bad will it be? (Low/Medium/High/Critical)</li>
+</ul>
+<div class="info"><strong>Risk Exposure = Probability × Impact</strong> — prioritise risks with the highest exposure (most likely to happen AND most damaging).</div>
+
+<h2>Risk categories</h2>
+<div class="cg">
+<div class="c cr"><strong>Project risks</strong><p style="font-size:13px;margin-top:4px">Affect schedule, budget, staffing, scope. Key developer leaves, budget cut, scope expansion, vendor delays.</p></div>
+<div class="c cam"><strong>Technical risks</strong><p style="font-size:13px;margin-top:4px">Affect quality, architecture, implementation. Unproven technology, complex algorithms, performance unknowns, integration difficulties.</p></div>
+<div class="c cp"><strong>Business risks</strong><p style="font-size:13px;margin-top:4px">Affect product viability. Competitor launches similar product, market shift, organisation changes strategy, regulatory change.</p></div>
+<div class="c ca"><strong>Known risks</strong><p style="font-size:13px;margin-top:4px">Identified by project analysis — can be managed with RMMM plan.</p></div>
+<div class="c cg2"><strong>Predictable risks</strong><p style="font-size:13px;margin-top:4px">Based on historical data — past projects show these commonly occur.</p></div>
+<div class="c ct"><strong>Unpredictable risks</strong><p style="font-size:13px;margin-top:4px">Emerge during the project — cannot be fully anticipated. Managed with contingency budget.</p></div>
+</div>
+
+<h2>Risk management process</h2>
+<div class="pf">
+<div class="fb">Risk identification</div><div class="fa">→</div>
+<div class="fb">Risk analysis</div><div class="fa">→</div>
+<div class="fb">Risk planning</div><div class="fa">→</div>
+<div class="fb">Risk monitoring</div><div class="fa">→</div>
+<div class="fb">Risk control</div>
+</div>
+
+<h3>Step 1: Risk identification techniques</h3>
+<ul>
+<li><strong>Risk checklists:</strong> Standard lists of common risks (staffing, requirements volatility, technology, etc.)</li>
+<li><strong>Brainstorming:</strong> Team generates risks; facilitator records all without judgment</li>
+<li><strong>SWOT analysis:</strong> Strengths, Weaknesses, Opportunities, Threats</li>
+<li><strong>Assumption analysis:</strong> Every project assumption is a potential risk if wrong</li>
+<li><strong>Delphi technique:</strong> Anonymous expert opinions gathered, iterated until consensus</li>
+<li><strong>Past project retrospectives:</strong> What went wrong before? What risks materialised?</li>
+</ul>
+
+<h3>Step 2: Risk analysis — Risk Matrix</h3>
+<table>
+<tr><th>Probability \ Impact</th><th>Low</th><th>Medium</th><th>High</th><th>Critical</th></tr>
+<tr><td><strong>High (≥70%)</strong></td><td><span class="pill p-mid">Medium</span></td><td><span class="pill p-no">High</span></td><td><span class="pill p-no">Critical</span></td><td><span class="pill p-no">Critical</span></td></tr>
+<tr><td><strong>Medium (30-70%)</strong></td><td><span class="pill p-ok">Low</span></td><td><span class="pill p-mid">Medium</span></td><td><span class="pill p-no">High</span></td><td><span class="pill p-no">Critical</span></td></tr>
+<tr><td><strong>Low (≤30%)</strong></td><td><span class="pill p-ok">Ignore</span></td><td><span class="pill p-ok">Low</span></td><td><span class="pill p-mid">Medium</span></td><td><span class="pill p-no">High</span></td></tr>
+</table>
+
+<h3>Step 3: Risk mitigation strategies (AVMT)</h3>
+<table>
+<tr><th>Strategy</th><th>Description</th><th>LMS example</th></tr>
+<tr><td><strong>Avoid</strong></td><td>Eliminate the cause of the risk entirely</td><td>Use proven PostgreSQL instead of experimental NewSQL database — eliminates technology risk</td></tr>
+<tr><td><strong>Transfer</strong></td><td>Shift impact to third party (insurance, outsourcing)</td><td>Use Stripe for payments — payment security risk transferred to Stripe</td></tr>
+<tr><td><strong>Mitigate / Reduce</strong></td><td>Reduce probability or impact or both</td><td>Hire backup developer, cross-train team — reduces key-person risk</td></tr>
+<tr><td><strong>Accept</strong></td><td>Acknowledge risk exists; have contingency ready</td><td>Reserve 15% budget contingency for unknown requirements changes</td></tr>
+</table>
+
+<h3>Step 4: RMMM Plan — Risk Mitigation, Monitoring and Management</h3>
+<p>For each significant risk, document all three elements:</p>
+<div class="c cam" style="margin:8px 0;padding:12px 14px">
+<strong>Risk: Key backend developer leaves mid-project</strong>
+<table style="font-size:13px;margin-top:8px">
+<tr><td style="color:var(--color-text-secondary);padding:4px 8px 4px 0">Probability</td><td>Medium (30%)</td></tr>
+<tr><td style="color:var(--color-text-secondary);padding:4px 8px 4px 0">Impact</td><td>High — 4+ week delay to recruit and onboard replacement</td></tr>
+<tr><td style="color:var(--color-text-secondary);padding:4px 8px 4px 0">Exposure</td><td>Medium-High</td></tr>
+<tr><td style="color:var(--color-text-secondary);padding:4px 8px 4px 0">Mitigation</td><td>Pair programming; all modules documented; no single-person knowledge silos; notice period contractually extended</td></tr>
+<tr><td style="color:var(--color-text-secondary);padding:4px 8px 4px 0">Monitoring</td><td>Weekly check-in with all developers; monitor job listings from team members; track team satisfaction</td></tr>
+<tr><td style="color:var(--color-text-secondary);padding:4px 8px 4px 0">Management</td><td>If triggered: immediately engage recruitment agency; junior developer starts 2-week accelerated onboarding; PM reprioritises scope to reduce critical path dependency</td></tr>
+</table>
+</div>
+
+<h2>LMS complete risk register</h2>
+<table>
+<tr><th>Risk</th><th>Prob</th><th>Impact</th><th>Exposure</th><th>Mitigation strategy</th></tr>
+<tr><td>Requirements change frequently</td><td>High</td><td>High</td><td><span class="pill p-no">Critical</span></td><td>Agile with 2-week sprints; MoSCoW prioritisation; strict change control after baseline</td></tr>
+<tr><td>Integration with legacy library catalogue fails</td><td>Medium</td><td>High</td><td><span class="pill p-no">High</span></td><td>Early proof-of-concept integration; API adapter pattern; fallback to manual import</td></tr>
+<tr><td>Performance target (&lt;2s search) not met</td><td>Medium</td><td>Medium</td><td><span class="pill p-mid">Medium</span></td><td>Performance testing from Sprint 3; PostgreSQL full-text index; Redis cache; load testing tools</td></tr>
+<tr><td>Key developer leaves</td><td>Low</td><td>High</td><td><span class="pill p-mid">Medium</span></td><td>Pair programming; documentation standards; cross-training; retain agency contract</td></tr>
+<tr><td>Security breach / data leak</td><td>Low</td><td>Critical</td><td><span class="pill p-no">High</span></td><td>Penetration testing; OWASP Top 10 review; AES-256 encryption; RBAC implementation</td></tr>
+<tr><td>Competitor launches before us</td><td>Low</td><td>Medium</td><td><span class="pill p-ok">Low</span></td><td>Focus on MVP delivery; document unique differentiators; target different library segments</td></tr>
+</table>
+
+<div class="mn">
+<div class="mn-t">Risk management steps: "IAPMC"</div>
+<strong>I</strong>dentification → <strong>A</strong>nalysis → <strong>P</strong>lanning (RMMM) → <strong>M</strong>onitoring → <strong>C</strong>ontrol
+</div>
+</div>
+
+<!-- REVISION -->
+<div class="sec" id="s-revision">
+<h1>Quick Revision Sheet <span class="tag tn">One-page reference</span></h1>
+
+<h2>All key definitions</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:8px;margin:9px 0">
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Testing objective</div><div style="font-size:13px;font-weight:500">Find defects, assess quality, reduce risk</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">7 principles</div><div style="font-size:13px;font-weight:500">SEED-PCA: Shows, Exhaustive, Early, Defect cluster, Pesticide, Context, Absence-fallacy</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Verification</div><div style="font-size:13px;font-weight:500">Built it right? (spec check) — static</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Validation</div><div style="font-size:13px;font-weight:500">Built the right thing? (user need) — dynamic</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Unit testing</div><div style="font-size:13px;font-weight:500">Single function/class in isolation; developer; white-box</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Integration testing</div><div style="font-size:13px;font-weight:500">Module interactions; Big Bang / Top-Down / Bottom-Up / Sandwich</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">System testing</div><div style="font-size:13px;font-weight:500">Complete system vs all requirements; independent QA; black-box</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Acceptance testing</div><div style="font-size:13px;font-weight:500">Customer validates business needs; Alpha → Beta → UAT</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Alpha testing</div><div style="font-size:13px;font-weight:500">Internal users; developer's site; developers can observe</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Beta testing</div><div style="font-size:13px;font-weight:500">External users; real environment; developers absent</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">White-box</div><div style="font-size:13px;font-weight:500">Code-based; statement/branch/path coverage; cyclomatic complexity</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Black-box</div><div style="font-size:13px;font-weight:500">Spec-based; EP, BVA, decision tables, state transition</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Cyclomatic complexity</div><div style="font-size:13px;font-weight:500">V(G) = decisions + 1 = min test cases for branch coverage</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Debugging</div><div style="font-size:13px;font-weight:500">Locate + fix fault causing failure; follows testing</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Maintenance types</div><div style="font-size:13px;font-weight:500">CAPP: Corrective, Adaptive, Perfective, Preventive</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">SCM</div><div style="font-size:13px;font-weight:500">Identify CIs, control changes, status accounting, audits, version control</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:9px 11px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px">Risk exposure</div><div style="font-size:13px;font-weight:500">Probability × Impact. Strategies: Avoid, Transfer, Mitigate, Accept</div></div>
+</div>
+
+<h2>All mnemonics consolidated</h2>
+<div class="mn"><div class="mn-t">Testing process — "OPVTRD"</div><strong>O</strong>bjectives → <strong>P</strong>lan → <strong>V</strong>erify/design test cases → <strong>T</strong>est → <strong>R</strong>eport → <strong>D</strong>ebug and fix</div>
+<div class="mn"><div class="mn-t">7 testing principles — "SEED-PCA"</div><strong>S</strong>hows presence | <strong>E</strong>xhaustive impossible | <strong>E</strong>arly testing | <strong>D</strong>efect clustering | <strong>P</strong>esticide paradox | <strong>C</strong>ontext-dependent | <strong>A</strong>bsence-of-errors fallacy</div>
+<div class="mn"><div class="mn-t">Coverage hierarchy (weak to strong) — "SBCP"</div><strong>S</strong>tatement → <strong>B</strong>ranch → <strong>C</strong>ondition → <strong>P</strong>ath</div>
+<div class="mn"><div class="mn-t">Integration approaches — "BTBS"</div><strong>B</strong>ig Bang | <strong>T</strong>op-Down | <strong>B</strong>ottom-Up | <strong>S</strong>andwich</div>
+<div class="mn"><div class="mn-t">Maintenance types — "CAPP"</div><strong>C</strong>orrective (fix bugs ~20%) | <strong>A</strong>daptive (env change ~25%) | <strong>P</strong>erfective (new features ~50%) | <strong>P</strong>reventive (avoid future bugs ~5%)</div>
+<div class="mn"><div class="mn-t">Risk management steps — "IAPMC"</div><strong>I</strong>dentification → <strong>A</strong>nalysis → <strong>P</strong>lanning → <strong>M</strong>onitoring → <strong>C</strong>ontrol</div>
+<div class="mn"><div class="mn-t">Risk strategies — "AVMT"</div><strong>A</strong>void | <strong>T</strong>ransfer | <strong>M</strong>itigate | <strong>A</strong>ccept</div>
+<div class="mn"><div class="mn-t">SCM activities — "ICCRA"</div><strong>I</strong>dentification | <strong>C</strong>ontrol | <strong>C</strong>onfiguration status accounting | <strong>R</strong>eview/Audit | <strong>A</strong>rchiving/release management</div>
+
+<h2>Exam questions bank</h2>
+<h3>Easy (2–4 marks)</h3>
+<ul>
+<li>State any four testing principles with brief explanations.</li>
+<li>Differentiate between error, fault, and failure with examples.</li>
+<li>What is the difference between alpha and beta testing?</li>
+<li>Define cyclomatic complexity. How is it calculated?</li>
+<li>List the four types of software maintenance with one example each.</li>
+<li>What is a baseline in SCM?</li>
+</ul>
+<h3>Medium (5–8 marks)</h3>
+<ul>
+<li>Explain verification and validation. How do they differ? Provide a real-world example of each failing independently.</li>
+<li>Compare white-box and black-box testing techniques with advantages and disadvantages.</li>
+<li>Explain Equivalence Partitioning and Boundary Value Analysis with a complete example.</li>
+<li>Describe the four integration testing approaches. When would you choose Bottom-Up over Top-Down?</li>
+<li>Explain software configuration management with all its activities.</li>
+<li>What is the RMMM plan? Create one for the risk "key developer leaves the project."</li>
+</ul>
+<h3>Hard / Scenario (10+ marks)</h3>
+<ul>
+<li>Design a complete test strategy for the Library Management System covering all testing levels, techniques for each level, entry/exit criteria, and tools.</li>
+<li>A function <code>process_loan(member_id, isbn, renewal_count)</code> has 5 if-conditions. Calculate cyclomatic complexity, identify minimum test cases, and write test cases for full branch coverage.</li>
+<li>The LMS production system shows that fine calculations are wrong for faculty members who return books on the due date. Describe the complete debugging process to find and fix this defect.</li>
+<li>Create a complete risk register for an LMS project: identify 6 risks, assess probability and impact for each, create a risk matrix, and write an RMMM plan for the top 2 risks.</li>
+</ul>
+</div>
+
+<!-- QUIZ -->
+<div class="sec" id="s-quiz">
+<h1>Self-Test Quiz <span class="tag te">Active Recall — 12 Questions</span></h1>
+<p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:14px">Select the best answer for each question then check all answers at once.</p>
+<div id="qc"></div>
+<div style="margin-top:14px;display:flex;gap:10px">
+  <button onclick="checkQ()" style="padding:8px 20px;background:#185FA5;color:white;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px">Check All Answers</button>
+  <button onclick="resetQ()" style="padding:8px 20px;background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--color-text-primary)">Reset</button>
+</div>
+<div id="qscore" style="display:none;margin-top:12px;padding:12px 16px;border-radius:8px;font-weight:500;font-size:15px"></div>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nb button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('s-'+id).classList.add('on');
+  event.target.classList.add('on');
+}
+
+const qs=[
+  {q:"Dijkstra's statement 'Testing can show the presence of bugs but never their absence' is which of the 7 testing principles?",opts:["Early testing","Testing shows presence of defects, not absence","Exhaustive testing is impossible","Defect clustering"],ans:1,exp:"Principle 1: Testing shows the presence of defects but cannot prove a program is bug-free. No matter how many tests pass, one more test might find a bug. This is why 'all tests passed' never means 'no bugs exist.'"},
+  {q:"A QA team runs the same 200 automated tests every sprint for 8 months and stops finding new defects. Which principle explains this?",opts:["Exhaustive testing is impossible","Absence of errors fallacy","Pesticide paradox","Defect clustering"],ans:2,exp:"Pesticide paradox (Principle 5): repeatedly running the same tests eventually stops finding new defects. Bugs develop 'resistance' to the same test set. Fix: continuously review, update, and add new test cases."},
+  {q:"Validation answers which question?",opts:["Are we building the product right?","Are we building the right product?","Is the code syntactically correct?","Does the design match the requirements?"],ans:1,exp:"Validation = 'Are we building the right product?' — checks against actual user needs, not just the written specification. Verification = 'Are we building the product right?' — checks against the specification. Both can fail independently."},
+  {q:"In bottom-up integration testing, what is used to replace calling modules that haven't been implemented yet?",opts:["Stubs","Mocks","Drivers","Fakes"],ans:2,exp:"Drivers simulate calling modules (above) in bottom-up testing. Stubs simulate called modules (below) in top-down testing. Mnemonic: Drivers Drive the test from above; Stubs are below doing nothing meaningful."},
+  {q:"Alpha testing is performed by:",opts:["External users at their own premises with developers absent","Independent QA team in a lab environment","Internal users at the developer's site; developers can observe","The development team on their own code"],ans:2,exp:"Alpha testing = internal users at the developer's site. Developers can observe and log issues in real time. It precedes beta testing. External users at their own premises = beta testing. The development team testing their own code = unit/integration testing (not alpha)."},
+  {q:"A function has 4 if-statements and 1 while-loop. What is its cyclomatic complexity?",opts:["4","5","6","10"],ans:2,exp:"V(G) = number of decision points + 1. Decision points: 4 if-statements + 1 while = 5 decisions. V(G) = 5 + 1 = 6. This means a minimum of 6 test cases are needed for full branch coverage."},
+  {q:"Requirement: age must be between 18 and 65 inclusive. Using Boundary Value Analysis, how many test values are needed for complete boundary coverage?",opts:["3","5","7","9"],ans:2,exp:"BVA tests: min-1=17, min=18, min+1=19, typical middle=40, max-1=64, max=65, max+1=66. That is 7 test values (covering both boundaries and adjacent values on each side, plus one typical value)."},
+  {q:"Library fine calculation logic works correctly but produces wrong results when the library's tax rate changes. Which type of maintenance is required?",opts:["Corrective maintenance","Adaptive maintenance","Perfective maintenance","Preventive maintenance"],ans:1,exp:"Adaptive maintenance: the software is not broken — the external environment (tax rate/business rule) changed. Corrective = fixing bugs. Perfective = adding features. Preventive = proactive restructuring. The trigger is an environmental change, not a defect."},
+  {q:"Which type of maintenance consumes approximately 50% of total maintenance effort?",opts:["Corrective (fixing bugs)","Adaptive (environment changes)","Perfective (new features and improvements)","Preventive (restructuring to prevent future bugs)"],ans:2,exp:"Perfective maintenance (~50%) is the largest category — user requests for new features, performance improvements, and usability enhancements. Corrective ~20%, Adaptive ~25%, Preventive ~5%. This shows that most maintenance effort goes into enhancements, not bug fixes."},
+  {q:"In SCM, a 'baseline' refers to:",opts:["The minimum acceptable quality threshold for release","A formally reviewed and agreed configuration item version that serves as the basis for further development","The initial version of the software before any changes","A performance benchmark for the system"],ans:1,exp:"A baseline is a formally agreed, reviewed snapshot of one or more configuration items. Once baselined, all changes must go through formal change control. It provides a stable reference point. Example: SRS baseline means any requirement change needs a formal CR process."},
+  {q:"Risk Exposure is calculated as:",opts:["Risk probability only","Risk impact only","Risk probability × Risk impact","Risk probability + Risk impact"],ans:2,exp:"Risk Exposure = Probability × Impact. This product prioritises risks: a risk with 50% probability and High impact ranks higher than one with 90% probability and Low impact. It guides where to invest risk mitigation effort."},
+  {q:"Decision table testing is BEST suited for:",opts:["Testing loop boundaries","Testing systems with complex combinations of conditions and corresponding actions","Testing code paths through a function","Testing performance under load"],ans:1,exp:"Decision tables systematically cover all combinations of conditions (True/False) and their resulting actions. Perfect for business rules like 'Issue book: depends on member active, fines status, and book availability.' With 3 conditions, a full decision table has 2³ = 8 rules covering every combination."}
+];
+
+function buildQ(){
+  const c=document.getElementById('qc');
+  c.innerHTML='';
+  qs.forEach((item,i)=>{
+    const d=document.createElement('div');
+    d.className='qb';
+    d.innerHTML=`<p style="font-weight:500;margin-bottom:8px;font-size:14px">${i+1}. ${item.q}</p>${item.opts.map((o,j)=>`<label class="qo"><input type="radio" name="q${i}" value="${j}"> <span style="font-size:13px">${o}</span></label>`).join('')}<div id="qr-${i}" class="qr"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function checkQ(){
+  let sc=0;
+  qs.forEach((item,i)=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    const rd=document.getElementById('qr-'+i);
+    rd.style.display='block';
+    if(!sel){rd.style.background='#FCEBEB';rd.style.color='#791F1F';rd.textContent='Not answered. '+item.exp;return;}
+    if(parseInt(sel.value)===item.ans){sc++;rd.style.background='#EAF3DE';rd.style.color='#27500A';rd.textContent='Correct! '+item.exp;}
+    else{rd.style.background='#FCEBEB';rd.style.color='#791F1F';rd.textContent=`Incorrect. Correct: "${item.opts[item.ans]}". ${item.exp}`;}
+  });
+  const sb=document.getElementById('qscore');sb.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  if(pct>=80){sb.style.background='#EAF3DE';sb.style.color='#27500A';}
+  else if(pct>=50){sb.style.background='#FAEEDA';sb.style.color='#633806';}
+  else{sb.style.background='#FCEBEB';sb.style.color='#791F1F';}
+  sb.textContent=`Score: ${sc}/${qs.length} (${pct}%) — ${pct>=80?'Excellent! Exam-ready.':pct>=50?'Good — review incorrect answers in the relevant tabs.':'Reread the notes systematically, then retry.'}`;
+}
+
+function resetQ(){
+  document.querySelectorAll('[name^="q"]').forEach(r=>r.checked=false);
+  document.querySelectorAll('[id^="qr-"]').forEach(r=>{r.style.display='none';r.textContent='';});
+  document.getElementById('qscore').style.display='none';
+}
+buildQ();
+</script>

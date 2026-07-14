@@ -1,0 +1,1381 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans,system-ui);font-size:14px;color:var(--color-text-primary);line-height:1.65}
+.nb{position:sticky;top:0;z-index:100;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:7px 10px;display:flex;gap:5px;flex-wrap:wrap}
+.nb button{font-size:11px;padding:4px 11px;border:0.5px solid var(--color-border-secondary);border-radius:20px;cursor:pointer;background:transparent;color:var(--color-text-secondary);white-space:nowrap;font-family:inherit;transition:all .15s}
+.nb button:hover,.nb button.on{background:#E6F1FB;color:#185FA5;border-color:#185FA5}
+.sec{display:none;padding:14px 2px 52px}
+.sec.on{display:block}
+h1{font-size:19px;font-weight:500;margin-bottom:4px}
+h2{font-size:16px;font-weight:500;margin:20px 0 8px}
+h3{font-size:14px;font-weight:500;margin:13px 0 5px}
+p{margin-bottom:8px;line-height:1.72}
+ul,ol{padding-left:20px;margin-bottom:8px}
+li{margin-bottom:3px}
+strong{font-weight:500}
+code{font-family:var(--font-mono,monospace);font-size:12px;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px}
+pre{font-family:var(--font-mono,monospace);font-size:12px;background:var(--color-background-secondary);padding:12px 14px;border-radius:8px;overflow-x:auto;line-height:1.6;margin:8px 0;border:0.5px solid var(--color-border-tertiary)}
+.tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;margin-left:6px;vertical-align:middle}
+.td{background:#EEEDFE;color:#3C3489}
+.tk{background:#E6F1FB;color:#0C447C}
+.te{background:#FAEEDA;color:#633806}
+.tw{background:#FCEBEB;color:#791F1F}
+.tn{background:#EAF3DE;color:#27500A}
+.tt{background:#E1F5EE;color:#085041}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:9px;margin:9px 0}
+.c{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:11px 14px}
+.ca{border-left:3px solid #185FA5}
+.cg2{border-left:3px solid #3B6D11}
+.cam{border-left:3px solid #854F0B}
+.cr{border-left:3px solid #A32D2D}
+.cp{border-left:3px solid #534AB7}
+.ct{border-left:3px solid #0F6E56}
+.cc{border-left:3px solid #993C1D}
+table{width:100%;border-collapse:collapse;margin:9px 0;font-size:13px}
+th{background:var(--color-background-secondary);padding:7px 10px;text-align:left;font-weight:500;border:0.5px solid var(--color-border-tertiary)}
+td{padding:6px 10px;border:0.5px solid var(--color-border-tertiary);vertical-align:top}
+tr:hover td{background:var(--color-background-secondary)}
+.info{background:#E6F1FB;border-left:3px solid #185FA5;border-radius:0;padding:10px 13px;margin:8px 0}
+.warn{background:#FCEBEB;border-left:3px solid #A32D2D;border-radius:0;padding:10px 13px;margin:8px 0}
+.tip{background:#EAF3DE;border-left:3px solid #3B6D11;border-radius:0;padding:10px 13px;margin:8px 0}
+.hl{background:#FAEEDA;border-left:3px solid #854F0B;border-radius:0;padding:10px 13px;margin:8px 0}
+.pur{background:#EEEDFE;border-left:3px solid #534AB7;border-radius:0;padding:10px 13px;margin:8px 0}
+.mn{background:#EEEDFE;border-radius:8px;padding:11px 13px;margin:8px 0}
+.mn-t{font-size:11px;font-weight:500;color:#534AB7;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.pf{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:10px 0}
+.fb{background:#E6F1FB;color:#185FA5;border:0.5px solid #185FA5;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:500;white-space:nowrap}
+.fa{color:var(--color-text-secondary);font-size:15px}
+.pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:20px;font-weight:500;margin:2px}
+.p-ok{background:#EAF3DE;color:#27500A}
+.p-no{background:#FCEBEB;color:#791F1F}
+.p-mid{background:#FAEEDA;color:#633806}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:18px 0}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.step-num{min-width:28px;height:28px;border-radius:50%;background:#E6F1FB;color:#185FA5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;margin-top:2px}
+.step-body{flex:1}
+.phase-bar{display:flex;flex-direction:column;gap:3px;margin:10px 0}
+.phase-row{display:flex;align-items:center;gap:10px;padding:9px 13px;border-radius:0;border-left:4px solid transparent}
+.q-box{background:var(--color-background-secondary);border-radius:8px;padding:12px 14px;margin:8px 0}
+.q-opt{display:flex;align-items:center;gap:8px;margin:5px 0;cursor:pointer;padding:5px 9px;border-radius:6px}
+.q-res{font-size:12px;margin-top:6px;padding:4px 10px;border-radius:4px;display:none}
+</style>
+
+<div class="nb">
+  <button class="on" onclick="show('overview')">Overview</button>
+  <button onclick="show('types')">Req. Types</button>
+  <button onclick="show('elicitation')">Elicitation</button>
+  <button onclick="show('feasibility')">Feasibility</button>
+  <button onclick="show('analysis')">RE Analysis</button>
+  <button onclick="show('srs')">SRS Document</button>
+  <button onclick="show('models')">Analysis Models</button>
+  <button onclick="show('stories')">User Stories</button>
+  <button onclick="show('validation')">Validation & V&V</button>
+  <button onclick="show('casestudy')">Case Study: HMS</button>
+  <button onclick="show('revision')">Quick Revision</button>
+  <button onclick="show('quiz')">Self-Test Quiz</button>
+</div>
+
+<!-- OVERVIEW -->
+<div class="sec on" id="s-overview">
+<h1>Requirements Engineering <span class="tag td">Unit 2</span></h1>
+<p style="color:var(--color-text-secondary);font-size:13px">The complete discipline of discovering, documenting, and validating what software must do — before a single line of code is written.</p>
+
+<h2>What is Requirements Engineering?</h2>
+<div class="info">
+<strong>Definition:</strong> Requirements Engineering (RE) is the systematic process of eliciting, analyzing, specifying, validating, and managing the requirements of a software system.
+</div>
+<p>RE bridges the gap between the <strong>problem world</strong> (customer needs) and the <strong>solution world</strong> (software to be built). It is the most critical phase of SDLC — errors here are the most expensive to fix later.</p>
+
+<div class="hl">
+<strong>The Rule of 10:</strong> A defect found in requirements costs $1 to fix. Found in design: $10. In coding: $100. In testing: $1,000. In production: $10,000+. Getting requirements right is the highest ROI activity in software engineering.
+</div>
+
+<h2>The RE Process — 5 Core Activities</h2>
+<div class="pf">
+  <div class="fb">Elicitation</div><div class="fa">→</div>
+  <div class="fb">Analysis</div><div class="fa">→</div>
+  <div class="fb">Specification</div><div class="fa">→</div>
+  <div class="fb">Validation</div><div class="fa">→</div>
+  <div class="fb">Management</div>
+</div>
+
+<table>
+<tr><th>Activity</th><th>What happens</th><th>Output</th></tr>
+<tr><td><strong>Elicitation</strong></td><td>Discover requirements from stakeholders using interviews, workshops, etc.</td><td>Raw requirements list, notes, transcripts</td></tr>
+<tr><td><strong>Analysis</strong></td><td>Resolve conflicts, detect inconsistencies, classify and model requirements</td><td>Structured, prioritised requirement set; DFDs, ERDs</td></tr>
+<tr><td><strong>Specification</strong></td><td>Document requirements formally</td><td>SRS document (IEEE 830)</td></tr>
+<tr><td><strong>Validation</strong></td><td>Check requirements are correct, complete, consistent, and feasible</td><td>Reviewed, signed-off SRS; test cases</td></tr>
+<tr><td><strong>Management</strong></td><td>Track changes to requirements throughout the project lifecycle</td><td>Requirement traceability matrix (RTM); change log</td></tr>
+</table>
+
+<h2>Who are Stakeholders?</h2>
+<div class="cg">
+<div class="c ca"><strong>End users</strong><p style="font-size:13px;margin-top:5px">People who will use the system day-to-day. Most important source of functional requirements.</p></div>
+<div class="c cg2"><strong>Clients / customers</strong><p style="font-size:13px;margin-top:5px">Funding the project. Define business goals and constraints. May differ from end users.</p></div>
+<div class="c cp"><strong>Domain experts</strong><p style="font-size:13px;margin-top:5px">Know the problem domain (e.g., doctors in a hospital system). Provide tacit knowledge.</p></div>
+<div class="c cam"><strong>System engineers</strong><p style="font-size:13px;margin-top:5px">Who will build it. Concerned with technical feasibility and platform constraints.</p></div>
+<div class="c cr"><strong>Regulators</strong><p style="font-size:13px;margin-top:5px">Impose legal/compliance constraints. E.g., HIPAA for medical, PCI-DSS for payments.</p></div>
+<div class="c ct"><strong>Managers</strong><p style="font-size:13px;margin-top:5px">Define budget, schedule, organizational priorities.</p></div>
+</div>
+
+<div class="warn">
+<strong>Stakeholder conflict:</strong> Different stakeholders will have conflicting requirements. A doctor wants maximum patient data access; a privacy regulator wants minimum data exposure. RE must surface and resolve these conflicts systematically — not ignore them.
+</div>
+
+<h2>Why RE is Hard — The Wicked Problem</h2>
+<ul>
+<li><strong>Stakeholders don't know what they want</strong> until they see it (Prototyping solves this)</li>
+<li><strong>Tacit knowledge:</strong> Experts know things they cannot articulate ("I'll know it when I see it")</li>
+<li><strong>Changing requirements:</strong> Business context evolves; what's right today may be wrong in 6 months</li>
+<li><strong>Language ambiguity:</strong> Natural language is inherently imprecise ("The system should be fast")</li>
+<li><strong>Conflicting stakeholders:</strong> Power dynamics suppress minority voices</li>
+<li><strong>Incomplete domain knowledge:</strong> Analysts may not understand the problem domain deeply</li>
+</ul>
+
+<div class="mn">
+<div class="mn-t">Mnemonic — RE Process: "EASVM"</div>
+<strong>E</strong>licitation → <strong>A</strong>nalysis → <strong>S</strong>pecification → <strong>V</strong>alidation → <strong>M</strong>anagement
+</div>
+</div>
+
+<!-- TYPES -->
+<div class="sec" id="s-types">
+<h1>Types of Requirements <span class="tag te">Exam Core</span></h1>
+
+<h2>The Three-Level Hierarchy</h2>
+<div class="phase-bar">
+<div class="phase-row" style="background:#EEEDFE;border-left-color:#534AB7"><strong style="color:#3C3489">User Requirements</strong> <span style="font-size:13px;color:#534AB7;margin-left:10px">High-level statements in natural language for stakeholders. What the system shall do for users.</span></div>
+<div class="phase-row" style="background:#E6F1FB;border-left-color:#185FA5"><strong style="color:#0C447C">System Requirements</strong> <span style="font-size:13px;color:#185FA5;margin-left:10px">Detailed technical descriptions for developers. Structured, testable, precise.</span></div>
+<div class="phase-row" style="background:#EAF3DE;border-left-color:#3B6D11"><strong style="color:#27500A">Software Design Spec</strong> <span style="font-size:13px;color:#3B6D11;margin-left:10px">Abstract description of how requirements will be met in the implementation.</span></div>
+</div>
+
+<h2>1. Functional Requirements (FR) <span class="tag tn">What the system does</span></h2>
+<div class="info">
+<strong>Definition:</strong> Statements that describe what the system should do — the specific behaviours, features, and functions the system must perform in response to inputs or events.
+</div>
+<p>Written as: <em>"The system shall [action] [object] [condition]."</em></p>
+
+<h3>Characteristics of Good FRs</h3>
+<ul>
+<li><strong>Specific:</strong> One requirement per statement</li>
+<li><strong>Verifiable:</strong> Can be tested pass/fail</li>
+<li><strong>Unambiguous:</strong> Exactly one interpretation</li>
+<li><strong>Traceable:</strong> Linked to a stakeholder source</li>
+</ul>
+
+<h3>HMS Examples (Hospital Management System)</h3>
+<table>
+<tr><th>ID</th><th>Functional Requirement</th><th>Module</th></tr>
+<tr><td>FR-01</td><td>The system shall allow authorized users to register a new patient with mandatory fields: name, DOB, gender, contact, and insurance ID.</td><td>Patient Registration</td></tr>
+<tr><td>FR-02</td><td>The system shall allow doctors to view a patient's complete medical history including diagnoses, prescriptions, and lab results.</td><td>EMR</td></tr>
+<tr><td>FR-03</td><td>The system shall generate an itemised billing invoice for each patient visit within 5 minutes of discharge.</td><td>Billing</td></tr>
+<tr><td>FR-04</td><td>The system shall send an automated appointment reminder to the patient 24 hours before a scheduled appointment via SMS or email.</td><td>Scheduling</td></tr>
+<tr><td>FR-05</td><td>The system shall alert the pharmacist when a prescribed drug quantity drops below the reorder threshold.</td><td>Pharmacy</td></tr>
+<tr><td>FR-06</td><td>The system shall restrict access to patient records based on role (doctor, nurse, admin, billing staff).</td><td>Security</td></tr>
+</table>
+
+<h2>2. Non-Functional Requirements (NFR) <span class="tag te">Quality Attributes / "-ilities"</span></h2>
+<div class="info">
+<strong>Definition:</strong> Constraints on the system's operation, behaviour, or development process. They describe <em>how well</em> the system performs its functions, not what it does.
+</div>
+<div class="warn">
+<strong>Common exam trap:</strong> NFRs are NOT optional extras. They often determine whether a system is acceptable. A hospital system that is correct but crashes once a week is useless. NFRs are as important as FRs.
+</div>
+
+<h3>NFR Categories with HMS Examples</h3>
+<table>
+<tr><th>NFR Type</th><th>Definition</th><th>HMS Example</th><th>Measurable Metric</th></tr>
+<tr><td><strong>Performance</strong></td><td>Speed and throughput under normal/peak load</td><td>Patient search results returned in &lt;2 seconds under normal load</td><td>Response time (ms)</td></tr>
+<tr><td><strong>Reliability</strong></td><td>Consistent correct operation over time</td><td>System availability must be 99.9% (≤8.7 hrs downtime/year)</td><td>MTBF, uptime %</td></tr>
+<tr><td><strong>Availability</strong></td><td>System accessible when needed</td><td>Must be available 24/7 including emergency access</td><td>Uptime %, MTTR</td></tr>
+<tr><td><strong>Security</strong></td><td>Protection against unauthorised access</td><td>All patient data encrypted at rest (AES-256) and in transit (TLS 1.3)</td><td>Encryption standard, audit logs</td></tr>
+<tr><td><strong>Scalability</strong></td><td>Handles increasing workload</td><td>Must support 500 concurrent users without performance degradation</td><td>Concurrent users, response time at load</td></tr>
+<tr><td><strong>Usability</strong></td><td>Ease of use for target users</td><td>A new nurse must complete patient registration in under 3 minutes after 2-hour training</td><td>Task completion time, error rate</td></tr>
+<tr><td><strong>Maintainability</strong></td><td>Ease of modification/update</td><td>New drug category must be configurable without code changes</td><td>Change request turnaround time</td></tr>
+<tr><td><strong>Portability</strong></td><td>Works across environments</td><td>Web interface must work on Chrome, Firefox, Edge (latest 2 versions)</td><td>Browser compatibility matrix</td></tr>
+<tr><td><strong>Compliance</strong></td><td>Legal/regulatory conformance</td><td>Must comply with HIPAA data privacy regulations</td><td>Audit certification</td></tr>
+<tr><td><strong>Interoperability</strong></td><td>Integration with other systems</td><td>Must support HL7 FHIR R4 standard for lab system integration</td><td>Integration test suite</td></tr>
+</table>
+
+<h2>3. Domain Requirements <span class="tag td">Often Forgotten</span></h2>
+<p>Requirements derived from the <strong>application domain</strong> — reflect domain knowledge, laws, regulations, and industry standards. They often appear as constraints.</p>
+<ul>
+<li><strong>HMS:</strong> Patient data must be retained for at least 7 years (medical records law)</li>
+<li><strong>HMS:</strong> Prescription drugs can only be dispensed against a valid doctor's order</li>
+<li><strong>HMS:</strong> Controlled substances must have a separate audit log (regulatory)</li>
+</ul>
+
+<h2>FR vs NFR — Master Comparison</h2>
+<table>
+<tr><th>Dimension</th><th>Functional</th><th>Non-Functional</th></tr>
+<tr><td>What it defines</td><td>System behaviour / features</td><td>Quality constraints on behaviour</td></tr>
+<tr><td>Question answered</td><td>What does the system do?</td><td>How well does it do it?</td></tr>
+<tr><td>Testability</td><td>Pass/fail against a spec</td><td>Measured against metrics/benchmarks</td></tr>
+<tr><td>Effect if missing</td><td>System is incomplete</td><td>System is unusable or unreliable</td></tr>
+<tr><td>Changes during project</td><td>Frequently</td><td>Relatively stable</td></tr>
+<tr><td>HMS example</td><td>Register a patient</td><td>Response time &lt;2 seconds</td></tr>
+<tr><td>Implementation</td><td>Specific module/feature</td><td>Often cuts across entire architecture</td></tr>
+</table>
+
+<div class="mn">
+<div class="mn-t">Mnemonic — NFR types: "PRASU SMPC"</div>
+<strong>P</strong>erformance | <strong>R</strong>eliability | <strong>A</strong>vailability | <strong>S</strong>ecurity | <strong>U</strong>sability | <strong>S</strong>calability | <strong>M</strong>aintainability | <strong>P</strong>ortability | <strong>C</strong>ompliance
+</div>
+
+<h2>MoSCoW Prioritisation</h2>
+<div class="cg">
+<div class="c cr"><strong>Must Have</strong><p style="font-size:13px;margin-top:4px">Non-negotiable. System fails without it. E.g., patient registration, doctor authentication.</p></div>
+<div class="c cam"><strong>Should Have</strong><p style="font-size:13px;margin-top:4px">Important but a workaround exists. E.g., automated appointment reminders.</p></div>
+<div class="c ca"><strong>Could Have</strong><p style="font-size:13px;margin-top:4px">Nice to have, dropped if time is short. E.g., custom report builder for admin.</p></div>
+<div class="c cg2"><strong>Won't Have (this time)</strong><p style="font-size:13px;margin-top:4px">Explicitly out of scope for this release. E.g., AI-driven diagnosis suggestions.</p></div>
+</div>
+</div>
+
+<!-- ELICITATION -->
+<div class="sec" id="s-elicitation">
+<h1>Requirements Elicitation Techniques <span class="tag te">All 5 Techniques</span></h1>
+
+<div class="info">
+<strong>Definition:</strong> Elicitation is the process of discovering requirements from stakeholders. It is NOT just asking "what do you want?" — it requires structured techniques to uncover explicit, implicit, and tacit requirements.
+</div>
+
+<h2>1. Interviews <span class="tag tn">Most Common</span></h2>
+<div class="step"><div class="step-num">1</div><div class="step-body"><strong>Definition:</strong> One-on-one or small-group structured conversations between analysts and stakeholders to discover requirements.</div></div>
+
+<h3>Types of Interviews</h3>
+<table>
+<tr><th>Type</th><th>Description</th><th>When to use</th><th>Advantage</th><th>Disadvantage</th></tr>
+<tr><td><strong>Structured</strong></td><td>Pre-defined questions, strict agenda</td><td>Known domain, need comparable data</td><td>Consistent data, easy to analyse</td><td>Rigid, misses unanticipated issues</td></tr>
+<tr><td><strong>Unstructured</strong></td><td>Open conversation, free-flowing</td><td>Unknown domain, exploratory phase</td><td>Discovers unexpected requirements</td><td>Hard to control, inconsistent</td></tr>
+<tr><td><strong>Semi-structured</strong></td><td>Pre-planned core questions + flexibility</td><td>Most real-world scenarios</td><td>Balance of both</td><td>Requires skilled interviewer</td></tr>
+</table>
+
+<h3>Interview Process</h3>
+<div class="pf">
+<div class="fb">Identify stakeholders</div><div class="fa">→</div>
+<div class="fb">Design questions</div><div class="fa">→</div>
+<div class="fb">Conduct interview</div><div class="fa">→</div>
+<div class="fb">Document & validate</div>
+</div>
+
+<h3>Good Interview Questions vs Bad</h3>
+<table>
+<tr><th>Bad (closed)</th><th>Good (open)</th></tr>
+<tr><td>"Do you want a login screen?" → Yes/No</td><td>"How do different staff currently access the system?"</td></tr>
+<tr><td>"Is the current system slow?"</td><td>"Walk me through how you process a patient admission today."</td></tr>
+<tr><td>"Do you want reports?"</td><td>"What decisions do you make each day that need information from the system?"</td></tr>
+</table>
+
+<h3>Advantages / Disadvantages</h3>
+<div class="cg">
+<div class="c cg2"><strong>Advantages</strong><ul style="font-size:13px;margin-top:5px"><li>Rich, detailed information</li><li>Builds trust and relationship</li><li>Can probe and follow up</li><li>Discovers implicit requirements</li></ul></div>
+<div class="c cr"><strong>Disadvantages</strong><ul style="font-size:13px;margin-top:5px"><li>Time-consuming for many stakeholders</li><li>Depends on interviewer skill</li><li>Stakeholders may be unavailable</li><li>Social pressure may suppress opinions</li></ul></div>
+</div>
+
+<hr class="divider">
+<h2>2. Questionnaires (Surveys) <span class="tag tn">Scalable</span></h2>
+<p>A set of written questions distributed to many stakeholders simultaneously. Used when: large user base, geographically distributed stakeholders, or quantitative data needed.</p>
+<h3>Types of Questions</h3>
+<ul>
+<li><strong>Closed-ended:</strong> Likert scale, multiple choice. "How important is mobile access? (1–5)"</li>
+<li><strong>Open-ended:</strong> Free text. "What is the most painful part of the current process?"</li>
+<li><strong>Ranking:</strong> "Rank these features by importance."</li>
+</ul>
+<div class="cg">
+<div class="c cg2"><strong>Advantages</strong><ul style="font-size:13px;margin-top:5px"><li>Scalable — reach 100s of users</li><li>Cost-effective</li><li>Anonymous responses → honest answers</li><li>Easy to aggregate and analyse</li></ul></div>
+<div class="c cr"><strong>Disadvantages</strong><ul style="font-size:13px;margin-top:5px"><li>Low response rates</li><li>Cannot probe or clarify</li><li>Misinterpretations go undetected</li><li>Design quality critically important</li></ul></div>
+</div>
+
+<hr class="divider">
+<h2>3. Observation (Ethnography) <span class="tag tn">Discovers Tacit Knowledge</span></h2>
+<p>Analyst watches stakeholders perform their actual work — either silently (passive) or by participating (active/apprenticing). Reveals what users actually do vs. what they say they do.</p>
+
+<div class="hl">
+<strong>Why observation is uniquely powerful:</strong> People often cannot articulate their own workflow — they have "muscle memory" knowledge. Watching them work uncovers requirements they would never think to mention in an interview. E.g., a nurse staples a handwritten note to a paper form because the system has no free-text field — a hidden requirement.
+</div>
+
+<table>
+<tr><th>Type</th><th>Description</th><th>HMS Example</th></tr>
+<tr><td><strong>Passive observation</strong></td><td>Analyst watches without interfering</td><td>Watching a receptionist handle patient check-in</td></tr>
+<tr><td><strong>Active/participant</strong></td><td>Analyst joins in the work</td><td>Analyst accompanies nurse on rounds, uses current system</td></tr>
+<tr><td><strong>Protocol analysis</strong></td><td>Ask user to think aloud while working</td><td>Pharmacist narrates drug dispensing process aloud</td></tr>
+</table>
+
+<div class="cg">
+<div class="c cg2"><strong>Advantages</strong><ul style="font-size:13px;margin-top:5px"><li>Reveals tacit and implicit requirements</li><li>Shows actual workflow vs stated workflow</li><li>Uncovers environmental constraints</li><li>Builds domain understanding</li></ul></div>
+<div class="c cr"><strong>Disadvantages</strong><ul style="font-size:13px;margin-top:5px"><li>Hawthorne effect — people change behaviour when watched</li><li>Time-intensive</li><li>Politically sensitive in some organizations</li><li>Observer may miss context without domain knowledge</li></ul></div>
+</div>
+
+<hr class="divider">
+<h2>4. Brainstorming <span class="tag tn">Creative Discovery</span></h2>
+<p>A group session where participants generate ideas freely without judgment. Goal: maximum quantity of ideas in a short time; evaluation comes later.</p>
+<h3>Brainstorming Rules (Osborn's Rules)</h3>
+<ul>
+<li><strong>No criticism:</strong> All ideas are welcome, no immediate judgment</li>
+<li><strong>Free-wheeling:</strong> Wild ideas are encouraged</li>
+<li><strong>Quantity over quality:</strong> More ideas = more seeds</li>
+<li><strong>Build on others:</strong> "Yes, and..." not "Yes, but..."</li>
+</ul>
+<h3>Structured Variants</h3>
+<div class="cg">
+<div class="c ca"><strong>Round-robin</strong><p style="font-size:13px;margin-top:4px">Each person contributes one idea in turn. Prevents domination by vocal members.</p></div>
+<div class="c cp"><strong>6-3-5 method</strong><p style="font-size:13px;margin-top:4px">6 people, 3 ideas each, 5 rounds of refinement. Generates 108 ideas in 30 minutes.</p></div>
+<div class="c ct"><strong>Brainwriting</strong><p style="font-size:13px;margin-top:4px">Silent written version. Reduces groupthink and social inhibition.</p></div>
+</div>
+
+<hr class="divider">
+<h2>5. Workshops (JAD / Focus Groups) <span class="tag tn">Best for Conflict Resolution</span></h2>
+<p><strong>Joint Application Development (JAD)</strong> — Structured workshops bringing all key stakeholders together to collaboratively define requirements, resolve conflicts, and reach consensus in a short, intensive session.</p>
+
+<h3>JAD Workshop Structure</h3>
+<div class="step"><div class="step-num">1</div><div class="step-body"><strong>Pre-workshop:</strong> Identify participants, define agenda, distribute pre-read materials (current system docs, problem statement)</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-body"><strong>Opening:</strong> Facilitator sets ground rules, defines objectives, introduces participants</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-body"><strong>Working sessions:</strong> Structured discussions by topic (patient flow, billing process, etc.). Use whiteboards, post-it notes, prototypes.</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-body"><strong>Conflict resolution:</strong> Facilitator manages disagreements, ensures minority voices heard, documents open issues</div></div>
+<div class="step"><div class="step-num">5</div><div class="step-body"><strong>Closing:</strong> Review agreed requirements, assign action items, plan next steps</div></div>
+
+<div class="cg">
+<div class="c cg2"><strong>Advantages</strong><ul style="font-size:13px;margin-top:5px"><li>Resolves conflicts directly between stakeholders</li><li>Faster than serial interviews</li><li>Creates shared understanding and ownership</li><li>Rich discussion reveals hidden assumptions</li></ul></div>
+<div class="c cr"><strong>Disadvantages</strong><ul style="font-size:13px;margin-top:5px"><li>Expensive to organise (all key people needed)</li><li>Dominated by senior or vocal participants</li><li>Requires skilled facilitator</li><li>Scheduling across departments is hard</li></ul></div>
+</div>
+
+<h2>Technique Comparison Matrix <span class="tag te">Exam Table</span></h2>
+<table>
+<tr><th>Technique</th><th>Best for</th><th>Stakeholder count</th><th>Time required</th><th>Key risk</th></tr>
+<tr><td>Interviews</td><td>Deep individual knowledge</td><td>1–3</td><td>High per person</td><td>Social desirability bias</td></tr>
+<tr><td>Questionnaires</td><td>Large user base, quantitative</td><td>Unlimited</td><td>Low (one-off)</td><td>Low response rate, no probe</td></tr>
+<tr><td>Observation</td><td>Tacit workflow knowledge</td><td>1–5</td><td>Very high</td><td>Hawthorne effect</td></tr>
+<tr><td>Brainstorming</td><td>Creative, new system ideas</td><td>5–12</td><td>Medium</td><td>Groupthink, vocal domination</td></tr>
+<tr><td>Workshops (JAD)</td><td>Conflict resolution, consensus</td><td>8–20</td><td>High (intensive)</td><td>Cost, scheduling, facilitation quality</td></tr>
+</table>
+
+<div class="tip">
+<strong>Real-world practice:</strong> No project uses only one technique. A typical project starts with workshops (scope), then interviews (detail per domain), then questionnaires (validate with wider audience), then observation (workflow verification). Multiple techniques cross-validate each other.
+</div>
+
+<div class="mn">
+<div class="mn-t">Mnemonic — Elicitation Techniques: "I-Q-O-B-W"</div>
+<strong>I</strong>nterviews | <strong>Q</strong>uestionnaires | <strong>O</strong>bservation | <strong>B</strong>rainstorming | <strong>W</strong>orkshops
+</div>
+</div>
+
+<!-- FEASIBILITY -->
+<div class="sec" id="s-feasibility">
+<h1>Feasibility Study <span class="tag te">Pre-project Gate</span></h1>
+
+<div class="info">
+<strong>Definition:</strong> A feasibility study is a preliminary investigation conducted before committing to a full project to determine whether the proposed software system is <em>worth building</em> and <em>can be built</em> within the given constraints.
+</div>
+<p>The feasibility study answers one question: <strong>"Should we proceed?"</strong> It is the first gate in any serious software project.</p>
+
+<div class="pf">
+<div class="fb">Technical Feasibility</div><div class="fa">+</div>
+<div class="fb">Operational Feasibility</div><div class="fa">+</div>
+<div class="fb">Economic Feasibility</div><div class="fa">+</div>
+<div class="fb">Schedule Feasibility</div><div class="fa">+</div>
+<div class="fb">Legal Feasibility</div><div class="fa">=</div>
+<div class="fb">Go / No-Go Decision</div>
+</div>
+
+<h2>1. Technical Feasibility <span class="tag td">Can we build it?</span></h2>
+<p>Assesses whether the required technology, tools, and expertise exist or can be acquired to build the system.</p>
+<h3>Questions to Answer</h3>
+<ul>
+<li>Does the technology to build the system exist?</li>
+<li>Does the team have the required technical skills?</li>
+<li>Can the system integrate with existing infrastructure?</li>
+<li>Are there performance or scalability concerns that technology cannot meet?</li>
+<li>Are the required hardware/software resources available?</li>
+</ul>
+<h3>HMS Technical Feasibility Assessment</h3>
+<div class="c ca" style="margin:8px 0">
+<table style="font-size:13px">
+<tr><th>Technical Concern</th><th>Assessment</th><th>Decision</th></tr>
+<tr><td>Web-based EMR technology</td><td>Mature tech (React, Node.js, PostgreSQL) — widely available</td><td class="p-ok">Feasible</td></tr>
+<tr><td>HL7 FHIR integration with labs</td><td>Standard protocol; API libraries available</td><td class="p-ok">Feasible</td></tr>
+<tr><td>Real-time bed management</td><td>WebSocket technology well-understood</td><td class="p-ok">Feasible</td></tr>
+<tr><td>AI diagnostic suggestions</td><td>Requires large labelled dataset, regulatory approval — not mature for this hospital's context</td><td class="p-no">Not feasible (this release)</td></tr>
+<tr><td>HIPAA-compliant cloud hosting</td><td>AWS GovCloud or Azure Government available</td><td class="p-ok">Feasible</td></tr>
+</table>
+</div>
+
+<h2>2. Operational Feasibility <span class="tag td">Will it be used?</span></h2>
+<p>Assesses whether the system will be used effectively once deployed. Even technically perfect systems fail if users won't adopt them.</p>
+<h3>Factors to assess</h3>
+<ul>
+<li><strong>User acceptance:</strong> Will end users embrace the system or resist it?</li>
+<li><strong>Workflow disruption:</strong> How much will daily work change? Will change management be needed?</li>
+<li><strong>Training:</strong> Can staff be trained within project constraints?</li>
+<li><strong>Organisational support:</strong> Does management champion the system?</li>
+<li><strong>Process compatibility:</strong> Does the system fit existing or planned processes?</li>
+</ul>
+<h3>HMS Operational Assessment</h3>
+<div class="hl">
+Doctors at City Hospital currently use paper-based records. Survey shows 65% resist digitisation. However, hospital administration mandates the system. Risk: low adoption without proper training and change management. Recommendation: phased rollout with intensive training programme and nurse/doctor champions.
+</div>
+
+<h2>3. Economic Feasibility (Cost-Benefit Analysis) <span class="tag td">Is it worth it?</span></h2>
+<p>Determines whether the financial benefits of the system justify its costs. The most decisive factor for business approval.</p>
+
+<h3>Cost Categories</h3>
+<div class="cg">
+<div class="c cr"><strong>Development costs</strong><p style="font-size:13px;margin-top:4px">Analyst, developer, tester salaries. Hardware. Software licences. Training for development team.</p></div>
+<div class="c cam"><strong>Operational costs</strong><p style="font-size:13px;margin-top:4px">Server hosting, maintenance, support staff, licence renewals, user training.</p></div>
+<div class="c cp"><strong>Opportunity costs</strong><p style="font-size:13px;margin-top:4px">What is foregone by choosing this project over alternatives? What if money was invested differently?</p></div>
+</div>
+
+<h3>Benefit Categories</h3>
+<div class="cg">
+<div class="c cg2"><strong>Tangible benefits</strong><p style="font-size:13px;margin-top:4px">Quantifiable in money. E.g., reduced paper costs, faster billing = earlier cash collection, fewer billing errors.</p></div>
+<div class="c ct"><strong>Intangible benefits</strong><p style="font-size:13px;margin-top:4px">Hard to quantify but real. E.g., improved patient safety, better doctor satisfaction, enhanced hospital reputation.</p></div>
+</div>
+
+<h3>Key Economic Metrics</h3>
+<table>
+<tr><th>Metric</th><th>Formula</th><th>Interpretation</th><th>HMS Example</th></tr>
+<tr><td><strong>ROI</strong></td><td>(Net Benefit / Total Cost) × 100</td><td>Higher % = better investment</td><td>ROI = (₹50L benefit / ₹20L cost) × 100 = 150%</td></tr>
+<tr><td><strong>Payback Period</strong></td><td>Total Cost / Annual Benefit</td><td>Years until cost recovered</td><td>₹20L / ₹12L per year = 1.67 years</td></tr>
+<tr><td><strong>NPV</strong></td><td>Sum of discounted future cash flows − initial cost</td><td>NPV &gt; 0 → proceed</td><td>Accounts for time value of money</td></tr>
+<tr><td><strong>Break-even Point</strong></td><td>When cumulative benefit = cumulative cost</td><td>Earlier = better</td><td>Month 20 of 60-month project life</td></tr>
+</table>
+
+<h3>HMS Cost-Benefit Example</h3>
+<pre>Development Cost:  ₹18,00,000 (one-time)
+Annual Operating:   ₹2,50,000/year
+─────────────────────────────────────────
+Tangible Benefits (annual):
+  Reduced paper/printing:        ₹80,000
+  Faster billing (cash flow):   ₹3,00,000
+  Fewer billing errors:         ₹1,50,000
+  Staff efficiency (2 FTE):     ₹4,00,000
+  Total Annual Benefit:         ₹9,30,000
+
+Net Annual Benefit: ₹9,30,000 - ₹2,50,000 = ₹6,80,000
+Payback Period: ₹18,00,000 / ₹6,80,000 = 2.65 years
+ROI (5-year): (₹34L - ₹18L) / ₹18L × 100 = 88.9%
+Decision: PROCEED — strong positive ROI with &lt;3 year payback</pre>
+
+<h2>4. Schedule Feasibility</h2>
+<p>Can the project be completed within the required timeframe? Considers team size, complexity, available technologies, and dependencies.</p>
+<ul>
+<li>Is the deadline driven by business events (regulatory, competitive) or arbitrary?</li>
+<li>Can scope be reduced if deadline cannot be moved?</li>
+<li>Are there external dependencies (vendor APIs, hardware procurement) on the critical path?</li>
+</ul>
+
+<h2>5. Legal Feasibility</h2>
+<ul>
+<li>Does the system comply with HIPAA, GDPR, local health data laws?</li>
+<li>Are there IP issues with software components being used?</li>
+<li>Contractual obligations with existing vendors?</li>
+</ul>
+
+<div class="mn">
+<div class="mn-t">Mnemonic — Feasibility types: "TOESL"</div>
+<strong>T</strong>echnical | <strong>O</strong>perational | <strong>E</strong>conomic | <strong>S</strong>chedule | <strong>L</strong>egal
+</div>
+</div>
+
+<!-- ANALYSIS -->
+<div class="sec" id="s-analysis">
+<h1>Requirements Analysis <span class="tag te">From Raw to Refined</span></h1>
+
+<div class="info">
+<strong>Definition:</strong> Requirements analysis transforms raw, elicited requirements into a structured, complete, consistent, and unambiguous set that can be used for design. It bridges elicitation and specification.
+</div>
+
+<h2>Problems Found During Analysis</h2>
+<div class="cg">
+<div class="c cr"><strong>Incompleteness</strong><p style="font-size:13px;margin-top:4px">Required behaviour in some situation is not described. "How should the system behave when the lab system is offline?"</p></div>
+<div class="c cr"><strong>Inconsistency</strong><p style="font-size:13px;margin-top:4px">Two requirements contradict each other. FR-06: "All staff can view any patient." FR-12: "Only treating doctors can view patient records."</p></div>
+<div class="c cam"><strong>Ambiguity</strong><p style="font-size:13px;margin-top:4px">"The system should be fast." Different stakeholders will interpret this differently.</p></div>
+<div class="c cam"><strong>Redundancy</strong><p style="font-size:13px;margin-top:4px">Same requirement stated in two different places — may diverge over time if one is updated.</p></div>
+<div class="c cp"><strong>Infeasibility</strong><p style="font-size:13px;margin-top:4px">A requirement that cannot be technically implemented within budget/time constraints.</p></div>
+<div class="c ca"><strong>Scope creep</strong><p style="font-size:13px;margin-top:4px">Requirements gradually expand beyond the agreed scope, often by well-meaning additions.</p></div>
+</div>
+
+<h2>Requirements Classification</h2>
+<p>During analysis, each requirement is classified by:</p>
+<ul>
+<li><strong>Type:</strong> FR, NFR, Domain Requirement</li>
+<li><strong>Priority:</strong> MoSCoW (Must / Should / Could / Won't)</li>
+<li><strong>Stability:</strong> Stable (unlikely to change) vs. Volatile (likely to change)</li>
+<li><strong>Source:</strong> Which stakeholder or document it came from (traceability)</li>
+<li><strong>Verification method:</strong> Test, inspection, demonstration, or analysis</li>
+</ul>
+
+<h2>Requirements Negotiation and Conflict Resolution</h2>
+<ul>
+<li><strong>Identify conflicting requirements</strong> — surface the conflict explicitly</li>
+<li><strong>Understand the underlying needs</strong> — often conflicts are over solutions, not actual needs</li>
+<li><strong>Prioritise using business goals</strong> — which better serves the hospital's mission?</li>
+<li><strong>Compromise:</strong> Role-based access control can satisfy both security and utility stakeholders</li>
+<li><strong>Escalate if unresolvable</strong> — take to project sponsor for decision</li>
+</ul>
+
+<h2>Requirement Traceability Matrix (RTM)</h2>
+<div class="info">
+<strong>Definition:</strong> An RTM is a document that traces each requirement from its source through design, implementation, and testing. It ensures every requirement is designed, coded, and tested.
+</div>
+<table>
+<tr><th>Req ID</th><th>Description</th><th>Source</th><th>Design Module</th><th>Code Module</th><th>Test Case</th><th>Status</th></tr>
+<tr><td>FR-01</td><td>Patient Registration</td><td>Receptionist Interview</td><td>UI-PatReg</td><td>PatientService.java</td><td>TC-001–TC-005</td><td class="p-ok">Done</td></tr>
+<tr><td>FR-03</td><td>Generate Invoice</td><td>Finance Workshop</td><td>UI-Billing</td><td>BillingEngine.java</td><td>TC-020–TC-025</td><td class="p-mid">In Dev</td></tr>
+<tr><td>NFR-01</td><td>Response &lt;2s</td><td>SLA Document</td><td>Architecture</td><td>All modules</td><td>TC-PERF-001</td><td class="p-no">Not Started</td></tr>
+</table>
+
+<h2>Structured Analysis Techniques</h2>
+<h3>Data Flow Diagrams (DFD)</h3>
+<ul>
+<li>Show how data flows through the system — processes, data stores, external entities, and flows</li>
+<li><strong>Context diagram (Level 0):</strong> System as one process, showing all external entities and high-level data flows</li>
+<li><strong>Level 1 DFD:</strong> Expands the system into major processes</li>
+<li><strong>Level 2 DFD:</strong> Further decomposes each process</li>
+</ul>
+<div class="c ca" style="margin:8px 0">
+<pre>HMS Context Diagram (Level 0):
+External entities → System → External entities
+
+Patient → [Register/Schedule] → HMS → [Appointment Confirm] → Patient
+Doctor → [Enter Diagnosis/Prescription] → HMS → [Lab Order] → Laboratory
+Billing Staff → [Generate Invoice] → HMS → [Payment Receipt] → Insurance Company
+Admin → [Manage System] → HMS → [Reports] → Hospital Management</pre>
+</div>
+
+<h3>Entity-Relationship Diagrams (ERD)</h3>
+<p>Model the data structure — entities, attributes, and relationships.</p>
+<div class="c cp" style="margin:8px 0">
+<pre>HMS Key Entities and Relationships:
+Patient (PatientID, Name, DOB, Gender, ContactNo, InsuranceID)
+    |
+    | has 1..* 
+    |
+Appointment (AppointmentID, DateTime, Status, DepartmentID)
+    |
+    | assigned to 1
+    |
+Doctor (DoctorID, Name, Specialisation, DepartmentID)
+    |
+    | creates 1..*
+    |
+MedicalRecord (RecordID, Diagnosis, Prescription, LabResults, Date)
+    |
+    | generates 1
+    |
+Invoice (InvoiceID, Amount, PaymentStatus, InsuranceClaimID)</pre>
+</div>
+
+<h2>Wiegers' Quality Requirements Framework</h2>
+<p>Each requirement should be evaluated against these dimensions:</p>
+<table>
+<tr><th>Quality Attribute</th><th>Definition</th><th>How to achieve</th></tr>
+<tr><td>Complete</td><td>All necessary information present; no TBDs</td><td>Checklists; prototype-based review</td></tr>
+<tr><td>Correct</td><td>Accurately represents stakeholder need</td><td>Stakeholder sign-off</td></tr>
+<tr><td>Feasible</td><td>Achievable within constraints</td><td>Technical expert review</td></tr>
+<tr><td>Necessary</td><td>Removing it would cause stakeholder dissatisfaction</td><td>MoSCoW prioritisation</td></tr>
+<tr><td>Prioritised</td><td>Has a business priority assigned</td><td>MoSCoW or weighted ranking</td></tr>
+<tr><td>Unambiguous</td><td>Only one interpretation possible</td><td>Avoid vague words: fast, easy, robust</td></tr>
+<tr><td>Verifiable</td><td>Can write a test case for it</td><td>Define acceptance criteria</td></tr>
+<tr><td>Consistent</td><td>No conflict with other requirements</td><td>Cross-referencing review</td></tr>
+<tr><td>Modifiable</td><td>Can change one requirement without cascading updates</td><td>One fact per requirement; atomic statements</td></tr>
+<tr><td>Traceable</td><td>Linked to source and downstream artifacts</td><td>Maintain RTM</td></tr>
+</table>
+</div>
+
+<!-- SRS -->
+<div class="sec" id="s-srs">
+<h1>Software Requirements Specification (SRS) <span class="tag te">IEEE 830 Standard</span></h1>
+
+<div class="info">
+<strong>Definition:</strong> The SRS is a formal document that completely describes the behaviour of the software system to be developed. It is the contract between customers and developers — both parties sign it.
+</div>
+
+<h2>Why SRS is Critical</h2>
+<ul>
+<li><strong>Communication:</strong> Single source of truth for all stakeholders</li>
+<li><strong>Legal contract:</strong> Defines what must be delivered</li>
+<li><strong>Design basis:</strong> Architects use it to create the system design</li>
+<li><strong>Test basis:</strong> QA derives all test cases from SRS</li>
+<li><strong>Change baseline:</strong> Any scope change requires SRS amendment (change control)</li>
+<li><strong>Maintenance guide:</strong> Future maintainers understand what and why</li>
+</ul>
+
+<h2>IEEE 830 SRS Structure <span class="tag te">Full Template</span></h2>
+<div class="c ca" style="margin:8px 0">
+<pre>SRS — Hospital Management System v1.0
+IEEE 830 Compliant
+══════════════════════════════════════════════
+1. INTRODUCTION
+   1.1 Purpose
+       To define all functional and non-functional requirements for the 
+       Hospital Management System (HMS) for City General Hospital.
+   1.2 Scope
+       HMS will cover: Patient Registration, EMR, Appointment Scheduling,
+       Billing, Pharmacy, Lab Integration, and Reporting.
+       Out of scope: Telemedicine, AI diagnosis, mobile app (Phase 2).
+   1.3 Definitions, Acronyms, Abbreviations
+       EMR: Electronic Medical Record
+       HL7 FHIR: Health Level 7 Fast Healthcare Interoperability Resources
+       HIPAA: Health Insurance Portability and Accountability Act
+   1.4 References
+       IEEE Std 830-1998, HIPAA Privacy Rule (45 CFR Part 164),
+       HL7 FHIR R4 Specification
+   1.5 Overview
+       Section 2: Overall description. Section 3: Specific requirements.
+
+2. OVERALL DESCRIPTION
+   2.1 Product Perspective
+       HMS is a standalone web-based system replacing paper-based records.
+       Integrates with: existing lab system (HL7 FHIR), insurance billing (EDI 837).
+   2.2 Product Functions
+       - Patient registration and demographics management
+       - Electronic medical records (EMR) creation and retrieval
+       - Appointment scheduling and calendar management
+       - Billing and insurance claim processing
+       - Pharmacy and drug inventory management
+       - Laboratory test ordering and result management
+       - Administrative reporting and dashboards
+   2.3 User Classes and Characteristics
+       Receptionist: Daily user, non-technical, registers patients, schedules appointments
+       Doctor: Clinical user, accesses EMR, creates prescriptions
+       Nurse: Views patient records, records vitals, administers medications
+       Pharmacist: Manages drug inventory, dispenses medications
+       Billing Staff: Processes invoices, manages insurance claims
+       Lab Technician: Receives test orders, uploads results
+       System Admin: Configures system, manages users and roles
+       Hospital Administrator: Views reports and dashboards
+   2.4 Operating Environment
+       - Web application accessible via browsers (Chrome, Firefox, Edge — latest 2 versions)
+       - Server: Linux (Ubuntu 22.04 LTS) on AWS GovCloud
+       - Database: PostgreSQL 15
+       - Network: Hospital LAN with TLS 1.3 for all connections
+       - Client: Any device with modern browser; minimum 1024×768 resolution
+   2.5 Design and Implementation Constraints
+       - Must comply with HIPAA Privacy and Security Rules
+       - Must support HL7 FHIR R4 for lab integration
+       - Must be delivered within 9 months
+       - Budget: ₹18,00,000 (development + first year maintenance)
+   2.6 Assumptions and Dependencies
+       - Hospital will provide patient registration hardware (barcode scanners)
+       - Lab system vendor will provide FHIR-compliant API endpoint
+       - Hospital will assign 2 IT staff for system administration
+
+3. SPECIFIC REQUIREMENTS
+   3.1 External Interface Requirements
+       3.1.1 User Interfaces
+             - Web-based responsive UI following WCAG 2.1 AA accessibility standard
+             - Consistent navigation: top navigation bar, sidebar module menu
+             - Patient search: autocomplete with name, ID, and DOB matching
+       3.1.2 Hardware Interfaces
+             - Barcode scanner for patient ID wristbands (USB HID protocol)
+             - Thermal printer for wristbands and invoices
+       3.1.3 Software Interfaces
+             - Lab System: HL7 FHIR R4 REST API (OAuth 2.0 authentication)
+             - Insurance: EDI 837 format for claim submission
+             - Email/SMS: SendGrid API for notifications
+       3.1.4 Communication Interfaces
+             - All API communication over HTTPS (TLS 1.3)
+             - Internal services: REST JSON APIs
+
+   3.2 Functional Requirements (selected)
+       [FR-01] Patient Registration
+         Priority: Must Have
+         Source: Receptionist interviews, Admin workshop
+         Description: The system shall allow authorised receptionists to register 
+         new patients with the following mandatory fields: Full Name, Date of Birth,
+         Gender, Primary Phone Number, and Insurance ID. Optional fields include 
+         secondary contact, address, and emergency contact.
+         Input: Registration form data
+         Output: Unique Patient ID (format: HMS-YYYY-NNNNN), confirmation screen, 
+                 printed wristband label
+         Constraints: Patient ID must be unique; duplicate detection by Name+DOB+Phone
+
+       [FR-04] Appointment Scheduling
+         Priority: Must Have
+         Description: The system shall allow receptionists and patients (via portal) 
+         to schedule appointments with available doctors. System shall check doctor 
+         availability against their calendar and prevent double-booking.
+         
+       [FR-12] Role-Based Access Control
+         Priority: Must Have
+         Description: The system shall enforce role-based access control (RBAC). 
+         Each user role shall have a defined set of permissions (see Appendix B — 
+         RBAC matrix). A user shall only see and interact with functions permitted 
+         by their assigned role.
+
+   3.3 Non-Functional Requirements
+       [NFR-01] Performance
+         The system shall return patient search results within 2 seconds for 
+         up to 500 concurrent users under normal operating conditions.
+       [NFR-02] Availability
+         The system shall maintain 99.9% uptime (maximum 8.7 hours downtime/year), 
+         excluding scheduled maintenance windows (maximum 4 hours/month, 02:00–06:00).
+       [NFR-03] Security
+         All patient data shall be encrypted at rest using AES-256 and in transit 
+         using TLS 1.3. All access to patient records shall be logged with user ID, 
+         timestamp, and action performed.
+       [NFR-04] Usability
+         A receptionist with no prior system training shall be able to register a 
+         patient in under 5 minutes after completing a 2-hour training session, with 
+         an error rate below 5%.
+
+   3.4 Design Constraints
+       Software must use open-source components only (no proprietary database licences).
+
+4. APPENDICES
+   Appendix A: Glossary
+   Appendix B: RBAC Permission Matrix
+   Appendix C: Data Dictionary (all entities and attributes)
+   Appendix D: Use Case Diagrams and Descriptions
+   Appendix E: ERD
+   Appendix F: Analysis models (DFDs Level 0, 1, 2)</pre>
+</div>
+
+<h2>Properties of a Good SRS</h2>
+<table>
+<tr><th>Property</th><th>Definition</th><th>Violation example (HMS)</th></tr>
+<tr><td><strong>Complete</strong></td><td>All requirements present; no TBDs</td><td>"Lab integration — TBD"</td></tr>
+<tr><td><strong>Consistent</strong></td><td>No contradictions</td><td>FR-06: Any staff views patient; FR-12: Only treating doctors view patient</td></tr>
+<tr><td><strong>Unambiguous</strong></td><td>Single interpretation</td><td>"System shall be secure" — means nothing testable</td></tr>
+<tr><td><strong>Verifiable</strong></td><td>Can write a test case</td><td>"System should be user-friendly"</td></tr>
+<tr><td><strong>Traceable</strong></td><td>Source linkable; downstream linkable</td><td>FR-07 has no stakeholder source</td></tr>
+<tr><td><strong>Modifiable</strong></td><td>Easy to update without cascading changes</td><td>Single paragraph covering patient registration + billing + notifications together</td></tr>
+<tr><td><strong>Ranked</strong></td><td>Priorities assigned</td><td>No MoSCoW or priority levels assigned</td></tr>
+</table>
+
+<div class="warn">
+<strong>SRS is NOT a design document.</strong> It says WHAT the system does, not HOW it does it. "The system shall store patient records" (SRS) vs "The system uses a PostgreSQL database with a normalised schema" (Design Specification). Mixing these creates confusion and locks in design decisions too early.
+</div>
+</div>
+
+<!-- ANALYSIS MODELS -->
+<div class="sec" id="s-models">
+<h1>Components of the Analysis Model <span class="tag te">4 Model Types</span></h1>
+
+<div class="info">
+The analysis model is a set of structured diagrams and models created during requirements analysis to represent the system's requirements visually. It bridges requirements and design.
+</div>
+
+<h2>The 4 Analysis Model Components</h2>
+<div class="cg">
+<div class="c ca"><strong>Scenario-based models</strong><p style="font-size:13px;margin-top:4px">Use cases, user stories. Model how actors interact with the system.</p></div>
+<div class="c cg2"><strong>Data models</strong><p style="font-size:13px;margin-top:4px">ERD, data dictionary. Model the structure and relationships of data.</p></div>
+<div class="c cp"><strong>Flow-oriented models</strong><p style="font-size:13px;margin-top:4px">DFDs, sequence diagrams. Model how data flows and transforms.</p></div>
+<div class="c cam"><strong>Behavioural models</strong><p style="font-size:13px;margin-top:4px">State diagrams, activity diagrams. Model system states and transitions.</p></div>
+</div>
+
+<h2>1. Use Case Model <span class="tag te">Scenario-based</span></h2>
+<p>Shows what actors do with the system. A use case = one goal of one actor. Captures functional requirements as narratives.</p>
+<h3>Use Case Diagram Elements</h3>
+<ul>
+<li><strong>Actor:</strong> External entity that interacts with the system (person, external system)</li>
+<li><strong>Use case:</strong> A function the system performs for an actor (oval)</li>
+<li><strong>Association:</strong> Actor participates in use case</li>
+<li><strong>«include»:</strong> Use case always includes another (mandatory sub-function)</li>
+<li><strong>«extend»:</strong> Use case optionally extends another (conditional add-on)</li>
+<li><strong>Generalisation:</strong> One actor/use case inherits from another</li>
+</ul>
+
+<h3>HMS Use Case: Patient Appointment Booking</h3>
+<pre>Use Case ID:    UC-004
+Use Case Name:  Book Appointment
+Actors:         Receptionist (Primary), Doctor (secondary — calendar checked)
+Preconditions:  Patient is registered in system; Receptionist is logged in
+                with scheduling role; Doctor profile and availability is configured
+Main Flow:
+  1. Receptionist searches for patient by name or ID
+  2. System displays patient profile and appointment history
+  3. Receptionist selects "New Appointment"
+  4. System displays available doctors by department and available time slots
+  5. Receptionist selects doctor, date, and time slot
+  6. System checks for doctor availability and patient conflict
+  7. System confirms booking, generates Appointment ID
+  8. System sends SMS/email confirmation to patient (includes: date, time, doctor, 
+     department, location, instructions)
+  9. System updates doctor's calendar
+
+Alternate Flows:
+  4a. No available slots for requested doctor:
+      System suggests next available date or alternate doctor in same department.
+  6a. Patient has existing appointment on same day:
+      System warns receptionist; receptionist must confirm override or reschedule.
+  8a. Patient contact details invalid:
+      Notification fails silently; appointment is still booked; system logs failure.
+
+Exception Flows:
+  E1. System is unavailable (lab integration down):
+      Appointment can still be booked; lab orders cannot be added until system recovers.
+
+Postconditions:
+  - Appointment record created with unique ID
+  - Doctor's calendar updated
+  - Patient notification sent
+  - Appointment visible in receptionist's daily view</pre>
+
+<h3>«include» vs «extend» — Clear Distinction</h3>
+<table>
+<tr><th></th><th>«include»</th><th>«extend»</th></tr>
+<tr><td>Meaning</td><td>Always executed — mandatory sub-function</td><td>Conditionally executed — optional add-on</td></tr>
+<tr><td>Dependency direction</td><td>Base case → included case</td><td>Extension case → base case</td></tr>
+<tr><td>Example in HMS</td><td>Book Appointment «includes» Check Doctor Availability</td><td>Book Appointment «extended by» Notify Patient (when contact info valid)</td></tr>
+<tr><td>Removes duplication</td><td>Yes — shared sub-functions</td><td>No — optional variation</td></tr>
+</table>
+
+<h2>2. Data Flow Diagram (DFD) <span class="tag te">Flow-oriented</span></h2>
+<h3>DFD Notation (DeMarco & Yourdon)</h3>
+<table>
+<tr><th>Symbol</th><th>Represents</th><th>Description</th></tr>
+<tr><td>Rectangle (square)</td><td>External Entity</td><td>Source or sink of data outside the system (Patient, Doctor, Lab)</td></tr>
+<tr><td>Circle / Rounded rectangle</td><td>Process</td><td>Transforms input data to output data (Register Patient, Generate Invoice)</td></tr>
+<tr><td>Open rectangle (two parallel lines)</td><td>Data Store</td><td>Stored data (Patient DB, Appointment DB, Medical Records)</td></tr>
+<tr><td>Arrow</td><td>Data Flow</td><td>Data movement between elements (named by the data type)</td></tr>
+</table>
+
+<div class="warn">
+<strong>DFD Rules (Balancing):</strong> When decomposing a Level-1 DFD process into Level-2, the inputs and outputs of that process at Level 1 must exactly match the inputs and outputs of the Level-2 diagram. This is called "levelling" or "balancing." Violating this is a common exam trap.
+</div>
+
+<h3>HMS DFD Level 1 (Key Processes)</h3>
+<pre>External Entities: Patient, Doctor, Lab System, Insurance Company, Admin
+
+Process 1.0: Patient Management
+  In: Patient personal data (from Patient)
+  Out: Patient ID, confirmation (to Patient)
+  Out: Patient record (to Patient DB)
+
+Process 2.0: Appointment Management
+  In: Appointment request (from Patient/Receptionist)
+  In: Doctor availability (from Doctor DB)
+  Out: Appointment confirmation (to Patient)
+  Out: Appointment record (to Appointment DB)
+
+Process 3.0: Clinical Management (EMR)
+  In: Consultation notes (from Doctor)
+  In: Lab results (from Lab System)
+  Out: Medical record (to Patient Medical Record DB)
+  Out: Lab order (to Lab System)
+  Out: Prescription (to Pharmacy)
+
+Process 4.0: Billing Management
+  In: Appointment + services (from Appointment DB, Medical Record DB)
+  Out: Invoice (to Patient)
+  Out: Insurance claim (to Insurance Company)
+
+Process 5.0: Reporting
+  In: Data from all stores
+  Out: Management reports (to Admin)</pre>
+
+<h2>3. Entity-Relationship Diagram (ERD) <span class="tag te">Data model</span></h2>
+<h3>HMS ERD Key Relationships</h3>
+<pre>PATIENT ──1─────────M── APPOINTMENT ──M─────────1── DOCTOR
+   |                                                    |
+   1                                                    1
+   |                                                    |
+   M── MEDICAL_RECORD ──1─────────M── PRESCRIPTION     M── DEPARTMENT
+   |
+   1── INVOICE ──1─── PAYMENT
+   |
+   M── LAB_ORDER ──1─── LAB_RESULT
+
+Cardinalities:
+  One PATIENT has many APPOINTMENTs
+  Each APPOINTMENT has one DOCTOR
+  One PATIENT has many MEDICAL_RECORDs
+  Each MEDICAL_RECORD may have many PRESCRIPTIONs
+  One PATIENT generates many INVOICEs
+  One MEDICAL_RECORD may have many LAB_ORDERs</pre>
+
+<h2>4. State Transition Diagram <span class="tag te">Behavioural model</span></h2>
+<p>Models the states an object (or system) can be in and the events that cause transitions between states.</p>
+<h3>HMS: Appointment State Diagram</h3>
+<pre>States: [Requested] → [Confirmed] → [In Progress] → [Completed]
+                                ↘ [Cancelled]      ↗
+                                          [No-show]
+
+Transitions:
+  Requested → Confirmed:    Doctor availability confirmed + patient notified
+  Confirmed → In Progress:  Patient checked in at reception
+  Confirmed → Cancelled:    Patient cancels ≥24 hours before appointment
+  Confirmed → No-show:      Patient does not appear; appointment time passes
+  In Progress → Completed:  Doctor closes consultation
+  No-show → Confirmed:      Patient reschedules</pre>
+
+<h2>Data Dictionary</h2>
+<div class="info">
+A data dictionary is a structured repository of all data elements in the system — their names, types, formats, constraints, and meanings. It eliminates ambiguity in the SRS.
+</div>
+<table>
+<tr><th>Data Element</th><th>Type</th><th>Format / Constraint</th><th>Description</th></tr>
+<tr><td>PatientID</td><td>String</td><td>HMS-YYYY-NNNNN (unique)</td><td>System-generated unique identifier for each patient</td></tr>
+<tr><td>DateOfBirth</td><td>Date</td><td>DD/MM/YYYY; must be in past; age 0–120</td><td>Patient's birth date for identity verification</td></tr>
+<tr><td>AppointmentStatus</td><td>Enum</td><td>{Requested, Confirmed, InProgress, Completed, Cancelled, No-show}</td><td>Current state of the appointment lifecycle</td></tr>
+<tr><td>InvoiceAmount</td><td>Decimal</td><td>≥0; 2 decimal places; max ₹9,99,999.99</td><td>Total amount charged for patient visit</td></tr>
+<tr><td>PrescriptionDosage</td><td>String</td><td>Format: [quantity][unit] [frequency]. E.g., "500mg twice daily"</td><td>Drug dosage instruction from doctor</td></tr>
+</table>
+</div>
+
+<!-- USER STORIES -->
+<div class="sec" id="s-stories">
+<h1>User Stories <span class="tag tn">Agile Requirements</span></h1>
+
+<div class="info">
+<strong>Definition:</strong> A user story is a short, informal description of a feature told from the perspective of the user or stakeholder. It is the primary requirements artifact in Agile development.
+</div>
+
+<h2>The 3-Part Template (Connextra Format)</h2>
+<div class="pur">
+<strong style="font-size:15px">As a [role], I want [feature/action] so that [benefit/goal].</strong>
+<ul style="margin-top:8px">
+<li><strong>Role:</strong> The type of user (not a specific person, but a user type/persona)</li>
+<li><strong>Feature:</strong> What the user wants to do — keep it action-oriented</li>
+<li><strong>Benefit:</strong> Why they want it — the business value. This is often omitted but crucial.</li>
+</ul>
+</div>
+
+<h2>HMS User Stories — Complete Set</h2>
+<table>
+<tr><th>ID</th><th>User Story</th><th>Priority</th><th>Story Points</th></tr>
+<tr><td>US-01</td><td>As a receptionist, I want to register a new patient so that they can receive hospital services.</td><td><span class="pill p-no">Must</span></td><td>5</td></tr>
+<tr><td>US-02</td><td>As a doctor, I want to view a patient's full medical history so that I can make an informed diagnosis.</td><td><span class="pill p-no">Must</span></td><td>8</td></tr>
+<tr><td>US-03</td><td>As a doctor, I want to prescribe medications digitally so that the pharmacy receives orders instantly without paper errors.</td><td><span class="pill p-no">Must</span></td><td>5</td></tr>
+<tr><td>US-04</td><td>As a nurse, I want to record and update a patient's vitals every 4 hours so that the care team has current clinical data.</td><td><span class="pill p-no">Must</span></td><td>3</td></tr>
+<tr><td>US-05</td><td>As a billing staff member, I want to generate an itemised invoice after each patient visit so that insurance claims are accurate and timely.</td><td><span class="pill p-no">Must</span></td><td>8</td></tr>
+<tr><td>US-06</td><td>As a pharmacist, I want to receive low-stock alerts so that I can reorder drugs before they run out.</td><td><span class="pill p-mid">Should</span></td><td>3</td></tr>
+<tr><td>US-07</td><td>As a hospital admin, I want to view a real-time bed occupancy dashboard so that I can manage admissions efficiently.</td><td><span class="pill p-mid">Should</span></td><td>5</td></tr>
+<tr><td>US-08</td><td>As a patient, I want to receive an appointment reminder 24 hours in advance so that I don't miss my consultation.</td><td><span class="pill p-mid">Should</span></td><td>3</td></tr>
+<tr><td>US-09</td><td>As a lab technician, I want to upload test results directly to the patient's record so that doctors see results without manual transcription errors.</td><td><span class="pill p-no">Must</span></td><td>5</td></tr>
+<tr><td>US-10</td><td>As a system admin, I want to assign roles to users so that each staff member only accesses data relevant to their job.</td><td><span class="pill p-no">Must</span></td><td>3</td></tr>
+</table>
+
+<h2>The 3 Cs of User Stories (Card, Conversation, Confirmation)</h2>
+<div class="cg">
+<div class="c ca"><strong>Card</strong><p style="font-size:13px;margin-top:5px">The written story — brief enough to fit on a physical index card. It is a placeholder for a conversation, not the full specification.</p></div>
+<div class="c cg2"><strong>Conversation</strong><p style="font-size:13px;margin-top:5px">The discussion between developer and customer to elaborate details. Most information lives here, not on the card. Stories are conversation starters.</p></div>
+<div class="c cp"><strong>Confirmation</strong><p style="font-size:13px;margin-top:5px">The acceptance criteria — testable conditions that confirm the story is done. Written before implementation (BDD).</p></div>
+</div>
+
+<h2>Acceptance Criteria — GIVEN-WHEN-THEN</h2>
+<div class="pur">
+<strong>Format:</strong>
+<code>GIVEN [context/precondition], WHEN [action/event], THEN [expected outcome].</code>
+</div>
+
+<h3>HMS Example — US-01: Patient Registration</h3>
+<pre>User Story: As a receptionist, I want to register a new patient so that they 
+can receive hospital services.
+
+Acceptance Criteria:
+
+AC-1: Successful registration
+  GIVEN a logged-in receptionist on the Patient Registration screen,
+  WHEN they fill in Name, DOB, Gender, Phone, and Insurance ID and click "Register",
+  THEN the system creates a unique PatientID (format: HMS-YYYY-NNNNN),
+       displays a success confirmation, and prints a wristband label.
+
+AC-2: Duplicate detection
+  GIVEN an existing patient with Name="Ravi Kumar", DOB="12/05/1980",
+  WHEN a receptionist tries to register another patient with the same Name and DOB,
+  THEN the system displays a "Possible duplicate detected" warning with the existing
+       patient's ID and asks to confirm or cancel before proceeding.
+
+AC-3: Mandatory field validation
+  GIVEN a registration form with the Phone field left empty,
+  WHEN the receptionist clicks "Register",
+  THEN the system highlights the Phone field in red with message 
+       "Phone number is required" and does not create the patient record.
+
+AC-4: Invalid date of birth
+  GIVEN a DOB field with a future date entered,
+  WHEN the receptionist clicks "Register",
+  THEN the system shows error "Date of birth cannot be in the future."</pre>
+
+<h2>INVEST Criteria for Good User Stories <span class="tag te">Quality Check</span></h2>
+<table>
+<tr><th>Letter</th><th>Criterion</th><th>Definition</th><th>HMS Check for US-01</th></tr>
+<tr><td>I</td><td>Independent</td><td>Can be developed and delivered without depending on other stories</td><td>Patient registration doesn't depend on billing</td></tr>
+<tr><td>N</td><td>Negotiable</td><td>Details can be changed; the story is not a fixed contract</td><td>Registration fields can be adjusted with stakeholders</td></tr>
+<tr><td>V</td><td>Valuable</td><td>Delivers value to the user/business</td><td>Yes — without registration, no other function works</td></tr>
+<tr><td>E</td><td>Estimable</td><td>Team can estimate size in story points</td><td>Estimated at 5 points</td></tr>
+<tr><td>S</td><td>Small</td><td>Fits within one sprint</td><td>Registration in one sprint of 2 weeks</td></tr>
+<tr><td>T</td><td>Testable</td><td>Has clear acceptance criteria that can be tested</td><td>4 acceptance criteria defined above</td></tr>
+</table>
+
+<h2>Epic → Feature → User Story → Task Hierarchy</h2>
+<div class="phase-bar">
+<div class="phase-row" style="background:#EEEDFE;border-left-color:#534AB7"><strong style="color:#3C3489">Epic:</strong> <span style="color:#534AB7;font-size:13px"> Patient Management (too large for one sprint — may span months)</span></div>
+<div class="phase-row" style="background:#E6F1FB;border-left-color:#185FA5"><strong style="color:#0C447C">Feature:</strong> <span style="color:#185FA5;font-size:13px"> Patient Registration (deliverable feature — several stories)</span></div>
+<div class="phase-row" style="background:#EAF3DE;border-left-color:#3B6D11"><strong style="color:#27500A">User Story:</strong> <span style="color:#3B6D11;font-size:13px"> "As a receptionist, I want to register a patient..." (fits one sprint)</span></div>
+<div class="phase-row" style="background:#FAEEDA;border-left-color:#854F0B"><strong style="color:#633806">Task:</strong> <span style="color:#854F0B;font-size:13px"> Build registration form UI / Write PatientService.save() / Write unit tests / Deploy to staging (hours)</span></div>
+</div>
+
+<h2>User Story vs Use Case — Comparison</h2>
+<table>
+<tr><th>Dimension</th><th>User Story</th><th>Use Case</th></tr>
+<tr><td>Methodology</td><td>Agile</td><td>Traditional / UML</td></tr>
+<tr><td>Detail level</td><td>Brief (1–3 sentences)</td><td>Detailed narrative with flows</td></tr>
+<tr><td>Focus</td><td>Business value (why)</td><td>System interaction (how)</td></tr>
+<tr><td>Primary artifact</td><td>Card + conversation</td><td>Document</td></tr>
+<tr><td>Acceptance criteria</td><td>GIVEN-WHEN-THEN</td><td>Preconditions + postconditions</td></tr>
+<tr><td>Written by</td><td>Product Owner / user</td><td>Business analyst</td></tr>
+<tr><td>Living document</td><td>Yes — evolves continuously</td><td>Mostly static after approval</td></tr>
+</table>
+</div>
+
+<!-- VALIDATION -->
+<div class="sec" id="s-validation">
+<h1>Requirement Validation and Verification <span class="tag te">V&V</span></h1>
+
+<div class="info">
+<strong>Validation:</strong> "Are we building the right system?" — Checking requirements against stakeholder needs.<br>
+<strong>Verification:</strong> "Are we building the system right?" — Checking requirements against standards and internal consistency.
+</div>
+
+<h2>Why Validate Requirements?</h2>
+<p>Because requirements can be wrong even after careful elicitation. Stakeholders may not have expressed their true needs, analysts may have misunderstood, or the business context may have changed. Validation catches errors before expensive design and coding begins.</p>
+
+<h2>Validation Techniques</h2>
+<h3>1. Requirements Reviews (Inspections) <span class="tag tn">Most Effective</span></h3>
+<p>A structured, systematic examination of the SRS by a team of reviewers. The most effective defect removal technique for requirements.</p>
+<h3>Fagan Inspection Process</h3>
+<div class="step"><div class="step-num">1</div><div class="step-body"><strong>Planning:</strong> Select team (author, moderator, reviewers, recorder). Distribute SRS. Set meeting time.</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-body"><strong>Overview:</strong> Author walks team through the requirements document at a high level.</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-body"><strong>Individual preparation:</strong> Each reviewer studies the document independently, noting defects.</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-body"><strong>Inspection meeting:</strong> Team reviews defects found. Moderator facilitates. Recorder logs all defects. No solutions — just find issues.</div></div>
+<div class="step"><div class="step-num">5</div><div class="step-body"><strong>Rework:</strong> Author fixes all logged defects.</div></div>
+<div class="step"><div class="step-num">6</div><div class="step-body"><strong>Follow-up:</strong> Moderator verifies all defects are fixed. If many defects remain, re-inspection is triggered.</div></div>
+
+<h3>Review Checklist (for HMS SRS)</h3>
+<ul>
+<li>Every FR has a unique ID, priority, and source?</li>
+<li>Every FR is testable (can write pass/fail test)?</li>
+<li>No ambiguous terms (fast, secure, easy, robust) used without metrics?</li>
+<li>All actors in use cases are defined in Section 2.3?</li>
+<li>All data elements in flows are in the data dictionary?</li>
+<li>No two FRs contradict each other?</li>
+<li>All NFRs have measurable metrics?</li>
+<li>HIPAA compliance requirements addressed?</li>
+</ul>
+
+<h3>2. Prototyping for Validation</h3>
+<p>Build a quick mockup (UI prototype or throwaway system) and show it to stakeholders. Users react to something tangible — they validate by using it.</p>
+<div class="hl">
+<strong>Why prototypes reveal hidden requirements:</strong> Users often cannot articulate abstract requirements, but they immediately recognize when something is wrong. "That's not how we do it" is more valuable feedback than any interview response.
+</div>
+<ul>
+<li><strong>Paper prototype:</strong> Hand-drawn screens. Fastest, cheapest.</li>
+<li><strong>Wireframe prototype:</strong> Digital mockup (Figma, Balsamiq). Realistic without code.</li>
+<li><strong>Throwaway prototype:</strong> Working code prototype to validate complex interactions. Discarded after validation.</li>
+</ul>
+
+<h3>3. Test Case Generation</h3>
+<p>Derive test cases from requirements. If a test case cannot be written, the requirement is not verifiable — it must be rewritten. This is a powerful validation technique.</p>
+<div class="c cg2" style="margin:8px 0">
+<strong>Example — testing NFR-01 (Response &lt;2 seconds):</strong>
+<pre style="margin-top:8px">Test Case TC-PERF-001: Patient Search Performance
+  Input: Search for "Ravi" with 450 concurrent simulated users
+  Expected: 95% of responses return within 2 seconds
+  Tool: Apache JMeter
+  Pass criterion: 95th percentile latency ≤ 2000ms</pre>
+</div>
+
+<h3>4. Model Checking</h3>
+<p>Formal mathematical technique that checks properties of a model (DFD, state diagram) automatically. Used for safety-critical systems where formal proof is needed.</p>
+
+<h3>5. Automated Requirements Analysis Tools</h3>
+<ul>
+<li>Tools like IBM DOORS, Helix RM, Jama Connect manage requirements and check for consistency, completeness, and traceability automatically</li>
+<li>NLP-based tools can detect ambiguous language ("should", "may", "fast") and flag for review</li>
+</ul>
+
+<h2>Verification vs Validation — Full Comparison</h2>
+<table>
+<tr><th>Dimension</th><th>Verification</th><th>Validation</th></tr>
+<tr><td>Core question</td><td>Did we build it right?</td><td>Did we build the right thing?</td></tr>
+<tr><td>Checks against</td><td>Specification / standards</td><td>Stakeholder actual needs</td></tr>
+<tr><td>Process type</td><td>Static (no execution needed)</td><td>Dynamic (running software) or stakeholder review</td></tr>
+<tr><td>Techniques</td><td>Inspections, reviews, walkthroughs</td><td>Prototyping, UAT, demo, testing</td></tr>
+<tr><td>Who performs</td><td>QA team, analysts</td><td>Users, customers, Product Owner</td></tr>
+<tr><td>When</td><td>After each artifact is produced</td><td>At end of phase or sprint</td></tr>
+<tr><td>HMS example (req phase)</td><td>SRS reviewed against IEEE 830 standard</td><td>SRS shown to doctors, nurses, admin for sign-off</td></tr>
+</table>
+
+<h2>Common Requirements Pitfalls <span class="tag tw">Edge Cases</span></h2>
+<div class="warn">
+<ul>
+<li><strong>Scope creep:</strong> Requirements grow unboundedly. Fix: strict change control; MoSCoW; frozen baseline</li>
+<li><strong>Gold plating:</strong> Developers add unrequested features. Fix: strict adherence to SRS; PO controls backlog</li>
+<li><strong>Analysis paralysis:</strong> Team spends so long on perfect requirements that project never starts. Fix: timeboxed analysis; "good enough" requirements with Agile iteration</li>
+<li><strong>Conflating requirements with solutions:</strong> "The system shall use MySQL" is a design decision in the SRS. Should be "The system shall support concurrent access by 500 users."</li>
+<li><strong>Ignoring NFRs:</strong> Teams focus on FR lists and defer NFRs. NFRs discovered late may require complete architecture rework.</li>
+<li><strong>Missing stakeholders:</strong> Night shift nurses in HMS were never consulted; system unusable for them.</li>
+<li><strong>Volatile requirements treated as stable:</strong> Insurance billing rules change every year — don't hardcode them; make them configurable.</li>
+</ul>
+</div>
+
+<h2>Requirements Change Management</h2>
+<p>Once SRS is baselined (formally approved), changes follow a formal process:</p>
+<div class="step"><div class="step-num">1</div><div class="step-body"><strong>Change Request (CR):</strong> Any stakeholder submits a formal CR describing the proposed change and business justification.</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-body"><strong>Impact Analysis:</strong> Analyst assesses impact on: other requirements, design, code, tests, timeline, budget.</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-body"><strong>Change Control Board (CCB):</strong> Group of stakeholders reviews CR and impact — approves, rejects, or defers.</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-body"><strong>Implementation:</strong> If approved, SRS is updated with version control. RTM updated. Design, code, tests updated.</div></div>
+<div class="step"><div class="step-num">5</div><div class="step-body"><strong>Re-verification:</strong> Changed requirements re-reviewed and retested.</div></div>
+</div>
+
+<!-- CASE STUDY -->
+<div class="sec" id="s-casestudy">
+<h1>Case Study: Hospital Management System (HMS) <span class="tag te">Full Application</span></h1>
+<p style="color:var(--color-text-secondary);font-size:13px">Applying every concept from this unit to a real-world scenario.</p>
+
+<h2>Project Context</h2>
+<div class="c ca" style="margin:8px 0">
+<table style="font-size:13px">
+<tr><td><strong>Client:</strong></td><td>City General Hospital, Pune (400 beds, 5 departments)</td></tr>
+<tr><td><strong>Current state:</strong></td><td>Paper-based records, manual billing, phone appointments, no lab integration</td></tr>
+<tr><td><strong>Problems:</strong></td><td>Lost records, billing errors, long wait times, medication errors from handwritten prescriptions</td></tr>
+<tr><td><strong>Project goal:</strong></td><td>Build an integrated Hospital Management System covering all core operations</td></tr>
+<tr><td><strong>Deadline:</strong></td><td>9 months (regulatory requirement to digitise records)</td></tr>
+<tr><td><strong>Budget:</strong></td><td>₹18,00,000 development + ₹2,50,000/year maintenance</td></tr>
+</table>
+</div>
+
+<h2>Step 1: Stakeholder Identification</h2>
+<table>
+<tr><th>Stakeholder</th><th>Role in HMS</th><th>Key concerns</th><th>Elicitation method</th></tr>
+<tr><td>Hospital Director</td><td>Project sponsor, decision-maker</td><td>ROI, compliance, reputation</td><td>Interview</td></tr>
+<tr><td>Head of Nursing</td><td>Clinical process owner</td><td>Medication safety, workflow fit</td><td>Interview + Observation</td></tr>
+<tr><td>Doctors (15 consulted)</td><td>Primary clinical users</td><td>EMR usability, speed, mobile access</td><td>Workshop + Questionnaire</td></tr>
+<tr><td>Receptionists (8)</td><td>Daily operational users</td><td>Patient registration speed, appointment ease</td><td>Observation + Interview</td></tr>
+<tr><td>Billing Manager</td><td>Finance process owner</td><td>Invoice accuracy, insurance EDI integration</td><td>Workshop</td></tr>
+<tr><td>IT Manager</td><td>Infrastructure and security</td><td>HIPAA compliance, integration, maintainability</td><td>Interview</td></tr>
+<tr><td>Patients (focus group)</td><td>End beneficiaries</td><td>Privacy, appointment reminders, portal access</td><td>Focus group + Questionnaire</td></tr>
+<tr><td>Lab System Vendor</td><td>External integration partner</td><td>API compatibility, FHIR standard</td><td>Technical meetings</td></tr>
+</table>
+
+<h2>Step 2: Elicitation Approach</h2>
+<div class="cg">
+<div class="c ca"><strong>Week 1–2: Discovery Workshop</strong><p style="font-size:13px;margin-top:4px">2-day JAD session with all department heads. Goal: define scope, identify major modules, surface conflicts. Output: approved project scope document.</p></div>
+<div class="c cg2"><strong>Week 3–4: Interviews</strong><p style="font-size:13px;margin-top:4px">In-depth interviews with 3 doctors, 2 receptionists, billing manager, IT manager. Goal: detailed workflow and functional requirements.</p></div>
+<div class="c cp"><strong>Week 4: Observation</strong><p style="font-size:13px;margin-top:4px">Analyst spends 2 days shadowing receptionist, 1 day on nursing ward. Discovers: nurses annotate paper forms because no free-text field exists in current system → new NFR added.</p></div>
+<div class="c cam"><strong>Week 5: Questionnaire</strong><p style="font-size:13px;margin-top:4px">Survey sent to all 120 staff. Questions on: feature priorities, current pain points, technology comfort. Response rate: 78%. Validates and prioritises elicited requirements.</p></div>
+</div>
+
+<h2>Step 3: Feasibility Results</h2>
+<table>
+<tr><th>Feasibility Type</th><th>Finding</th><th>Decision</th></tr>
+<tr><td>Technical</td><td>Web EMR tech mature; HL7 FHIR supported; AI diagnosis — insufficient data</td><td><span class="pill p-ok">Feasible</span> (exclude AI)</td></tr>
+<tr><td>Operational</td><td>65% doctor resistance; training programme needed; phased rollout plan</td><td><span class="pill p-mid">Feasible with mitigation</span></td></tr>
+<tr><td>Economic</td><td>ROI 89% over 5 years; payback in 2.65 years</td><td><span class="pill p-ok">Strong positive ROI</span></td></tr>
+<tr><td>Schedule</td><td>9 months achievable with team of 8 (phased delivery)</td><td><span class="pill p-ok">Feasible</span></td></tr>
+<tr><td>Legal</td><td>Must comply HIPAA; HL7 FHIR required for lab integration</td><td><span class="pill p-ok">Feasible with compliance controls</span></td></tr>
+</table>
+
+<h2>Step 4: Key Requirements (Consolidated)</h2>
+<h3>Must-Have Functional Requirements</h3>
+<ul>
+<li>FR-01: Patient registration with unique ID, duplicate detection</li>
+<li>FR-02: Role-based access control (8 roles defined)</li>
+<li>FR-03: Electronic Medical Record — create, view, update, access history</li>
+<li>FR-04: Appointment scheduling with doctor availability check</li>
+<li>FR-05: Digital prescription with pharmacy routing</li>
+<li>FR-06: Lab order and result management (HL7 FHIR)</li>
+<li>FR-07: Itemised billing and insurance claim generation (EDI 837)</li>
+<li>FR-08: Drug inventory management with low-stock alerts</li>
+</ul>
+<h3>Must-Have Non-Functional Requirements</h3>
+<ul>
+<li>NFR-01: Response time &lt;2s at 500 concurrent users</li>
+<li>NFR-02: 99.9% availability (24/7)</li>
+<li>NFR-03: AES-256 encryption at rest; TLS 1.3 in transit; HIPAA compliant</li>
+<li>NFR-04: Complete audit log of all patient data access</li>
+<li>NFR-05: Nurse can register patient in &lt;5 minutes after 2-hour training</li>
+</ul>
+
+<h2>Step 5: Analysis Models (HMS)</h2>
+<h3>Context Diagram — HMS</h3>
+<pre>                    ┌─────────────────────────────┐
+Patient ────────────►│                             │────────────► Patient
+(demographics,       │    Hospital Management      │  (appointment confirm,
+ appointments)       │         System              │   invoice, records)
+                     │                             │
+Doctor ─────────────►│   Core functions:           │────────────► Doctor
+(diagnosis,          │   - Patient Mgmt            │  (schedule, lab results)
+ prescriptions)      │   - EMR                     │
+                     │   - Scheduling              │
+Lab System ─────────►│   - Billing                 │────────────► Lab System
+(FHIR results)       │   - Pharmacy                │  (lab orders)
+                     │   - Reporting               │
+Insurance Co ───────►│                             │────────────► Insurance Co
+(claim payment)      └─────────────────────────────┘  (EDI claims)</pre>
+
+<h2>Step 6: Sample User Story with Full Detail</h2>
+<pre>Epic: Clinical Management
+Feature: Electronic Medical Record
+
+User Story US-02:
+  As a doctor, I want to view a patient's complete medical history 
+  so that I can make an informed diagnosis without relying on paper records.
+
+Acceptance Criteria:
+  AC-1: GIVEN a doctor is logged in and opens a patient record,
+        WHEN they navigate to "Medical History",
+        THEN the system displays all past consultations (date, doctor, diagnosis),
+             all prescriptions (drug, dosage, duration), and all lab results 
+             in reverse chronological order.
+
+  AC-2: GIVEN a patient has records from multiple doctors,
+        WHEN a doctor views the history,
+        THEN records from ALL treating doctors are visible (not just the viewing doctor's).
+
+  AC-3: GIVEN a doctor is viewing another department's patient (not under their care),
+        WHEN they attempt to access detailed EMR,
+        THEN the system logs the access attempt and displays a "Patient not under your care" 
+             confirmation dialog before allowing access (for emergency scenarios).
+
+  AC-4: GIVEN the network is slow,
+        WHEN a doctor loads a patient with 10+ years of records,
+        THEN the system loads the most recent 12 months first (within 2s) 
+             and paginates historical records.
+
+Story Points: 8
+Definition of Done: Code reviewed, unit tests ≥80% coverage, integration tests passing,
+                    deployed to staging, doctor sign-off on demo</pre>
+
+<h2>Step 7: Validation Plan for HMS SRS</h2>
+<div class="cg">
+<div class="c ca"><strong>Review 1: Internal technical review</strong><p style="font-size:13px;margin-top:4px">IT manager + lead architect review for technical feasibility and consistency. Fagan inspection on SRS sections 3.1–3.4.</p></div>
+<div class="c cg2"><strong>Review 2: Clinical stakeholder review</strong><p style="font-size:13px;margin-top:4px">Head of nursing + 3 doctors + billing manager review SRS for completeness and correctness against their workflows.</p></div>
+<div class="c cp"><strong>Prototype demo</strong><p style="font-size:13px;margin-top:4px">Figma wireframe of patient registration + EMR view shown to receptionists and doctors. Collects usability feedback before development.</p></div>
+<div class="c cam"><strong>Test case generation</strong><p style="font-size:13px;margin-top:4px">QA team writes test cases for every FR and NFR. Requirements that cannot be tested are flagged and rewritten.</p></div>
+</div>
+</div>
+
+<!-- REVISION -->
+<div class="sec" id="s-revision">
+<h1>Quick Revision Sheet <span class="tag tn">One-page reference</span></h1>
+
+<h2>All Key Definitions</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:9px 0">
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">RE Definition</div><div style="font-size:13px;font-weight:500">Systematic: elicit, analyse, specify, validate, manage</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">FR</div><div style="font-size:13px;font-weight:500">What the system does. "System shall [action]."</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">NFR</div><div style="font-size:13px;font-weight:500">How well it does it. Quality constraints.</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">SRS</div><div style="font-size:13px;font-weight:500">IEEE 830 contract: what to build. NOT how.</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">User Story</div><div style="font-size:13px;font-weight:500">As [role], I want [feature] so that [benefit]</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Validation</div><div style="font-size:13px;font-weight:500">Right product? (stakeholder needs check)</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Verification</div><div style="font-size:13px;font-weight:500">Built right? (spec / standards check)</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">RTM</div><div style="font-size:13px;font-weight:500">Traces req → design → code → test</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">JAD</div><div style="font-size:13px;font-weight:500">Joint Application Development — group workshop</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">MoSCoW</div><div style="font-size:13px;font-weight:500">Must/Should/Could/Won't prioritisation</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Feasibility</div><div style="font-size:13px;font-weight:500">TOESL: Technical, Operational, Economic, Schedule, Legal</div></div>
+<div style="background:var(--color-background-secondary);border-radius:8px;padding:10px 12px"><div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">INVEST</div><div style="font-size:13px;font-weight:500">Independent, Negotiable, Valuable, Estimable, Small, Testable</div></div>
+</div>
+
+<h2>All Mnemonics</h2>
+<div class="mn"><div class="mn-t">RE Process</div><strong>EASVM</strong> — Elicitation → Analysis → Specification → Validation → Management</div>
+<div class="mn"><div class="mn-t">Elicitation techniques</div><strong>I-Q-O-B-W</strong> — Interviews | Questionnaires | Observation | Brainstorming | Workshops</div>
+<div class="mn"><div class="mn-t">NFR types</div><strong>PRASU SMPC</strong> — Performance | Reliability | Availability | Security | Usability | Scalability | Maintainability | Portability | Compliance</div>
+<div class="mn"><div class="mn-t">Feasibility types</div><strong>TOESL</strong> — Technical | Operational | Economic | Schedule | Legal</div>
+<div class="mn"><div class="mn-t">User story quality</div><strong>INVEST</strong> — Independent | Negotiable | Valuable | Estimable | Small | Testable</div>
+<div class="mn"><div class="mn-t">3Cs of User Stories</div><strong>Card + Conversation + Confirmation</strong></div>
+<div class="mn"><div class="mn-t">SRS properties</div><strong>CCUVTMR</strong> — Complete | Consistent | Unambiguous | Verifiable | Traceable | Modifiable | Ranked</div>
+<div class="mn"><div class="mn-t">Analysis model types</div><strong>SDFB</strong> — Scenario-based | Data models | Flow-oriented | Behavioural</div>
+
+<h2>Interview / Exam Questions</h2>
+<h3>Easy (2–4 marks)</h3>
+<ul>
+<li>Define functional and non-functional requirements with examples.</li>
+<li>List any 5 properties of a good SRS.</li>
+<li>What is a feasibility study? Name its types.</li>
+<li>Write a user story for patient appointment booking.</li>
+<li>What is the difference between validation and verification?</li>
+<li>What is a Requirement Traceability Matrix?</li>
+</ul>
+<h3>Medium (5–8 marks)</h3>
+<ul>
+<li>Explain any 3 requirements elicitation techniques with advantages and disadvantages.</li>
+<li>Compare user stories and use cases with a table.</li>
+<li>Explain the IEEE 830 SRS structure with all sections.</li>
+<li>What is economic feasibility? Explain cost-benefit analysis with an example.</li>
+<li>Explain the INVEST criteria for user stories with HMS examples.</li>
+<li>Draw and explain a DFD Level 0 for the Hospital Management System.</li>
+</ul>
+<h3>Hard / Scenario (10+ marks)</h3>
+<ul>
+<li>You are the requirements analyst for HMS. Describe how you would conduct the full elicitation process for the Billing and Insurance module, including which techniques you would use and why.</li>
+<li>Write 3 user stories for the HMS pharmacy module with complete GIVEN-WHEN-THEN acceptance criteria for each.</li>
+<li>A doctor stakeholder says: "The system should be fast and show everything." How do you handle this as a requirements analyst? Apply the full analysis process.</li>
+<li>Create a complete RTM mapping 5 FRs of HMS to their source, design module, and test case.</li>
+<li>Conduct a full feasibility study for an online patient portal feature (patients book appointments and view records from home). Cover all 5 types.</li>
+</ul>
+</div>
+
+<!-- QUIZ -->
+<div class="sec" id="s-quiz">
+<h1>Self-Test Quiz <span class="tag te">Active Recall — 12 Questions</span></h1>
+<p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:14px">Select the best answer, then click "Check All Answers" to see your score and explanations.</p>
+<div id="quiz-c"></div>
+<div style="margin-top:14px;display:flex;gap:10px">
+  <button onclick="checkQ()" style="padding:8px 20px;background:#185FA5;color:white;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px">Check All Answers</button>
+  <button onclick="resetQ()" style="padding:8px 20px;background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--color-text-primary)">Reset</button>
+</div>
+<div id="q-score" style="display:none;margin-top:12px;padding:12px 16px;border-radius:8px;font-weight:500;font-size:15px"></div>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nb button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('s-'+id).classList.add('on');
+  event.target.classList.add('on');
+}
+
+const qs=[
+  {q:"Which of the following is a Non-Functional Requirement for HMS?",opts:["The system shall allow doctors to prescribe medications","The system shall respond to patient search within 2 seconds","The system shall generate an invoice after discharge","The system shall allow lab technicians to upload results"],ans:1,exp:"Response time is a performance NFR (how well the system works). The others are functional requirements (what the system does)."},
+  {q:"A doctor says 'I want the system to be secure.' As a requirements analyst, what is the most important next step?",opts:["Write 'System shall be secure' in the SRS","Make security a high priority in MoSCoW","Clarify with the doctor: 'What does secure mean? What threats concern you?' and define measurable criteria","Assume HTTPS and passwords are sufficient"],ans:2,exp:"Ambiguous NFRs must be made measurable. 'Secure' is meaningless without specifics like encryption standard, access controls, and audit requirements. Always clarify and quantify."},
+  {q:"Which elicitation technique is BEST for discovering tacit requirements that users cannot articulate?",opts:["Questionnaires","Brainstorming","Observation (Ethnography)","Structured interviews"],ans:2,exp:"Observation reveals what users actually do vs. what they say they do. Tacit knowledge (muscle memory, workarounds) is visible in action but impossible to articulate in an interview."},
+  {q:"In a Use Case diagram, «include» means:",opts:["The use case is optional and may or may not be executed","The base use case conditionally uses another","The base use case always executes the included use case as a mandatory sub-function","Two actors share the same use case"],ans:2,exp:"«include» = always executed, mandatory. The included use case is a required sub-function. «extend» = conditional, optional."},
+  {q:"The economic feasibility metric that shows how many years to recover the development cost is:",opts:["ROI","NPV","Payback Period","Break-even analysis"],ans:2,exp:"Payback Period = Total Development Cost / Annual Net Benefit. It shows when the investment is recovered. If HMS costs ₹18L and saves ₹6.8L/year, payback = 2.65 years."},
+  {q:"Which property of SRS is violated if two requirements contradict each other?",opts:["Completeness","Consistency","Verifiability","Traceability"],ans:1,exp:"Consistency is violated when two or more requirements contradict each other. E.g., 'All staff can view any patient record' vs. 'Only treating doctors can view patient records.'"},
+  {q:"The Connextra format for user stories is:",opts:["Given [context], When [action], Then [outcome]","As [role], I want [feature] so that [benefit]","The system shall [action] [object] [condition]","User → System: request; System → User: response"],ans:1,exp:"The Connextra format is the standard user story template: As [role], I want [feature] so that [benefit]. GIVEN-WHEN-THEN is the acceptance criteria format."},
+  {q:"Which feasibility type answers: 'Will users actually use the system once built?'",opts:["Technical feasibility","Economic feasibility","Operational feasibility","Schedule feasibility"],ans:2,exp:"Operational feasibility assesses user acceptance, training needs, workflow disruption, and organisational support — will the system be adopted and used effectively?"},
+  {q:"What is the primary purpose of a Requirement Traceability Matrix (RTM)?",opts:["To list all requirements in priority order","To ensure every requirement is designed, coded, and tested — nothing missed or added","To document the SRS sign-off history","To manage change requests"],ans:1,exp:"The RTM maps each requirement to its source (stakeholder), design module, code module, and test cases. This ensures complete coverage — no requirement is missed and no feature is built without a requirement."},
+  {q:"In DFD notation (Yourdon-DeMarco), a data store is represented by:",opts:["A circle","A rectangle","Two parallel horizontal lines (open-ended rectangle)","A directed arrow"],ans:2,exp:"Data stores (databases, files) = two parallel lines (open rectangle). Circles/rounded rectangles = processes. Rectangles = external entities. Arrows = data flows."},
+  {q:"Which INVEST criterion ensures a user story can be developed without depending on other stories?",opts:["Valuable","Estimable","Independent","Testable"],ans:2,exp:"Independent = story can be developed and delivered standalone. If stories are tightly coupled, the team cannot reorder or split work. Independence enables flexible sprint planning."},
+  {q:"A patient portal requirement states: 'The system should be easy to use for elderly patients.' What action should the analyst take?",opts:["Accept it as written — it is self-explanatory","Delete it — it is too vague to be a requirement","Rewrite it with measurable criteria: e.g., 'A patient aged 65+ with no computer experience shall complete appointment booking in under 5 minutes with no training after viewing a 2-minute tutorial'","Move it to NFR section and mark it as low priority"],ans:2,exp:"'Easy to use' is ambiguous and unverifiable. A good NFR must be specific and measurable. The rewritten version is testable: you can measure task completion time and test with the target demographic."}
+];
+
+function buildQ(){
+  const c=document.getElementById('quiz-c');
+  c.innerHTML='';
+  qs.forEach((item,i)=>{
+    const d=document.createElement('div');
+    d.className='q-box';
+    d.innerHTML=`<p style="font-weight:500;margin-bottom:8px;font-size:14px">${i+1}. ${item.q}</p>${item.opts.map((o,j)=>`<label class="q-opt"><input type="radio" name="q${i}" value="${j}"> <span style="font-size:13px">${o}</span></label>`).join('')}<div id="qr-${i}" class="q-res"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function checkQ(){
+  let sc=0;
+  qs.forEach((item,i)=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    const rd=document.getElementById('qr-'+i);
+    rd.style.display='block';
+    if(!sel){rd.style.background='#FCEBEB';rd.style.color='#791F1F';rd.textContent='Not answered. '+item.exp;return;}
+    if(parseInt(sel.value)===item.ans){sc++;rd.style.background='#EAF3DE';rd.style.color='#27500A';rd.textContent='Correct! '+item.exp;}
+    else{rd.style.background='#FCEBEB';rd.style.color='#791F1F';rd.textContent=`Incorrect. Correct: "${item.opts[item.ans]}". ${item.exp}`;}
+  });
+  const sb=document.getElementById('q-score');sb.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  if(pct>=80){sb.style.background='#EAF3DE';sb.style.color='#27500A';}
+  else if(pct>=50){sb.style.background='#FAEEDA';sb.style.color='#633806';}
+  else{sb.style.background='#FCEBEB';sb.style.color='#791F1F';}
+  sb.textContent=`Score: ${sc}/${qs.length} (${pct}%) — ${pct>=80?'Excellent! Exam-ready.':pct>=50?'Good — review incorrect answers and revisit those tabs.':'Needs more study — go back through the notes systematically.'}`;
+}
+function resetQ(){
+  document.querySelectorAll('[name^="q"]').forEach(r=>r.checked=false);
+  document.querySelectorAll('[id^="qr-"]').forEach(r=>{r.style.display='none';r.textContent='';});
+  document.getElementById('q-score').style.display='none';
+}
+buildQ();
+</script>
